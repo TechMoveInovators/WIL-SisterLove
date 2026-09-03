@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sisterlove.Models;
-using SisterLoveSA.Models;
+using SisterLoveSA.Models;  
 using SisterLoveSA.Services;
 
 namespace SisterLoveSA.Controllers
@@ -34,12 +34,10 @@ namespace SisterLoveSA.Controllers
 
             try
             {
-                // Process donation (simulated for prototype)
                 var result = await _donationService.ProcessDonation(model);
 
                 if (result.Success)
                 {
-                    // Store donation details in TempData for Thank You page
                     TempData["DonorName"] = result.DonorName;
                     TempData["Amount"] = result.Amount;
                     TempData["TransactionId"] = result.TransactionId;

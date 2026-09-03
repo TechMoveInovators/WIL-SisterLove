@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sisterlove")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a40488b980c663d748eb7bce481dc614ae780546")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a8973b604058464c2aa48c37ed42e59dd8bd046")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sisterlove")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sisterlove")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
