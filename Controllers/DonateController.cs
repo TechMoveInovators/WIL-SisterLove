@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sisterlove.Models;
-using SisterLoveSA.Models;  
+using SisterLoveSA.Models;
 using SisterLoveSA.Services;
 
 namespace SisterLoveSA.Controllers
@@ -17,20 +16,14 @@ namespace SisterLoveSA.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            var model = new DonationViewModel();
-            return View(model);
-        }
+        public IActionResult Index() => View(new DonationViewModel());
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(DonationViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             try
             {
@@ -39,35 +32,27 @@ namespace SisterLoveSA.Controllers
                 if (result.Success)
                 {
                     TempData["DonorName"] = result.DonorName;
-                    TempData["Amount"] = result.Amount;
+                    TempData["Amount"] = result.Amount.ToString("N2");
                     TempData["TransactionId"] = result.TransactionId;
-
                     return RedirectToAction("ThankYou");
                 }
-                else
-                {
-                    ModelState.AddModelError("", result.ErrorMessage);
-                    return View(model);
-                }
+
+                ModelState.AddModelError("", result.ErrorMessage ?? "Donation failed.");
+                return View(model);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error processing donation");
-                ModelState.AddModelError("", "An error occurred while processing your donation. Please try again.");
+                ModelState.AddModelError("", "An error occurred. Please try again.");
                 return View(model);
             }
         }
 
         public IActionResult ThankYou()
         {
-            var donorName = TempData["DonorName"]?.ToString() ?? "Donor";
-            var amount = TempData["Amount"]?.ToString() ?? "0";
-            var transactionId = TempData["TransactionId"]?.ToString() ?? "1000";
-
-            ViewBag.DonorName = donorName;
-            ViewBag.Amount = amount;
-            ViewBag.TransactionId = transactionId;
-
+            ViewBag.DonorName = TempData["DonorName"]?.ToString() ?? "Donor";
+            ViewBag.Amount = TempData["Amount"]?.ToString() ?? "0";
+            ViewBag.TransactionId = TempData["TransactionId"]?.ToString() ?? "1000";
             return View();
         }
     }
