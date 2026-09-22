@@ -1,8 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.PageTitle = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero">
+    <div class="container hero-container">
+        <div class="hero-content">
+            <h1>Supporting Women and Girls Impacted by Abuse</h1>
+            <p>SisterLove South Africa is dedicated to ending HIV, upholding reproductive health rights, and creating a community of dignity and love in action.</p>
+            <div class="hero-actions">
+                <a href="/donate" class="btn-primary">Donate Now</a>
+                <a href="/contact" class="btn-secondary">Get Help</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="impact-section">
+    <div class="container">
+        <h2 class="section-title">Our Impact</h2>
+        <div class="impact-grid">
+            <div class="impact-card"><div class="impact-number">15,000+</div><p>Women Supported</p></div>
+            <div class="impact-card"><div class="impact-number">500+</div><p>Workshops Conducted</p></div>
+            <div class="impact-card"><div class="impact-number">50+</div><p>Community Partners</p></div>
+        </div>
+    </div>
+</section>
