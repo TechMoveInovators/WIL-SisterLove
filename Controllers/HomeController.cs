@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Sisterlove.Models;
+using SisterLoveSA.Models;
 using System.Diagnostics;
 
-namespace Sisterlove.Controllers
+namespace SisterLoveSA.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,11 +14,7 @@ namespace Sisterlove.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.PageTitle = "SisterLove South Africa - Supporting Women & Girls";
-            return View();
-        }
+        public IActionResult Index() => View();
 
         public IActionResult Error()
         {
