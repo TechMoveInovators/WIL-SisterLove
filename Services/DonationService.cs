@@ -1,6 +1,4 @@
-﻿using Sisterlove.Models;
-using Sisterlove.Services;
-using SisterLoveSA.Models;
+﻿using SisterLoveSA.Models;
 
 namespace SisterLoveSA.Services
 {
@@ -17,10 +15,7 @@ namespace SisterLoveSA.Services
         {
             try
             {
-                // Simulate payment processing
                 await Task.Delay(1000);
-
-                // Generate a transaction ID (in production, this would come from the payment gateway)
                 var transactionId = GenerateTransactionId();
 
                 var result = new DonationResult
@@ -28,12 +23,10 @@ namespace SisterLoveSA.Services
                     Success = true,
                     TransactionId = transactionId,
                     DonorName = model.DonorName,
-                    Amount = model.Amount.Value
+                    Amount = model.Amount ?? 0
                 };
 
-                // Send confirmation email
                 await SendConfirmationEmail(result);
-
                 return result;
             }
             catch (Exception ex)
@@ -51,7 +44,6 @@ namespace SisterLoveSA.Services
         {
             try
             {
-                // Simulate sending email
                 await Task.Delay(500);
                 _logger.LogInformation($"Confirmation email sent to donor {result.DonorName} for transaction #{result.TransactionId}");
                 return true;
@@ -65,7 +57,6 @@ namespace SisterLoveSA.Services
 
         private string GenerateTransactionId()
         {
-            // Generate a unique transaction ID (e.g., SL-2024-XXXX)
             var random = new Random();
             var number = random.Next(1000, 9999);
             return $"SL-{DateTime.Now.Year}-{number}";
