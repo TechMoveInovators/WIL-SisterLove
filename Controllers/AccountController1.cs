@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Sisterlove.Models;
 using SisterLoveSA.Models;
 using System.Security.Claims;
 
@@ -11,25 +10,16 @@ namespace SisterLoveSA.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly ILogger<AccountController> _logger;
-
-        public AccountController(ILogger<AccountController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
         public IActionResult Profile()
         {
-            var user = GetCurrentUser();
             var model = new UserProfileViewModel
             {
-                FullName = user.FindFirst(ClaimTypes.Name)?.Value ?? "User",
-                Email = user.FindFirst(ClaimTypes.Email)?.Value ?? "user@example.com",
-                PhoneNumber = user.FindFirst(ClaimTypes.MobilePhone)?.Value ?? "",
-                MemberSince = DateTime.Now.AddMonths(-6) // Simulated
+                FullName = User.FindFirst(ClaimTypes.Name)?.Value ?? "User",
+                Email = User.FindFirst(ClaimTypes.Email)?.Value ?? "user@example.com",
+                PhoneNumber = User.FindFirst(ClaimTypes.MobilePhone)?.Value ?? "",
+                MemberSince = DateTime.Now.AddMonths(-6)
             };
-
             return View(model);
         }
 
@@ -38,57 +28,37 @@ namespace SisterLoveSA.Controllers
         public async Task<IActionResult> Profile(UserProfileViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
-            try
-            {
-                // In production, you would update the user in the database
-                var user = GetCurrentUser();
-                var identity = (ClaimsIdentity)user.Identity;
+            var identity = (ClaimsIdentity)User.Identity!;
 
-                // Update claims
-                var nameClaim = identity.FindFirst(ClaimTypes.Name);
-                if (nameClaim != null)
-                    identity.RemoveClaim(nameClaim);
-                identity.AddClaim(new Claim(ClaimTypes.Name, model.FullName));
+            var nameClaim = identity.FindFirst(ClaimTypes.Name);
+            if (nameClaim != null) identity.RemoveClaim(nameClaim);
+            identity.AddClaim(new Claim(ClaimTypes.Name, model.FullName));
 
-                var phoneClaim = identity.FindFirst(ClaimTypes.MobilePhone);
-                if (phoneClaim != null)
-                    identity.RemoveClaim(phoneClaim);
-                if (!string.IsNullOrEmpty(model.PhoneNumber))
-                    identity.AddClaim(new Claim(ClaimTypes.MobilePhone, model.PhoneNumber));
+            var phoneClaim = identity.FindFirst(ClaimTypes.MobilePhone);
+            if (phoneClaim != null) identity.RemoveClaim(phoneClaim);
+            if (!string.IsNullOrEmpty(model.PhoneNumber))
+                identity.AddClaim(new Claim(ClaimTypes.MobilePhone, model.PhoneNumber));
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
-                TempData["SuccessMessage"] = "Your profile has been updated successfully.";
-                return RedirectToAction("Profile");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating profile");
-                ModelState.AddModelError("", "An error occurred while updating your profile.");
-                return View(model);
-            }
+            TempData["SuccessMessage"] = "Your profile has been updated successfully.";
+            return RedirectToAction("Profile");
         }
 
         [AllowAnonymous]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
-            // Simplified for prototype
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, "Ben Brown"),
-                new Claim(ClaimTypes.Email, "Bbrown@sisterlove.org.za"),
-                new Claim(ClaimTypes.Role, "User"),
-                new Claim("ProfileImage", "/images/default-avatar.png")
+                new Claim(ClaimTypes.Name, "Asandak"),
+                new Claim(ClaimTypes.Email, "asandak@sisterlove.org.za"),
+                new Claim(ClaimTypes.Role, "User")
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
-
-            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
             return RedirectToAction("Index", "Home");
         }
@@ -97,11 +67,6 @@ namespace SisterLoveSA.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
-        }
-
-        private ClaimsPrincipal GetCurrentUser()
-        {
-            return User;
         }
     }
 }
