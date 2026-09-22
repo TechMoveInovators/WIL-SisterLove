@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.PageTitle = "Thank You";
+}
+
+<section style="padding: 4rem 0; text-align:center;">
+    <div class="container" style="max-width:600px;">
+        <i class="fas fa-heart fa-4x" style="color:#c0392b;margin-bottom:1.5rem;"></i>
+        <h1>Thank You, @ViewBag.DonorName</h1>
+        <p style="font-size:1.2rem;margin:1.5rem 0;">
+            We are so grateful for your generous donation of <strong>R@ViewBag.Amount</strong>.
+        </p>
+        <p>Your donation number is <strong>#@ViewBag.TransactionId</strong>.</p>
+        <p style="margin-top:1rem;">You'll receive a confirmation email soon.</p>
+        <div style="margin-top:2rem;">
+            <a href="/" class="btn-primary">Return Home</a>
+            <a href="/contact" class="btn-secondary">Get Involved</a>
+        </div>
+    </div>
+</section>donate tha
