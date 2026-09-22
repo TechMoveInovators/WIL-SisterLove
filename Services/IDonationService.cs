@@ -1,10 +1,10 @@
-﻿using Sisterlove.Models;
+﻿using SisterLoveSA.Models;
 
-namespace Sisterlove.Services
+namespace SisterLoveSA.Services
+{
+    public interface IDonationService
     {
-        public interface IDonationService
-        {
-            Task<DonationResult> ProcessDonation(DonationViewModel model);
-            Task<bool> SendConfirmationEmail(DonationResult result);
-        }
+        Task<DonationResult> ProcessDonation(DonationViewModel model);
+        Task<bool> SendConfirmationEmail(DonationResult result);
     }
+}
