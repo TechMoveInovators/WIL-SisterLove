@@ -15,13 +15,13 @@ namespace SisterLoveSA.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new ContactViewModel();
+            var model = new Contact();
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(ContactViewModel model)
+        public async Task<IActionResult> Index(Contact model)
         {
             if (!ModelState.IsValid)
             {

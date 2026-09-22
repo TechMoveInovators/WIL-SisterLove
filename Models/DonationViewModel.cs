@@ -1,30 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sisterlove.Models
+namespace SisterLoveSA.Models
 {
     public class DonationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter your name")]
         [Display(Name = "Full Name")]
-        public string DonorName { get; set; }
+        public string DonorName { get; set; } = string.Empty;
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Please enter your email")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email")]
         [Display(Name = "Email Address")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "Please select or enter an amount")]
+        [Range(10, 1000000, ErrorMessage = "Amount must be at least R10")]
         [Display(Name = "Donation Amount")]
-        public decimal? Amoount {  get; set; }
+        public decimal? Amount { get; set; }
 
         [Display(Name = "Message (Optional)")]
         [StringLength(500)]
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         public DonationType DonationType { get; set; }
 
-        // Preset amounts for quick selection
-        public List<decimal> PresetAmounts => new List<decimal> { 50, 100, 250, 500, 1000 };
+        public List<decimal> PresetAmounts => new List<decimal> { 50, 100, 250, 500 };
     }
 
     public enum DonationType
@@ -32,12 +32,4 @@ namespace Sisterlove.Models
         OneTime,
         Monthly
     }
-
-    public class DonationResult
-        {
-            public bool Success { get; set; }
-            public string DonorName { get; set; }
-            public decimal Amount { get; set; }
-            public string ErrorMessage { get; set; }
-        }
-    }
+}
