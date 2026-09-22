@@ -13,38 +13,18 @@ namespace SisterLoveSA.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            var model = new Contact();
-            return View(model);
-        }
+        public IActionResult Index() => View(new ContactViewModel());
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(Contact model)
+        public IActionResult Index(ContactViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
-            try
-            {
-                // Simulate sending inquiry
-                _logger.LogInformation($"Inquiry received from {model.Name} ({model.Email}) - Subject: {model.Subject}");
-
-                // In production, you would send email or save to database
-                // await _contactService.SendInquiry(model);
-
-                TempData["SuccessMessage"] = "Thank you for contacting us. We will respond within 24 hours.";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error processing contact form");
-                ModelState.AddModelError("", "An error occurred. Please try again.");
-                return View(model);
-            }
+            _logger.LogInformation($"Inquiry from {model.Name} ({model.Email}) - {model.Subject}");
+            TempData["SuccessMessage"] = "Thank you for contacting us. We'll respond within 24 hours.";
+            return RedirectToAction("Index");
         }
     }
 }
