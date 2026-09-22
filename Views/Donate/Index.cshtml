@@ -1,0 +1,75 @@
+﻿@model SisterLoveSA.Models.DonationViewModel
+@{
+    ViewBag.PageTitle = "Donate";
+}
+
+<section style="padding: 4rem 0; background:#faf8f7;">
+    <div class="container">
+        <div class="donate-grid">
+            <div>
+                <h1 style="font-size:2.5rem;color:#2d1b1a;">Your Donation Makes a Difference</h1>
+                <p>Every contribution helps us support women and girls impacted by abuse and HIV.</p>
+                <ul style="margin-top:2rem;list-style:none;">
+                    <li><strong>R100</strong> - Provides a workshop for 5 women</li>
+                    <li><strong>R250</strong> - Supplies health kits for 10 women</li>
+                    <li><strong>R500</strong> - Funds a community outreach program</li>
+                </ul>
+            </div>
+            <div class="donate-form-container">
+                <form asp-action="Index" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="DonorName">Full Name</label>
+                        <input asp-for="DonorName" class="form-control" placeholder="Your full name" />
+                        <span asp-validation-for="DonorName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email">Email Address</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="your@email.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Donation Type</label>
+                        <div style="display:flex;gap:1rem;">
+                            <label><input type="radio" asp-for="DonationType" value="0" checked /> One-Time</label>
+                            <label><input type="radio" asp-for="DonationType" value="1" /> Monthly</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Amount">Amount (R)</label>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                            @foreach (var amt in Model.PresetAmounts)
+                            {
+                                <button type="button" class="amount-btn" onclick="setAmount(@amt)">R@(amt.ToString("N0"))</button>
+                            }
+                        </div>
+                        <input asp-for="Amount" type="number" class="form-control" style="margin-top:0.5rem;" placeholder="Or enter custom amount" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Message">Message (Optional)</label>
+                        <textarea asp-for="Message" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width:100%;">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function setAmount(amt) {
+            document.getElementById('Amount').value = amt;
+        }
+    </script>
+}
