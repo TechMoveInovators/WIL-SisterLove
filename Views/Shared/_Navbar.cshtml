@@ -1,36 +1,20 @@
 ﻿<nav class="navbar">
-    <div class="container">
-        <div class="navbar-brand">
-            <a href="/" class="navbar-logo"><strong style="color:#c0392b;">SisterLove</strong> SA</a>
-            <button class="navbar-toggle" aria-label="Toggle navigation" onclick="toggleNav()">
-                <span class="hamburger"></span>
-            </button>
-        </div>
-        <div class="navbar-menu" id="navMenu">
-            <ul class="navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Services</a></li>
-                <li><a href="/donate" class="btn-donate">Donate</a></li>
-            </ul>
-            <div class="navbar-user">
-                @if (User.Identity?.IsAuthenticated == true)
-                {
-                    <a href="/account/profile" class="user-avatar">
-                        <i class="fas fa-user-circle"></i>
-                        <span>@User.Identity.Name</span>
-                    </a>
-                }
-                else
-                {
-                    <a href="/account/login" class="btn-login">Sign In</a>
-                }
-            </div>
+    <div class="container nav-container">
+        <a href="/" class="brand">
+            <span class="brand-text">Sisterlove</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="/about">ABOUT</a></li>
+            <li><a href="/contact">SERVICES</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="/donate" class="btn-donate-nav">DONATE</a>
+            <a href="/account/login" class="user-icon" aria-label="Account">
+                <i class="fas fa-user-circle"></i>
+            </a>
         </div>
     </div>
 </nav>
-<script>
-    function toggleNav() {
-        document.getElementById('navMenu').classList.toggle('active');
-    }
-</script>
