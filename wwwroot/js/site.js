@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function toggleMenu() {
+    const menu = document.getElementById("mainNavigation");
+    const button = document.querySelector(".mobile-menu-btn");
 
-// Write your JavaScript code.
+    if (!menu || !button) {
+        return;
+    }
+
+    const isOpen = menu.classList.toggle("active");
+
+    button.setAttribute("aria-expanded", isOpen);
+
+    const icon = button.querySelector("i");
+
+    if (icon) {
+        icon.classList.toggle("fa-bars", !isOpen);
+        icon.classList.toggle("fa-xmark", isOpen);
+    }
+}

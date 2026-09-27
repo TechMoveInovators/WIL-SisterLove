@@ -1,20 +1,73 @@
-﻿<nav class="navbar">
-    <div class="container nav-container">
-        <a href="/" class="brand">
-            <span class="brand-text">Sisterlove</span>
+﻿<nav class="site-navbar">
+    <div class="nav-container">
+
+        <!-- Logo -->
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="site-logo">
+
+            <div class="logo-mark">
+                SL
+            </div>
+
+            <div class="logo-text">
+                SisterLove
+                <span>South Africa</span>
+            </div>
+
         </a>
 
-        <ul class="nav-links">
-            <li><a href="/about">ABOUT</a></li>
-            <li><a href="/contact">SERVICES</a></li>
-            <li><a href="/contact">CONTACT</a></li>
-        </ul>
 
-        <div class="nav-right">
-            <a href="/donate" class="btn-donate-nav">DONATE</a>
-            <a href="/account/login" class="user-icon" aria-label="Account">
-                <i class="fas fa-user-circle"></i>
+        <!-- Mobile menu button -->
+        <button class="mobile-menu-btn"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                onclick="toggleMenu()">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+
+        <!-- Navigation -->
+        <div class="nav-menu" id="mainNavigation">
+
+            <a asp-controller="Home"
+               asp-action="Index">
+                Home
             </a>
+
+            <a href="/Home/About">
+                About Us
+            </a>
+
+            <a href="/Home/OurWork">
+                Our Work
+            </a>
+
+            <a href="/Home/Partnerships">
+                Partnerships
+            </a>
+
+            <a href="/Home/TrackRecord">
+                Track Record
+            </a>
+
+            <a href="/Home/GetInvolved">
+                Get Involved
+            </a>
+
+            <a href="/Donate"
+               class="nav-support">
+                Support Our Work
+            </a>
+
+            <a href="/Contact">
+                Contact
+            </a>
+
         </div>
+
     </div>
 </nav>

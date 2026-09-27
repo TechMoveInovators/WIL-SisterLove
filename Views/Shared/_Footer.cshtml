@@ -1,40 +1,186 @@
 ﻿<footer class="footer">
     <div class="container">
+
         <div class="footer-grid">
+
+            <!-- Brand -->
             <div class="footer-brand">
-                <h3 style="color:#fff;">SisterLove SA</h3>
-                <p class="footer-tagline">Love in Action - Supporting women and girls impacted by abuse, HIV, and reproductive health challenges.</p>
+
+                <h3>SisterLove SA</h3>
+
+                <p class="footer-tagline">
+                    Love in Action — supporting communities through
+                    HIV prevention, sexual and reproductive health,
+                    gender justice and youth empowerment.
+                </p>
+
                 <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                    <a href="#"
+                       aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#"
+                       aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a href="#"
+                       aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
                 </div>
+
             </div>
+
+
+            <!-- Quick Links -->
             <div class="footer-links">
+
                 <h4>Quick Links</h4>
+
                 <ul>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Services</a></li>
-                    <li><a href="/donate">Donate</a></li>
+
+                    <li>
+                        <a asp-controller="Home"
+                           asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Home"
+                           asp-action="About">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Contact"
+                           asp-action="Index">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Donate"
+                           asp-action="Index">
+                            Support Our Work
+                        </a>
+                    </li>
+
                 </ul>
+
             </div>
+
+
+            <!-- Website Sections -->
             <div class="footer-links">
-                <h4>Legal</h4>
+
+                <h4>Explore</h4>
+
                 <ul>
-                    <li><a href="/legal/terms">Terms & Conditions</a></li>
-                    <li><a href="/legal/privacy">Privacy Policy</a></li>
-                    <li><a href="/legal/accessibility">Accessibility</a></li>
+
+                    <li>
+                        <a href="/Home/OurWork">
+                            Our Work
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/Home/Partnerships">
+                            Partnerships
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/Home/TrackRecord">
+                            Track Record
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/Home/GetInvolved">
+                            Get Involved
+                        </a>
+                    </li>
+
                 </ul>
+
             </div>
-            <div class="footer-contact">
-                <h4>Get in Touch</h4>
-                <p><i class="fas fa-map-marker-alt"></i> Johannesburg, South Africa</p>
-                <p><i class="fas fa-phone"></i> +27 (0) 11 123 4567</p>
-                <p><i class="fas fa-envelope"></i> info@sisterlove.org.za</p>
+
+
+            <!-- Legal -->
+            <div class="footer-links">
+
+                <h4>Legal</h4>
+
+                <ul>
+
+                    <li>
+                        <a asp-controller="Legal"
+                           asp-action="Terms">
+                            Terms &amp; Conditions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Legal"
+                           asp-action="Privacy">
+                            Privacy Policy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Legal"
+                           asp-action="Accessibility">
+                            Accessibility
+                        </a>
+                    </li>
+
+                </ul>
+
             </div>
+
+
         </div>
+
+
+        <!-- Contact -->
+        <div class="footer-contact">
+
+            <h4>Get in Touch</h4>
+
+            <p>
+                <i class="fas fa-map-marker-alt"></i>
+                Johannesburg, South Africa
+            </p>
+
+            <p>
+                <i class="fas fa-phone"></i>
+                +27 (0) 11 123 4567
+            </p>
+
+            <p>
+                <i class="fas fa-envelope"></i>
+                info@sisterlove.org.za
+            </p>
+
+        </div>
+
+
+        <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>&copy; @DateTime.Now.Year SisterLove South Africa. All rights reserved.</p>
+
+            <p>
+                &copy; @DateTime.Now.Year
+                SisterLove South Africa.
+                All rights reserved.
+            </p>
+
         </div>
+
     </div>
 </footer>

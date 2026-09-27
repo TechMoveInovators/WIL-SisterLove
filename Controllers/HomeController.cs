@@ -16,9 +16,39 @@ namespace SisterLoveSA.Controllers
 
         public IActionResult Index() => View();
 
+        public IActionResult About()
+        {
+            return View("About/Index");
+        }
+
+        public IActionResult OurWork()
+        {
+            return View("OurWork/Index");
+        }
+
+        public IActionResult Partnerships()
+        {
+            return View("Partnerships/Index");
+        }
+
+        public IActionResult TrackRecord()
+        {
+            return View("TrackRecord/Index");
+        }
+
+        public IActionResult GetInvolved()
+        {
+            return View("GetInvolved/Index");
+        }
+
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(
+                new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id
+                        ?? HttpContext.TraceIdentifier
+                });
         }
     }
 }

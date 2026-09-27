@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\emeris\\source\\repos\\Sisterlove\\Sisterlove\\Sisterlove.csproj": {}
+    "C:\\Users\\emeris\\source\\repos\\WIL-SisterLove\\Sisterlove.csproj": {}
   },
   "projects": {
-    "C:\\Users\\emeris\\source\\repos\\Sisterlove\\Sisterlove\\Sisterlove.csproj": {
+    "C:\\Users\\emeris\\source\\repos\\WIL-SisterLove\\Sisterlove.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\emeris\\source\\repos\\Sisterlove\\Sisterlove\\Sisterlove.csproj",
+        "projectUniqueName": "C:\\Users\\emeris\\source\\repos\\WIL-SisterLove\\Sisterlove.csproj",
         "projectName": "Sisterlove",
-        "projectPath": "C:\\Users\\emeris\\source\\repos\\Sisterlove\\Sisterlove\\Sisterlove.csproj",
+        "projectPath": "C:\\Users\\emeris\\source\\repos\\WIL-SisterLove\\Sisterlove.csproj",
         "packagesPath": "C:\\Users\\emeris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\emeris\\source\\repos\\Sisterlove\\Sisterlove\\obj\\",
+        "outputPath": "C:\\Users\\emeris\\source\\repos\\WIL-SisterLove\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

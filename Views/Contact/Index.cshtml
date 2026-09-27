@@ -1,0 +1,264 @@
+﻿@model SisterLoveSA.Models.ContactViewModel
+
+@{
+    ViewBag.PageTitle = "Contact Us";
+}
+
+<section class="contact-page">
+
+    <!-- Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero-content">
+                <span class="contact-eyebrow">GET IN TOUCH</span>
+
+                <h1>Let's connect.<br />Let's create change.</h1>
+
+                <p>
+                    Whether you want to learn more about our work, explore a
+                    partnership, volunteer your time, or support our programmes,
+                    we'd love to hear from you.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-section">
+        <div class="container">
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="contact-success">
+                    <i class="fas fa-circle-check"></i>
+                    <div>
+                        <strong>Message sent successfully</strong>
+                        <p>@TempData["SuccessMessage"]</p>
+                    </div>
+                </div>
+            }
+
+            <div class="contact-grid">
+
+                <!-- Contact Information -->
+                <div class="contact-information">
+
+                    <span class="section-label">CONTACT US</span>
+
+                    <h2>We'd love to hear from you.</h2>
+
+                    <p class="contact-intro">
+                        SisterLove South Africa works to advance sexual and
+                        reproductive health and justice, HIV prevention and
+                        education, gender justice, and youth empowerment.
+                    </p>
+
+                    <!-- Remote Office -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+
+                        <div>
+                            <h3>Our Office</h3>
+                            <p>
+                                SisterLove South Africa currently operates
+                                remotely, with our team, consultants and
+                                volunteers coordinating virtually.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Postal Address -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+
+                        <div>
+                            <h3>Postal Address</h3>
+                            <p>
+                                Suite 116, P.Bag X2600<br />
+                                Killarney, 2041<br />
+                                South Africa
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Programme Lead -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+
+                        <div>
+                            <h3>Programme Lead</h3>
+                            <p>
+                                <strong>Dr Busi Ndlovu</strong><br />
+                                <a href="tel:+27824611985">
+                                    +27 82 461 1985
+                                </a><br />
+                                <a href="mailto:bndlovu@SisterLovelove.org">
+                                    bndlovu@SisterLovelove.org
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Operations -->
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+
+                        <div>
+                            <h3>Operations</h3>
+                            <p>
+                                <strong>Nomsa Mothapo</strong><br />
+                                <a href="tel:+27796665075">
+                                    +27 79 666 5075
+                                </a><br />
+                                <a href="mailto:nmothapo@SisterLovelove.org">
+                                    nmothapo@SisterLovelove.org
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- VAT -->
+                    <div class="contact-vat">
+                        <span>VAT Number</span>
+                        <strong>4690278157</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+
+                    <div class="contact-form-header">
+                        <span class="section-label">SEND A MESSAGE</span>
+                        <h2>How can we help?</h2>
+                        <p>
+                            Complete the form below and a member of our team
+                            will get back to you.
+                        </p>
+                    </div>
+
+                    <form asp-controller="Contact"
+                          asp-action="Index"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="validation-summary">
+                        </div>
+
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+
+                            <input asp-for="Name"
+                                   class="form-control"
+                                   placeholder="Enter your full name" />
+
+                            <span asp-validation-for="Name"
+                                  class="field-validation">
+                            </span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+
+                            <input asp-for="Email"
+                                   type="email"
+                                   class="form-control"
+                                   placeholder="you@example.com" />
+
+                            <span asp-validation-for="Email"
+                                  class="field-validation">
+                            </span>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label asp-for="Phone"></label>
+
+                            <input asp-for="Phone"
+                                   type="tel"
+                                   class="form-control"
+                                   placeholder="+27 XX XXX XXXX" />
+
+                            <span asp-validation-for="Phone"
+                                  class="field-validation">
+                            </span>
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="form-group">
+                            <label asp-for="Subject"></label>
+
+                            <select asp-for="Subject"
+                                    asp-items="Html.GetEnumSelectList<SisterLoveSA.Models.InquiryType>()"
+                                    class="form-control">
+                                <option value="">Select a reason</option>
+                            </select>
+
+                            <span asp-validation-for="Subject"
+                                  class="field-validation">
+                            </span>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label asp-for="Message"></label>
+
+                            <textarea asp-for="Message"
+                                      class="form-control"
+                                      rows="6"
+                                      placeholder="Tell us how we can help..."></textarea>
+
+                            <span asp-validation-for="Message"
+                                  class="field-validation">
+                            </span>
+                        </div>
+
+                        <!-- Volunteer -->
+                        <div class="volunteer-option">
+
+                            <label class="checkbox-label">
+
+                                <input asp-for="IsVolunteer"
+                                       type="checkbox" />
+
+                                <span>
+                                    I'd like to volunteer with SisterLove
+                                    South Africa.
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="contact-submit">
+                            <span>Send Message</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
