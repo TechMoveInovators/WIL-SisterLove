@@ -10,7 +10,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-res.send('PulseVote API running!');
+res.send('SisterLoverSA API running!');
 });
 
 module.exports = app;
