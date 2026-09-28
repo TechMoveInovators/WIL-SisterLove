@@ -1,4 +1,7 @@
+const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
+
+const JWT_SECRET = "sisterlove-secret-key";
 
 const login = async (req, res) => {
     try {
@@ -32,8 +35,21 @@ const login = async (req, res) => {
             });
         }
 
+        const token = jwt.sign(
+            {
+                id: user.id,
+                email: user.email,
+                roleId: user.roleId
+            },
+            JWT_SECRET,
+            {
+                expiresIn: "2h"
+            }
+        );
+
         res.status(200).json({
             message: "Login successful",
+            token: token,
             user: {
                 id: user.id,
                 name: user.name,
@@ -53,5 +69,6 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-    login
+    login,
+    JWT_SECRET
 };
