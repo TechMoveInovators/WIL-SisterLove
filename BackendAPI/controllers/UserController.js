@@ -1,38 +1,76 @@
 const UserModel = require("../models/UserModel");
 
-const createUser = (req, res) => {
-    const {
-        name,
-        email,
-        phone,
-        role
-    } = req.body;
+const createUser = async (req, res) => {
+    try {
+        const {
+            name,
+            email,
+            phone,
+            password,
+            roleId
+        } = req.body;
 
-    if (!name || !email) {
-        return res.status(400).json({
-            message: "Name and email are required"
+        if (!name || !email || !password) {
+            return res.status(400).json({
+                message: "Name, email and password are required"
+            });
+        }
+
+        const existingUser = UserModel.getByEmail(email);
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: "A user with this email already exists"
+            });
+        }
+
+        const user = await UserModel.create({
+            name,
+            email,
+            phone,
+            password,
+            roleId
+        });
+
+        const safeUser = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            roleId: user.roleId,
+            status: user.status,
+            createdAt: user.createdAt
+        };
+
+        res.status(201).json({
+            message: "User registered successfully",
+            user: safeUser
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Error creating user",
+            error: error.message
         });
     }
-
-    const user = UserModel.create({
-        name,
-        email,
-        phone,
-        role
-    });
-
-    res.status(201).json({
-        message: "User created successfully",
-        user: user
-    });
 };
 
 const getUsers = (req, res) => {
     const users = UserModel.getAll();
 
+    const safeUsers = users.map(user => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        roleId: user.roleId,
+        status: user.status,
+        createdAt: user.createdAt
+    }));
+
     res.status(200).json({
         message: "Users retrieved successfully",
-        users: users
+        users: safeUsers
     });
 };
 
@@ -46,7 +84,15 @@ const getUserById = (req, res) => {
     }
 
     res.status(200).json({
-        user: user
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            roleId: user.roleId,
+            status: user.status,
+            createdAt: user.createdAt
+        }
     });
 };
 
