@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sisterlove.Models.Entities
 {
@@ -15,6 +16,7 @@ namespace Sisterlove.Models.Entities
         public string Email { get; set; } = string.Empty;
 
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Amount { get; set; }
 
         [MaxLength(50)]
