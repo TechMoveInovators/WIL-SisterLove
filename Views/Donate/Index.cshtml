@@ -6,7 +6,9 @@
 
 <section class="donate-page">
 
-    <!-- Page Hero -->
+    <!-- =============================================
+         PAGE HERO
+    ============================================== -->
     <div class="donate-hero">
         <div class="container donate-hero-inner">
 
@@ -37,32 +39,27 @@
             </div>
 
             <div class="donate-hero-shape">
-
                 <div class="donate-heart">
                     <i class="fas fa-heart"></i>
                 </div>
-
                 <strong>Love in Action</strong>
-
             </div>
 
         </div>
     </div>
 
 
-    <!-- Donation Content -->
+    <!-- =============================================
+         DONATION CONTENT
+    ============================================== -->
     <div class="donate-content">
-
         <div class="container">
-
             <div class="donate-grid">
 
-                <!-- Why Support -->
+                <!-- WHY SUPPORT -->
                 <div class="donate-info">
 
-                    <span class="section-label">
-                        MAKE AN IMPACT
-                    </span>
+                    <span class="section-label">MAKE AN IMPACT</span>
 
                     <h2>
                         Every contribution
@@ -75,254 +72,162 @@
                         partnerships to create meaningful change.
                     </p>
 
-
                     <div class="impact-list">
 
                         <div class="impact-item">
                             <div class="impact-icon purple">
                                 <i class="fas fa-people-group"></i>
                             </div>
-
                             <div>
                                 <strong>Community programmes</strong>
-                                <p>
-                                    Support education, awareness and
-                                    community engagement.
-                                </p>
+                                <p>Support education, awareness and community engagement.</p>
                             </div>
                         </div>
-
 
                         <div class="impact-item">
                             <div class="impact-icon turquoise">
                                 <i class="fas fa-heart-pulse"></i>
                             </div>
-
                             <div>
                                 <strong>Health &amp; prevention</strong>
-                                <p>
-                                    Help strengthen HIV prevention and
-                                    sexual and reproductive health work.
-                                </p>
+                                <p>Help strengthen HIV prevention and sexual and reproductive health work.</p>
                             </div>
                         </div>
-
 
                         <div class="impact-item">
                             <div class="impact-icon peach">
                                 <i class="fas fa-hand-holding-heart"></i>
                             </div>
-
                             <div>
                                 <strong>Youth &amp; gender justice</strong>
-                                <p>
-                                    Contribute to youth empowerment and
-                                    GBVF prevention initiatives.
-                                </p>
+                                <p>Contribute to youth empowerment and GBVF prevention initiatives.</p>
                             </div>
                         </div>
 
                     </div>
 
-
                     <div class="donate-note">
-
                         <i class="fas fa-circle-info"></i>
-
                         <p>
-                            We are actively seeking funding, programme
-                            partnerships, corporate support, in-kind support
-                            and strategic collaboration.
+                            We are actively seeking funding, programme partnerships,
+                            corporate support, in-kind support and strategic collaboration.
                         </p>
-
                     </div>
 
                 </div>
 
 
-                <!-- Donation Form -->
+                <!-- DONATION FORM -->
                 <div class="donate-form-container">
 
                     <div class="donate-form-header">
-
-                        <span class="form-step">
-                            SUPPORT OUR WORK
-                        </span>
-
-                        <h2>
-                            Make a contribution
-                        </h2>
-
-                        <p>
-                            Every contribution helps us continue our work
-                            with communities across South Africa.
-                        </p>
-
+                        <span class="form-step">SUPPORT OUR WORK</span>
+                        <h2>Make a contribution</h2>
+                        <p>Every contribution helps us continue our work with communities across South Africa.</p>
                     </div>
 
-
-                    <form asp-action="Index" method="post">
+                    <form asp-action="Index" method="post" novalidate>
 
                         @Html.AntiForgeryToken()
 
-                        <div asp-validation-summary="All"
-                             class="text-danger validation-summary">
-                        </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
 
-
-                        <!-- Name -->
+                        <!-- FULL NAME -->
                         <div class="form-group">
-
-                            <label asp-for="DonorName">
-                                Full Name
-                            </label>
-
+                            <label asp-for="DonorName">Full Name</label>
                             <input asp-for="DonorName"
                                    class="form-control"
-                                   placeholder="Enter your full name" />
-
-                            <span asp-validation-for="DonorName"
-                                  class="text-danger">
-                            </span>
-
+                                   placeholder="Enter your full name"
+                                   autocomplete="name" />
+                            <span asp-validation-for="DonorName" class="text-danger"></span>
                         </div>
 
-
-                        <!-- Email -->
+                        <!-- EMAIL -->
                         <div class="form-group">
-
-                            <label asp-for="Email">
-                                Email Address
-                            </label>
-
+                            <label asp-for="Email">Email Address</label>
                             <input asp-for="Email"
                                    type="email"
                                    class="form-control"
-                                   placeholder="you@example.com" />
-
-                            <span asp-validation-for="Email"
-                                  class="text-danger">
-                            </span>
-
+                                   placeholder="you@example.com"
+                                   autocomplete="email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
-
-                        <!-- Donation Type -->
+                        <!-- DONATION TYPE -->
                         <div class="form-group">
-
-                            <label>
-                                Donation Type
-                            </label>
+                            <label>Donation Type</label>
 
                             <div class="donation-type-options">
 
                                 <label class="radio-card">
-
-                                    <input type="radio"
-                                           asp-for="DonationType"
-                                           value="0"
-                                           checked />
-
-                                    <span>
+                                    <input type="radio" asp-for="DonationType" value="0" checked />
+                                    <span class="radio-content">
                                         <strong>One-Time</strong>
                                         <small>Make a single contribution</small>
                                     </span>
-
                                 </label>
 
-
                                 <label class="radio-card">
-
-                                    <input type="radio"
-                                           asp-for="DonationType"
-                                           value="1" />
-
-                                    <span>
+                                    <input type="radio" asp-for="DonationType" value="1" />
+                                    <span class="radio-content">
                                         <strong>Monthly</strong>
                                         <small>Support us regularly</small>
                                     </span>
-
                                 </label>
 
                             </div>
-
                         </div>
 
-
-                        <!-- Amount -->
+                        <!-- AMOUNT -->
                         <div class="form-group">
-
-                            <label asp-for="Amount">
-                                Choose an Amount
-                            </label>
+                            <label asp-for="Amount">Choose an Amount</label>
 
                             <div class="amount-options">
-
                                 @foreach (var amt in Model.PresetAmounts)
                                 {
                                     <button type="button"
                                             class="amount-btn"
-                                            onclick="setAmount(@amt)">
+                                            data-amount="@amt"
+                                            onclick="setAmount(this, @amt)">
                                         R@(amt.ToString("N0"))
                                     </button>
                                 }
-
                             </div>
 
-
                             <div class="custom-amount">
-
-                                <span>R</span>
-
+                                <span class="currency-prefix">R</span>
                                 <input asp-for="Amount"
                                        type="number"
                                        class="form-control"
-                                       placeholder="Enter custom amount"
+                                       placeholder="Or enter custom amount"
                                        min="1" />
-
                             </div>
 
-                            <span asp-validation-for="Amount"
-                                  class="text-danger">
-                            </span>
-
+                            <span asp-validation-for="Amount" class="text-danger"></span>
                         </div>
 
-
-                        <!-- Message -->
+                        <!-- MESSAGE -->
                         <div class="form-group">
-
                             <label asp-for="Message">
-                                Message <span>(Optional)</span>
+                                Message <span class="optional">(Optional)</span>
                             </label>
-
                             <textarea asp-for="Message"
                                       class="form-control"
                                       rows="4"
                                       placeholder="Leave a message for SisterLove South Africa"></textarea>
-
+                            <span asp-validation-for="Message" class="text-danger"></span>
                         </div>
 
-
-                        <!-- Submit -->
-                        <button type="submit"
-                                class="donate-submit">
-
+                        <!-- SUBMIT -->
+                        <button type="submit" class="donate-submit">
                             <i class="fas fa-heart"></i>
-
                             Support Our Work
-
                             <i class="fas fa-arrow-right"></i>
-
                         </button>
 
-
                         <p class="donate-security">
-
                             <i class="fas fa-lock"></i>
-
                             Your information is handled securely.
-
                         </p>
 
                     </form>
@@ -330,45 +235,38 @@
                 </div>
 
             </div>
-
         </div>
-
     </div>
 
 </section>
 
 
 @section Scripts {
-
     <script>
+        function setAmount(button, amt) {
+            const amountInput = document.getElementById('Amount');
+            if (!amountInput) return;
 
-        function setAmount(amt) {
+            amountInput.value = amt;
 
-            const amountInput =
-                document.getElementById('Amount');
-
-            if (amountInput) {
-
-                amountInput.value = amt;
-
-                document
-                    .querySelectorAll('.amount-btn')
-                    .forEach(button => {
-                        button.classList.remove('selected');
-                    });
-
-                const buttons =
-                    document.querySelectorAll('.amount-btn');
-
-                buttons.forEach(button => {
-
-                    if (button.textContent.trim() === 'R' + Number(amt).toLocaleString('en-ZA')) {
-                        button.classList.add('selected');
-                    }
-
-                });
-            }
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            button.classList.add('selected');
         }
 
+        // Highlight the preset button if user types a matching amount
+        document.addEventListener('DOMContentLoaded', function () {
+            const amountInput = document.getElementById('Amount');
+            if (!amountInput) return;
+
+            amountInput.addEventListener('input', function () {
+                const val = parseFloat(this.value);
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    const btnVal = parseFloat(btn.dataset.amount);
+                    btn.classList.toggle('selected', btnVal === val);
+                });
+            });
+        });
     </script>
 }
