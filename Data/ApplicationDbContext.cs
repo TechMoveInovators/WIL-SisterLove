@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sisterlove.Models.Entities;
 
 namespace Sisterlove.Data
 {
@@ -8,5 +9,7 @@ namespace Sisterlove.Data
             : base(options)
         {
         }
+
+        public DbSet<Donation> Donations { get; set; }
     }
 }
