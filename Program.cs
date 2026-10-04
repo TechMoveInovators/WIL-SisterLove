@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using SisterLoveSA.Services;
+using Sisterlove.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDonationService, DonationService>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
