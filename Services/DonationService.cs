@@ -1,13 +1,20 @@
-﻿using SisterLoveSA.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Sisterlove.Data;
+using Sisterlove.Models.Entities;
+using SisterLoveSA.Models;
 
 namespace SisterLoveSA.Services
 {
     public class DonationService : IDonationService
     {
+        private readonly ApplicationDbContext _context;
         private readonly ILogger<DonationService> _logger;
 
-        public DonationService(ILogger<DonationService> logger)
+        public DonationService(
+            ApplicationDbContext context,
+            ILogger<DonationService> logger)
         {
+            _context = context;
             _logger = logger;
         }
 
@@ -15,8 +22,21 @@ namespace SisterLoveSA.Services
         {
             try
             {
-                await Task.Delay(1000);
                 var transactionId = GenerateTransactionId();
+
+                var donation = new Donation
+                {
+                    DonorName = model.DonorName,
+                    Email = model.Email,
+                    Amount = model.Amount ?? 0,
+                    Message = model.Message,
+                    DonationType = model.DonationType.ToString(),
+                    TransactionId = transactionId,
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                _context.Donations.Add(donation);
+                await _context.SaveChangesAsync();
 
                 var result = new DonationResult
                 {
@@ -27,11 +47,13 @@ namespace SisterLoveSA.Services
                 };
 
                 await SendConfirmationEmail(result);
+
                 return result;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error processing donation");
+
                 return new DonationResult
                 {
                     Success = false,
@@ -45,7 +67,11 @@ namespace SisterLoveSA.Services
             try
             {
                 await Task.Delay(500);
-                _logger.LogInformation($"Confirmation email sent to donor {result.DonorName} for transaction #{result.TransactionId}");
+
+                _logger.LogInformation(
+                    $"Confirmation email sent to donor {result.DonorName} " +
+                    $"for transaction #{result.TransactionId}");
+
                 return true;
             }
             catch (Exception ex)
@@ -59,6 +85,7 @@ namespace SisterLoveSA.Services
         {
             var random = new Random();
             var number = random.Next(1000, 9999);
+
             return $"SL-{DateTime.Now.Year}-{number}";
         }
     }

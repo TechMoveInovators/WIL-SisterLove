@@ -19,6 +19,13 @@ namespace Sisterlove.Models.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal Amount { get; set; }
 
+        [MaxLength(500)]
+        public string? Message { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string DonationType { get; set; } = "OneTime";
+
         [MaxLength(50)]
         public string? PaymentMethod { get; set; }
 
