@@ -6,30 +6,40 @@
 
 <section class="contact-page">
 
-    <!-- Hero -->
+    <!-- =============================================
+         HERO
+    ============================================== -->
     <section class="contact-hero">
         <div class="container">
             <div class="contact-hero-content">
+
                 <span class="contact-eyebrow">GET IN TOUCH</span>
 
-                <h1>Let's connect.<br />Let's create change.</h1>
+                <h1>
+                    Let's connect.<br />
+                    Let's create change.
+                </h1>
 
                 <p>
                     Whether you want to learn more about our work, explore a
                     partnership, volunteer your time, or support our programmes,
                     we'd love to hear from you.
                 </p>
+
             </div>
         </div>
     </section>
 
-    <!-- Contact Content -->
+
+    <!-- =============================================
+         CONTACT CONTENT
+    ============================================== -->
     <section class="contact-section">
         <div class="container">
 
             @if (TempData["SuccessMessage"] != null)
             {
-                <div class="contact-success">
+                <div class="contact-success" role="status">
                     <i class="fas fa-circle-check"></i>
                     <div>
                         <strong>Message sent successfully</strong>
@@ -40,7 +50,9 @@
 
             <div class="contact-grid">
 
-                <!-- Contact Information -->
+                <!-- =============================================
+                     CONTACT INFORMATION
+                ============================================== -->
                 <div class="contact-information">
 
                     <span class="section-label">CONTACT US</span>
@@ -55,10 +67,9 @@
 
                     <!-- Remote Office -->
                     <div class="contact-info-item">
-                        <div class="contact-icon">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-location-dot"></i>
                         </div>
-
                         <div>
                             <h3>Our Office</h3>
                             <p>
@@ -71,10 +82,9 @@
 
                     <!-- Postal Address -->
                     <div class="contact-info-item">
-                        <div class="contact-icon">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-envelope"></i>
                         </div>
-
                         <div>
                             <h3>Postal Address</h3>
                             <p>
@@ -87,19 +97,16 @@
 
                     <!-- Programme Lead -->
                     <div class="contact-info-item">
-                        <div class="contact-icon">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-user"></i>
                         </div>
-
                         <div>
                             <h3>Programme Lead</h3>
                             <p>
                                 <strong>Dr Busi Ndlovu</strong><br />
-                                <a href="tel:+27824611985">
-                                    +27 82 461 1985
-                                </a><br />
-                                <a href="mailto:bndlovu@SisterLovelove.org">
-                                    bndlovu@SisterLovelove.org
+                                <a href="tel:+27824611985">+27 82 461 1985</a><br />
+                                <a href="mailto:bndlovu@SisterLove.org">
+                                    bndlovu@SisterLove.org
                                 </a>
                             </p>
                         </div>
@@ -107,19 +114,16 @@
 
                     <!-- Operations -->
                     <div class="contact-info-item">
-                        <div class="contact-icon">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-phone"></i>
                         </div>
-
                         <div>
                             <h3>Operations</h3>
                             <p>
                                 <strong>Nomsa Mothapo</strong><br />
-                                <a href="tel:+27796665075">
-                                    +27 79 666 5075
-                                </a><br />
-                                <a href="mailto:nmothapo@SisterLovelove.org">
-                                    nmothapo@SisterLovelove.org
+                                <a href="tel:+27796665075">+27 79 666 5075</a><br />
+                                <a href="mailto:nmothapo@SisterLove.org">
+                                    nmothapo@SisterLove.org
                                 </a>
                             </p>
                         </div>
@@ -134,7 +138,9 @@
                 </div>
 
 
-                <!-- Contact Form -->
+                <!-- =============================================
+                     CONTACT FORM
+                ============================================== -->
                 <div class="contact-form-container">
 
                     <div class="contact-form-header">
@@ -148,105 +154,90 @@
 
                     <form asp-controller="Contact"
                           asp-action="Index"
-                          method="post">
+                          method="post"
+                          novalidate>
 
                         @Html.AntiForgeryToken()
 
                         <div asp-validation-summary="ModelOnly"
-                             class="validation-summary">
+                             class="validation-summary text-danger">
                         </div>
 
                         <!-- Name -->
                         <div class="form-group">
-                            <label asp-for="Name"></label>
-
+                            <label asp-for="Name">Full Name</label>
                             <input asp-for="Name"
                                    class="form-control"
-                                   placeholder="Enter your full name" />
-
+                                   placeholder="Enter your full name"
+                                   autocomplete="name" />
                             <span asp-validation-for="Name"
-                                  class="field-validation">
-                            </span>
+                                  class="field-validation text-danger"></span>
                         </div>
 
                         <!-- Email -->
                         <div class="form-group">
-                            <label asp-for="Email"></label>
-
+                            <label asp-for="Email">Email Address</label>
                             <input asp-for="Email"
                                    type="email"
                                    class="form-control"
-                                   placeholder="you@example.com" />
-
+                                   placeholder="you@example.com"
+                                   autocomplete="email" />
                             <span asp-validation-for="Email"
-                                  class="field-validation">
-                            </span>
+                                  class="field-validation text-danger"></span>
                         </div>
 
                         <!-- Phone -->
                         <div class="form-group">
-                            <label asp-for="Phone"></label>
-
+                            <label asp-for="Phone">
+                                Phone Number <span class="optional">(Optional)</span>
+                            </label>
                             <input asp-for="Phone"
                                    type="tel"
                                    class="form-control"
-                                   placeholder="+27 XX XXX XXXX" />
-
+                                   placeholder="+27 XX XXX XXXX"
+                                   autocomplete="tel" />
                             <span asp-validation-for="Phone"
-                                  class="field-validation">
-                            </span>
+                                  class="field-validation text-danger"></span>
                         </div>
 
                         <!-- Subject -->
                         <div class="form-group">
-                            <label asp-for="Subject"></label>
-
+                            <label asp-for="Subject">Reason for Contact</label>
                             <select asp-for="Subject"
                                     asp-items="Html.GetEnumSelectList<SisterLoveSA.Models.InquiryType>()"
                                     class="form-control">
                                 <option value="">Select a reason</option>
                             </select>
-
                             <span asp-validation-for="Subject"
-                                  class="field-validation">
-                            </span>
+                                  class="field-validation text-danger"></span>
                         </div>
 
                         <!-- Message -->
                         <div class="form-group">
-                            <label asp-for="Message"></label>
-
+                            <label asp-for="Message">Message</label>
                             <textarea asp-for="Message"
                                       class="form-control"
                                       rows="6"
                                       placeholder="Tell us how we can help..."></textarea>
-
                             <span asp-validation-for="Message"
-                                  class="field-validation">
-                            </span>
+                                  class="field-validation text-danger"></span>
                         </div>
 
                         <!-- Volunteer -->
                         <div class="volunteer-option">
-
                             <label class="checkbox-label">
-
-                                <input asp-for="IsVolunteer"
-                                       type="checkbox" />
-
+                                <input asp-for="IsVolunteer" type="checkbox" />
                                 <span>
                                     I'd like to volunteer with SisterLove
                                     South Africa.
                                 </span>
-
                             </label>
-
                         </div>
 
                         <!-- Submit -->
                         <button type="submit" class="contact-submit">
                             <span>Send Message</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </button>
 
                     </form>
