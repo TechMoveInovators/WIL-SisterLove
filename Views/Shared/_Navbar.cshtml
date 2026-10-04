@@ -4,11 +4,13 @@
         <!-- Logo -->
         <a asp-controller="Home"
            asp-action="Index"
-           class="site-logo">
+           class="site-logo"
+           aria-label="SisterLove South Africa Home">
 
-            <div class="logo-mark">
-                SL
-            </div>
+            <img src="~/images/logo.png"
+                 alt=""
+                 class="site-logo-img"
+                 aria-hidden="true" />
 
             <div class="logo-text">
                 SisterLove
@@ -33,39 +35,14 @@
         <!-- Navigation -->
         <div class="nav-menu" id="mainNavigation">
 
-            <a asp-controller="Home"
-               asp-action="Index">
-                Home
-            </a>
-
-            <a href="/Home/About">
-                About Us
-            </a>
-
-            <a href="/Home/OurWork">
-                Our Work
-            </a>
-
-            <a href="/Home/Partnerships">
-                Partnerships
-            </a>
-
-            <a href="/Home/TrackRecord">
-                Track Record
-            </a>
-
-            <a href="/Home/GetInvolved">
-                Get Involved
-            </a>
-
-            <a href="/Donate"
-               class="nav-support">
-                Support Our Work
-            </a>
-
-            <a href="/Contact">
-                Contact
-            </a>
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a href="/Home/About">About Us</a>
+            <a href="/Home/OurWork">Our Work</a>
+            <a href="/Home/Partnerships">Partnerships</a>
+            <a href="/Home/TrackRecord">Track Record</a>
+            <a href="/Home/GetInvolved">Get Involved</a>
+            <a href="/Donate" class="nav-support">Support Our Work</a>
+            <a href="/Contact">Contact</a>
 
         </div>
 
