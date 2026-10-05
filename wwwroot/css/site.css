@@ -21,9 +21,9 @@
 }
 
 .our-work-hero .gi-hero-image-circle {
-    /* Larger hero circle (top of page) */
-    width: 320px;
-    height: 320px;
+    /* Top hero circle: set to 300x300 on desktop as requested */
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     overflow: hidden;
     display: inline-block;
@@ -39,24 +39,24 @@
 
 @media (max-width: 1000px) {
     .our-work-hero .gi-hero-image-circle {
-        width: 260px;
-        height: 260px;
+        width: 240px;
+        height: 240px;
     }
 }
 
 @media (max-width: 600px) {
     .our-work-hero .gi-hero-image-circle {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
 }
 
 /* OUR WORK - reduce community-led image size */
 .our-work-identity .gi-volunteer-visual {
-    /* Make community-led image very small per request; use !important to override existing rules */
-    width: 60px !important;
-    max-width: 60px !important;
-    min-width: 60px !important;
+    /* Community-led (second) image: set to 300x300 on desktop as requested */
+    width: 300px !important;
+    max-width: 300px !important;
+    min-width: 300px !important;
     aspect-ratio: 1 / 1;
     overflow: hidden;
 }
@@ -73,19 +73,67 @@
     background-repeat: no-repeat !important;
 }
 
+/* WORK HERO - layout and image sizing */
+.work-hero-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 280px; /* text + image column */
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.work-hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-hero-image .our-work-hero-img {
+    width: 100%;
+    max-width: 200px; /* make the our-work-hero image smaller on desktop */
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+    .work-hero-content-wrapper {
+        grid-template-columns: 1fr 200px;
+    }
+
+    .work-hero-image .our-work-hero-img {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 600px) {
+    .work-hero-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .work-hero-image {
+        order: 2;
+    }
+
+    .work-hero-image .our-work-hero-img {
+        max-width: 140px;
+    }
+}
+
 @media (max-width: 1000px) {
     .our-work-identity .gi-volunteer-visual {
-        width: 50px !important;
-        max-width: 50px !important;
-        min-width: 50px !important;
+        width: 240px !important;
+        max-width: 240px !important;
+        min-width: 240px !important;
     }
 }
 
 @media (max-width: 600px) {
     .our-work-identity .gi-volunteer-visual {
-        width: 40px !important;
-        max-width: 40px !important;
-        min-width: 40px !important;
+        width: 180px !important;
+        max-width: 180px !important;
+        min-width: 180px !important;
     }
 }
 
