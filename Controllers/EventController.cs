@@ -72,28 +72,17 @@ namespace SisterLoveSA.Controllers
 
             try
             {
-                // Get the authenticated user's email from the login claim.
-                var email = User.FindFirstValue(ClaimTypes.Email);
+                // Get the authenticated user's database ID
+                // from the NameIdentifier claim.
+                var userIdClaim =
+                    User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                if (string.IsNullOrWhiteSpace(email))
+                if (!int.TryParse(userIdClaim, out var userId))
                 {
                     _logger.LogWarning(
-                        "Authenticated user attempted to create an event without an email claim.");
+                        "Authenticated user attempted to create an event without a valid user ID claim.");
 
                     return Challenge();
-                }
-
-                // Find the real user in the database.
-                var currentUser = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == email);
-
-                if (currentUser == null)
-                {
-                    _logger.LogWarning(
-                        "No database user found for authenticated email {Email}.",
-                        email);
-
-                    return Forbid();
                 }
 
                 var newEvent = new Event
@@ -103,15 +92,15 @@ namespace SisterLoveSA.Controllers
                     EventDate = model.EventDate,
                     Venue = model.Venue,
 
-                    // IMPORTANT:
-                    // The user ID comes from the database,
-                    // NOT from the submitted form.
-                    CreatedByUserId = currentUser.Id,
+                    // The creator ID comes from the authenticated
+                    // user's claim, NOT from the submitted form.
+                    CreatedByUserId = userId,
 
                     CreatedAt = DateTime.UtcNow
                 };
 
                 _context.Events.Add(newEvent);
+
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] =
@@ -155,8 +144,6 @@ namespace SisterLoveSA.Controllers
                 Description = eventItem.Description,
                 EventDate = eventItem.EventDate,
                 Venue = eventItem.Venue,
-
-                // Display the existing creator.
                 CreatedByUserId = eventItem.CreatedByUserId
             };
 
@@ -184,16 +171,14 @@ namespace SisterLoveSA.Controllers
                     return NotFound();
                 }
 
-                // Only update fields that the user is allowed
-                // to change.
+                // Update editable event information only.
                 eventItem.EventName = model.EventName;
                 eventItem.Description = model.Description;
                 eventItem.EventDate = model.EventDate;
                 eventItem.Venue = model.Venue;
 
-                // DO NOT update CreatedByUserId from the form.
-                // The original creator remains associated
-                // with the event.
+                // CreatedByUserId is deliberately NOT updated
+                // from the submitted form.
 
                 await _context.SaveChangesAsync();
 
@@ -218,7 +203,7 @@ namespace SisterLoveSA.Controllers
         }
 
         // GET: /Event/Delete/5
-        // Only authenticated users can access the delete confirmation.
+        // Only authenticated users can access delete confirmation.
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

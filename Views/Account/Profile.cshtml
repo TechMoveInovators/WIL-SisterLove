@@ -1,4 +1,5 @@
 ﻿@model SisterLoveSA.Models.UserProfileViewModel
+
 @{
     ViewBag.PageTitle = "My Account";
 }
@@ -14,21 +15,27 @@
 
         <div class="hero-content">
             <span class="eyebrow">MY ACCOUNT</span>
+
             <h1>
                 Welcome back,
                 <span>@Model.FullName.</span>
             </h1>
+
             <p>
                 Manage your personal information, update your contact
                 details and keep your SisterLove South Africa account
                 secure.
             </p>
+
             <div class="hero-actions">
                 <a href="#profile" class="btn btn-primary">
                     Edit Profile
                     <i class="fas fa-arrow-right"></i>
                 </a>
-                <a asp-controller="Home" asp-action="Index" class="btn btn-outline">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn btn-outline">
                     Return Home
                 </a>
             </div>
@@ -39,11 +46,15 @@
             <div class="gi-hero-image-circle gi-account-circle">
                 <i class="fas fa-user-circle"></i>
             </div>
+
             <div class="floating-card gi-floating-card">
                 <i class="fas fa-calendar-check"></i>
+
                 <div>
                     <strong>Member Since</strong>
-                    <span>@Model.MemberSince.ToString("MMMM yyyy")</span>
+                    <span>
+                        @Model.MemberSince.ToString("MMMM yyyy")
+                    </span>
                 </div>
             </div>
         </div>
@@ -60,23 +71,34 @@
 
         <div class="section-heading">
             <span class="section-label">PROFILE DETAILS</span>
+
             <h2>Manage your information</h2>
+
             <p>
                 Keep your details up to date to ensure you receive
                 relevant updates from SisterLove South Africa.
             </p>
         </div>
 
+
         @if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
         {
-            <div class="contact-banner-success" role="status" style="max-width: 900px; margin: 0 auto 2rem;">
+            <div class="contact-banner-success"
+                 role="status"
+                 style="max-width: 900px; margin: 0 auto 2rem;">
+
                 <i class="fas fa-circle-check"></i>
+
                 <div>
                     <strong>Profile updated successfully</strong>
-                    <p>@TempData["SuccessMessage"]</p>
+
+                    <p>
+                        @TempData["SuccessMessage"]
+                    </p>
                 </div>
             </div>
         }
+
 
         <div class="account-grid">
 
@@ -85,43 +107,76 @@
 
                 <!-- Avatar header -->
                 <div class="account-avatar-card">
+
                     <div class="account-avatar">
                         <i class="fas fa-user"></i>
                     </div>
+
                     <strong>@Model.FullName</strong>
+
                     <span>@Model.Email</span>
+
                 </div>
+
 
                 <!-- Quick facts -->
                 <div class="account-facts">
+
                     <div class="account-fact">
                         <i class="fas fa-calendar-check"></i>
+
                         <div>
                             <strong>Member Since</strong>
-                            <span>@Model.MemberSince.ToString("dd MMM yyyy")</span>
+
+                            <span>
+                                @Model.MemberSince.ToString("dd MMM yyyy")
+                            </span>
                         </div>
                     </div>
+
+
                     <div class="account-fact">
                         <i class="fas fa-envelope"></i>
+
                         <div>
                             <strong>Email</strong>
+
                             <span>@Model.Email</span>
                         </div>
                     </div>
+
+
                     <div class="account-fact">
                         <i class="fas fa-shield-halved"></i>
+
                         <div>
                             <strong>Account Status</strong>
+
                             <span>Active &amp; Verified</span>
                         </div>
                     </div>
+
                 </div>
 
+
                 <!-- Sign out -->
-                <a asp-controller="Account" asp-action="Logout" class="account-signout">
-                    <i class="fas fa-right-from-bracket"></i>
-                    Sign Out
-                </a>
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post"
+                      style="display: inline;">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="account-signout">
+
+                        <i class="fas fa-right-from-bracket"></i>
+
+                        Sign Out
+
+                    </button>
+
+                </form>
 
             </aside>
 
@@ -130,53 +185,111 @@
             <div class="account-form-card">
 
                 <div class="account-form-header">
+
                     <i class="fas fa-pen-to-square"></i>
+
                     <div>
                         <h3>Update your details</h3>
-                        <p>Changes are saved instantly when you submit.</p>
+
+                        <p>
+                            Changes are saved instantly when you submit.
+                        </p>
                     </div>
+
                 </div>
 
-                <form asp-action="Profile" method="post" novalidate>
+
+                <form asp-action="Profile"
+                      method="post"
+                      novalidate>
+
                     @Html.AntiForgeryToken()
 
-                    <div class="form-field">
-                        <label asp-for="FullName">Full Name</label>
-                        <input asp-for="FullName" placeholder="Enter your full name" />
-                        <span asp-validation-for="FullName" class="field-error"></span>
-                    </div>
 
                     <div class="form-field">
-                        <label asp-for="Email">
-                            Email <span class="muted">(Read-only)</span>
+
+                        <label asp-for="FullName">
+                            Full Name
                         </label>
-                        <input asp-for="Email" readonly />
+
+                        <input asp-for="FullName"
+                               placeholder="Enter your full name" />
+
+                        <span asp-validation-for="FullName"
+                              class="field-error">
+                        </span>
+
                     </div>
 
-                    <div class="form-field">
-                        <label asp-for="PhoneNumber">Phone Number</label>
-                        <input asp-for="PhoneNumber" placeholder="+27 XX XXX XXXX" />
-                        <span asp-validation-for="PhoneNumber" class="field-error"></span>
-                    </div>
 
                     <div class="form-field">
-                        <label>Member Since</label>
+
+                        <label asp-for="Email">
+                            Email
+                            <span class="muted">
+                                (Read-only)
+                            </span>
+                        </label>
+
+                        <input asp-for="Email"
+                               readonly />
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label asp-for="PhoneNumber">
+                            Phone Number
+                        </label>
+
+                        <input asp-for="PhoneNumber"
+                               placeholder="+27 XX XXX XXXX" />
+
+                        <span asp-validation-for="PhoneNumber"
+                              class="field-error">
+                        </span>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Member Since
+                        </label>
+
                         <input type="text"
                                value="@Model.MemberSince.ToString("dd MMM yyyy")"
                                readonly />
+
                     </div>
 
+
                     <div class="account-form-actions">
-                        <button type="submit" class="form-submit">
+
+                        <button type="submit"
+                                class="form-submit">
+
                             Update Info
+
                             <i class="fas fa-arrow-right"></i>
+
                         </button>
-                        <a asp-controller="Home" asp-action="Index" class="account-form-discard">
+
+
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="account-form-discard">
+
                             Discard
+
                         </a>
+
                     </div>
 
                 </form>
+
             </div>
 
         </div>
@@ -189,25 +302,47 @@
      CTA SECTION
 ============================================== -->
 <section class="cta-section">
+
     <div class="container">
+
         <div class="cta-content">
-            <span class="section-label">NEED HELP?</span>
+
+            <span class="section-label">
+                NEED HELP?
+            </span>
+
             <h2>
                 We're here
                 if you need us.
             </h2>
+
             <p>
                 Have a question about your account or need assistance?
                 Our team is ready to help.
             </p>
+
             <div class="cta-actions">
-                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
+
+                <a asp-controller="Contact"
+                   asp-action="Index"
+                   class="btn btn-light">
+
                     Contact Support
+
                 </a>
-                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn btn-outline-light">
+
                     Return Home
+
                 </a>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
