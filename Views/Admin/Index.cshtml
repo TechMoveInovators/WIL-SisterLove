@@ -1,5 +1,111 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SisterLoveSA.Models.AdminDashboardViewModel
+
 @{
+    ViewData["Title"] = "Admin Dashboard";
 }
+
+<div class="container py-5">
+    <div class="mb-5">
+        <h1 class="display-5 fw-bold">Admin Dashboard</h1>
+        <p class="text-muted">
+            Manage SisterLove South Africa content, submissions and events.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Donations</h5>
+                    <h2>@Model.TotalDonations</h2>
+                    <a asp-action="Donations" class="btn btn-primary">
+                        View Donations
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Volunteer Applications</h5>
+                    <h2>@Model.TotalVolunteerApplications</h2>
+                    <a asp-action="VolunteerApplications" class="btn btn-primary">
+                        View Applications
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Funding Enquiries</h5>
+                    <h2>@Model.TotalFundingEnquiries</h2>
+                    <a asp-action="FundingEnquiries" class="btn btn-primary">
+                        View Enquiries
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Contact Enquiries</h5>
+                    <h2>@Model.TotalContactEnquiries</h2>
+                    <a asp-action="ContactEnquiries" class="btn btn-primary">
+                        View Enquiries
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Programmes</h5>
+                    <h2>@Model.TotalProgrammes</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Partnerships</h5>
+                    <h2>@Model.TotalPartnerships</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>News Articles</h5>
+                    <h2>@Model.TotalNewsArticles</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Legacy Projects</h5>
+                    <h2>@Model.TotalLegacyProjects</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5>Events</h5>
+                    <h2>@Model.TotalEvents</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

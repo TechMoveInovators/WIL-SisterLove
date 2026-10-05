@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Sisterlove.Models.Entities.VolunteerApplication>
+
 @{
+    ViewData["Title"] = "Volunteer Applications";
 }
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1>Volunteer Applications</h1>
+            <p class="text-muted">Review volunteer applications submitted by users.</p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Motivation</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var application in Model)
+                {
+                    <tr>
+                        <td>@application.FullName</td>
+                        <td>@application.Email</td>
+                        <td>@(application.PhoneNumber ?? "N/A")</td>
+                        <td>@application.Motivation</td>
+                        <td>@application.SubmittedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
