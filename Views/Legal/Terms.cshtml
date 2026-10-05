@@ -1,17 +1,291 @@
-﻿@{ ViewBag.PageTitle = "Terms & Conditions"; }
-<section style="padding: 4rem 0;">
-    <div class="container" style="max-width:800px;">
-        <h1>Terms & Conditions</h1>
-        <p><strong>Last Updated:</strong> @DateTime.Now.ToString("dd MMMM yyyy")</p>
-        <h2>1. Introduction</h2>
-        <p>By accessing this website, you agree to comply with these terms and conditions.</p>
-        <h2>2. Intellectual Property</h2>
-        <p>All content is the property of SisterLove South Africa and protected by copyright laws.</p>
-        <h2>3. Prohibited Actions</h2>
-        <p>You may not damage, disable, or impair the website or attempt unauthorized access.</p>
-        <h2>4. Privacy</h2>
-        <p>Your information is governed by our <a href="/legal/privacy">Privacy Policy</a>.</p>
-        <h2>5. Contact</h2>
-        <p>Questions? <a href="/contact">Contact us</a>.</p>
+﻿@{
+    ViewBag.PageTitle = "Terms & Conditions";
+}
+
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">TERMS &amp; CONDITIONS</span>
+            <h1>
+                Terms of use,
+                <span>simply stated.</span>
+            </h1>
+            <p>
+                Please read these terms carefully before using the
+                SisterLove South Africa website. By accessing our site,
+                you agree to comply with these conditions.
+            </p>
+            <div class="hero-actions">
+                <a href="#sections" class="btn btn-primary">
+                    Read the Terms
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-outline">
+                    Questions? Contact Us
+                </a>
+            </div>
+        </div>
+
+        <!-- Circular hero visual with icon -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle gi-terms-circle">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-scroll"></i>
+                <div>
+                    <strong>Terms of Use</strong>
+                    <span>Fair • Clear • Transparent</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     INTRODUCTION
+============================================== -->
+<section class="intro-section">
+    <div class="container intro-grid">
+
+        <div>
+            <span class="section-label">AGREEMENT</span>
+            <h2>
+                Your use of our site
+                is governed by these terms.
+            </h2>
+        </div>
+
+        <div>
+            <p>
+                These Terms &amp; Conditions govern your access to and
+                use of the SisterLove South Africa website and its
+                content. By using our site, you accept these terms in
+                full.
+            </p>
+            <p>
+                <strong>Last updated:</strong>
+                @DateTime.Now.ToString("dd MMMM yyyy")
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     TERMS SECTIONS
+============================================== -->
+<section class="focus-section" id="sections">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">TERMS IN DETAIL</span>
+            <h2>What you need to know</h2>
+            <p>
+                Below is a summary of the key terms that apply when
+                you use our website or interact with our content.
+            </p>
+        </div>
+
+        <div class="privacy-grid">
+
+            <!-- 1. Introduction -->
+            <article class="privacy-card">
+                <div class="privacy-card-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <div class="privacy-card-content">
+                    <span class="privacy-card-number">01</span>
+                    <h3>Introduction</h3>
+                    <p>
+                        By accessing or using the SisterLove South Africa
+                        website, you agree to comply with and be bound by
+                        these terms and conditions, along with all
+                        applicable laws and regulations.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 2. Intellectual Property -->
+            <article class="privacy-card">
+                <div class="privacy-card-icon">
+                    <i class="fas fa-copyright"></i>
+                </div>
+                <div class="privacy-card-content">
+                    <span class="privacy-card-number">02</span>
+                    <h3>Intellectual Property</h3>
+                    <p>
+                        All content on this website — including text,
+                        images, logos, graphics and design — is the
+                        property of SisterLove South Africa and is
+                        protected by copyright and intellectual
+                        property laws.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 3. Prohibited Actions -->
+            <article class="privacy-card">
+                <div class="privacy-card-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+                <div class="privacy-card-content">
+                    <span class="privacy-card-number">03</span>
+                    <h3>Prohibited Actions</h3>
+                    <p>
+                        You may not damage, disable, overburden or impair
+                        the website, or attempt to gain unauthorised
+                        access to any part of our systems, data or
+                        services.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 4. Privacy -->
+            <article class="privacy-card">
+                <div class="privacy-card-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="privacy-card-content">
+                    <span class="privacy-card-number">04</span>
+                    <h3>Privacy</h3>
+                    <p>
+                        Your personal information is governed by our
+                        <a asp-controller="Legal" asp-action="Privacy"
+                           style="color: var(--magenta); font-weight: 600; text-decoration: none;">
+                            Privacy Policy
+                        </a>.
+                        We encourage you to read it to understand how we
+                        collect, use and protect your data.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 5. Contact -->
+            <article class="privacy-card">
+                <div class="privacy-card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="privacy-card-content">
+                    <span class="privacy-card-number">05</span>
+                    <h3>Contact</h3>
+                    <p>
+                        If you have questions about these Terms &amp;
+                        Conditions, please
+                        <a asp-controller="Contact" asp-action="Index"
+                           style="color: var(--magenta); font-weight: 600; text-decoration: none;">
+                            contact us
+                        </a>.
+                        We're happy to help clarify anything you need.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     CONTACT FOR TERMS QUESTIONS
+============================================== -->
+<section class="identity-section">
+    <div class="container identity-grid">
+
+        <!-- Content side -->
+        <div class="identity-content">
+            <span class="section-label">GET IN TOUCH</span>
+            <h2>
+                Questions about
+                these terms?
+            </h2>
+            <p>
+                If anything in these Terms &amp; Conditions is unclear,
+                or if you would like to request permission to use our
+                content, please reach out to our team.
+            </p>
+            <p>
+                We aim to respond to all enquiries within 48 hours.
+            </p>
+
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-primary" style="margin-top:1.5rem;">
+                Contact Us
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Contact info side -->
+        <div class="identity-visual">
+            <div class="work-principles" style="margin-top:0; padding-top:0; border-top:none;">
+                <div class="work-principle">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <span>info@sisterlove.org.za</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Call Us</strong>
+                        <span>+27 (0) 11 123 4567</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-comments"></i>
+                    <div>
+                        <strong>Contact Form</strong>
+                        <span>Use our online contact form</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Response Time</strong>
+                        <span>We aim to respond within 48 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">RELATED POLICIES</span>
+            <h2>
+                Explore our
+                other policies.
+            </h2>
+            <p>
+                Learn more about how we protect your rights, data and
+                ensure equal access for everyone.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Legal" asp-action="Privacy" class="btn btn-light">
+                    Privacy Policy
+                </a>
+                <a asp-controller="Legal" asp-action="Accessibility" class="btn btn-outline-light">
+                    Accessibility
+                </a>
+            </div>
+        </div>
     </div>
 </section>
