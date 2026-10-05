@@ -2,401 +2,294 @@
     ViewBag.PageTitle = "Our Work";
 }
 
-<section class="our-work-page">
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
 
-    <!-- Hero -->
-    <section class="our-work-hero">
-        <div class="container">
+    <div class="container hero-container">
 
-            <div class="our-work-hero-content">
-
-                <span class="section-label">
-                    OUR WORK
-                </span>
-
-                <h1>
-                    Turning love into
-                    <span>action.</span>
-                </h1>
-
-                <p>
-                    SisterLove South Africa works with communities and
-                    partners to advance health, justice, dignity and
-                    opportunity for women, young people and families.
-                </p>
-
+        <div class="hero-content">
+            <span class="eyebrow">OUR WORK</span>
+            <h1>
+                Turning love into
+                <span>action.</span>
+            </h1>
+            <p>
+                SisterLove South Africa works with communities and
+                partners to advance health, justice, dignity and
+                opportunity for women, young people and families.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">
+                    Get Involved
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline">
+                    Support Our Work
+                </a>
             </div>
-
         </div>
-    </section>
 
-
-    <!-- Introduction -->
-    <section class="our-work-intro">
-        <div class="container">
-
-            <div class="our-work-intro-grid">
-
+        <!-- Circular hero image -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image" 
+                     style="background-image: url('/images/our-work-hero.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-hand-holding-heart"></i>
                 <div>
-                    <span class="section-label">
-                        WHAT WE DO
-                    </span>
-
-                    <h2>
-                        Community-led work for
-                        lasting change.
-                    </h2>
+                    <strong>Community Rooted</strong>
+                    <span>Health • Justice • Dignity</span>
                 </div>
+            </div>
+        </div>
 
+    </div>
+</section>
+
+
+<!-- =============================================
+     INTRODUCTION
+============================================== -->
+<section class="intro-section">
+    <div class="container intro-grid">
+
+        <div>
+            <span class="section-label">WHAT WE DO</span>
+            <h2>
+                Community-led work
+                for lasting change.
+            </h2>
+        </div>
+
+        <div>
+            <p>
+                Our work is grounded in sexual and reproductive
+                health and justice, HIV prevention and education,
+                gender justice, youth empowerment and meaningful
+                community engagement.
+            </p>
+            <p>
+                We work through education, prevention, support,
+                research, advocacy, partnerships and community
+                participation.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     FOCUS AREAS
+============================================== -->
+<section class="focus-section" id="our-work">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">OUR FOCUS AREAS</span>
+            <h2>Where we make a difference</h2>
+            <p>
+                Our programmes and initiatives respond to issues
+                affecting communities across South Africa.
+            </p>
+        </div>
+
+        <div class="focus-grid">
+
+            <!-- HIV Prevention -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-ribbon"></i>
+                </div>
+                <h3>HIV Prevention & Education</h3>
+                <p>
+                    Supporting HIV prevention and education through
+                    community engagement, awareness and access to
+                    relevant information.
+                </p>
+                <a href="#">
+                    Learn more
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- SRHR -->
+            <article class="focus-card focus-blue">
+                <div class="focus-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <h3>Sexual & Reproductive Health & Justice</h3>
+                <p>
+                    Promoting access to information, support and
+                    rights relating to sexual and reproductive
+                    health and justice.
+                </p>
+                <a href="#">
+                    Learn more
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- GBVF -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-hand-fist"></i>
+                </div>
+                <h3>Gender-Based Violence & Femicide</h3>
+                <p>
+                    Working to prevent gender-based violence and
+                    femicide while promoting dignity, safety,
+                    equality and human rights.
+                </p>
+                <a href="#">
+                    Learn more
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Youth -->
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <h3>Youth Empowerment Through Sport</h3>
+                <p>
+                    Using education, sport and community engagement
+                    to create opportunities for young people and
+                    support their development.
+                </p>
+                <a href="#">
+                    Learn more
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Partnerships -->
+            <article class="focus-card focus-peach">
+                <div class="focus-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Partnerships & Collaboration</h3>
+                <p>
+                    Building relationships with civil society,
+                    government, local stakeholders and community
+                    organisations to strengthen collective action.
+                </p>
+                <a href="#">
+                    Learn more
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     HOW WE WORK (with circular image)
+============================================== -->
+<section class="identity-section">
+    <div class="container identity-grid">
+
+        <!-- Circular image side -->
+        <div class="identity-visual gi-volunteer-visual">
+            <div class="gi-volunteer-image-circle">
+                <div class="gi-volunteer-image" 
+                     style="background-image: url('/images/our-work-community.jpg');"></div>
+            </div>
+            <div class="floating-card gi-volunteer-badge">
+                <i class="fas fa-users"></i>
                 <div>
-                    <p>
-                        Our work is grounded in sexual and reproductive
-                        health and justice, HIV prevention and education,
-                        gender justice, youth empowerment and meaningful
-                        community engagement.
-                    </p>
-
-                    <p>
-                        We work through education, prevention, support,
-                        research, advocacy, partnerships and community
-                        participation.
-                    </p>
+                    <strong>Locally Led</strong>
+                    <span>Community • Justice • Action</span>
                 </div>
-
             </div>
-
-        </div>
-    </section>
-
-
-    <!-- Areas of Work -->
-    <section class="work-areas">
-        <div class="container">
-
-            <div class="work-section-heading">
-
-                <span class="section-label">
-                    OUR FOCUS AREAS
-                </span>
-
-                <h2>
-                    Where we make a difference
-                </h2>
-
-                <p>
-                    Our programmes and initiatives respond to issues
-                    affecting communities across South Africa.
-                </p>
-
-            </div>
-
-
-            <div class="work-cards">
-
-                <!-- Sexual & Reproductive Health -->
-                <article class="work-card">
-
-                    <div class="work-card-icon">
-                        <i class="fas fa-heart-pulse"></i>
-                    </div>
-
-                    <span class="work-number">
-                        01
-                    </span>
-
-                    <h3>
-                        Sexual & Reproductive
-                        Health and Justice
-                    </h3>
-
-                    <p>
-                        Promoting access to information, support and
-                        rights relating to sexual and reproductive health
-                        and justice.
-                    </p>
-
-                    <a href="#"
-                       class="work-card-link">
-                        Learn more
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-                <!-- HIV -->
-                <article class="work-card">
-
-                    <div class="work-card-icon">
-                        <i class="fas fa-ribbon"></i>
-                    </div>
-
-                    <span class="work-number">
-                        02
-                    </span>
-
-                    <h3>
-                        HIV Prevention
-                        & Education
-                    </h3>
-
-                    <p>
-                        Supporting HIV prevention and education through
-                        community engagement, awareness and access to
-                        relevant information.
-                    </p>
-
-                    <a href="#"
-                       class="work-card-link">
-                        Learn more
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-                <!-- GBVF -->
-                <article class="work-card">
-
-                    <div class="work-card-icon">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
-
-                    <span class="work-number">
-                        03
-                    </span>
-
-                    <h3>
-                        Gender-Based Violence
-                        & Femicide
-                    </h3>
-
-                    <p>
-                        Working to prevent gender-based violence and
-                        femicide while promoting dignity, safety,
-                        equality and human rights.
-                    </p>
-
-                    <a href="#"
-                       class="work-card-link">
-                        Learn more
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-                <!-- Youth -->
-                <article class="work-card">
-
-                    <div class="work-card-icon">
-                        <i class="fas fa-people-group"></i>
-                    </div>
-
-                    <span class="work-number">
-                        04
-                    </span>
-
-                    <h3>
-                        Youth Empowerment
-                        Through Sport
-                    </h3>
-
-                    <p>
-                        Using education, sport and community engagement
-                        to create opportunities for young people and
-                        support their development.
-                    </p>
-
-                    <a href="#"
-                       class="work-card-link">
-                        Learn more
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-                <!-- Partnerships -->
-                <article class="work-card">
-
-                    <div class="work-card-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-
-                    <span class="work-number">
-                        05
-                    </span>
-
-                    <h3>
-                        Partnerships &
-                        Collaboration
-                    </h3>
-
-                    <p>
-                        Building relationships with civil society,
-                        government, local stakeholders and community
-                        organisations to strengthen collective action.
-                    </p>
-
-                    <a href="#"
-                       class="work-card-link">
-                        Learn more
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- How We Work -->
-    <section class="how-we-work">
-
-        <div class="container">
-
-            <div class="how-we-work-grid">
-
-                <div class="how-we-work-content">
-
-                    <span class="section-label">
-                        HOW WE WORK
-                    </span>
-
-                    <h2>
-                        Locally led.
-                        Community driven.
-                    </h2>
-
-                    <p>
-                        SisterLove South Africa is locally led,
-                        community-based and grounded in feminist and
-                        human-rights principles.
-                    </p>
-
-                    <p>
-                        Our organisation is volunteer-driven and supported
-                        by consultants who work alongside partners,
-                        civil society organisations, government and local
-                        stakeholders.
-                    </p>
-
-                    <a asp-controller="Contact"
-                       asp-action="Index"
-                       class="btn-primary">
-                        Work With Us
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                </div>
-
-
-                <div class="how-we-work-points">
-
-                    <div class="work-point">
-
-                        <div class="work-point-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-
-                        <div>
-                            <h3>Community Leadership</h3>
-                            <p>
-                                Communities are central to the work
-                                and the change we seek to create.
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="work-point">
-
-                        <div class="work-point-icon">
-                            <i class="fas fa-scale-balanced"></i>
-                        </div>
-
-                        <div>
-                            <h3>Human Rights</h3>
-                            <p>
-                                We work toward dignity, equality and
-                                justice for all.
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="work-point">
-
-                        <div class="work-point-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-
-                        <div>
-                            <h3>Love in Action</h3>
-                            <p>
-                                We turn compassion and commitment into
-                                meaningful community action.
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
         </div>
 
-    </section>
+        <!-- Content side -->
+        <div class="identity-content">
+            <span class="section-label">HOW WE WORK</span>
+            <h2>
+                Locally led.
+                Community driven.
+            </h2>
+            <p>
+                SisterLove South Africa is locally led,
+                community-based and grounded in feminist and
+                human-rights principles.
+            </p>
+            <p>
+                Our organisation is volunteer-driven and supported
+                by consultants who work alongside partners,
+                civil society organisations, government and local
+                stakeholders.
+            </p>
 
-
-    <!-- CTA -->
-    <section class="work-cta">
-
-        <div class="container">
-
-            <div class="work-cta-content">
-
-                <span class="section-label">
-                    GET INVOLVED
-                </span>
-
-                <h2>
-                    Change happens
-                    when we act together.
-                </h2>
-
-                <p>
-                    Partner with us, volunteer your time or support
-                    our work in advancing health, justice and dignity.
-                </p>
-
-                <div class="work-cta-buttons">
-
-                    <a asp-controller="Contact"
-                       asp-action="Index"
-                       class="btn-primary">
-                        Get Involved
-                    </a>
-
-                    <a asp-controller="Donate"
-                       asp-action="Index"
-                       class="btn-secondary">
-                        Support Our Work
-                    </a>
-
+            <!-- Three inline principles -->
+            <div class="work-principles">
+                <div class="work-principle">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <strong>Community Leadership</strong>
+                        <span>Communities are central to the change we seek.</span>
+                    </div>
                 </div>
-
+                <div class="work-principle">
+                    <i class="fas fa-scale-balanced"></i>
+                    <div>
+                        <strong>Human Rights</strong>
+                        <span>We work toward dignity, equality and justice.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-heart"></i>
+                    <div>
+                        <strong>Love in Action</strong>
+                        <span>We turn compassion into meaningful action.</span>
+                    </div>
+                </div>
             </div>
 
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-primary" style="margin-top:1.5rem;">
+                Work With Us
+                <i class="fas fa-arrow-right"></i>
+            </a>
         </div>
 
-    </section>
+    </div>
+</section>
 
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">GET INVOLVED</span>
+            <h2>
+                Change happens
+                when we act together.
+            </h2>
+            <p>
+                Partner with us, volunteer your time or support
+                our work in advancing health, justice and dignity.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
+                    Get Involved
+                </a>
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline-light">
+                    Support Our Work
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
