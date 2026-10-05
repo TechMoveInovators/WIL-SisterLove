@@ -24,6 +24,7 @@ namespace SisterLoveSA.Controllers
         {
             var events = await _context.Events
                 .AsNoTracking()
+                .Include(e => e.CreatedByUser)
                 .OrderBy(e => e.EventDate)
                 .Select(e => new EventViewModel
                 {
@@ -32,7 +33,7 @@ namespace SisterLoveSA.Controllers
                     Description = e.Description,
                     EventDate = e.EventDate,
                     Venue = e.Venue,
-                    CreatedBy = e.CreatedBy
+                    CreatedByUserId = e.CreatedByUserId
                 })
                 .ToListAsync();
 
@@ -69,7 +70,7 @@ namespace SisterLoveSA.Controllers
                     Description = model.Description,
                     EventDate = model.EventDate,
                     Venue = model.Venue,
-                    CreatedBy = model.CreatedBy,
+                    CreatedByUserId = model.CreatedByUserId,
                     CreatedAt = DateTime.UtcNow
                 };
 
@@ -112,7 +113,7 @@ namespace SisterLoveSA.Controllers
                 Description = eventItem.Description,
                 EventDate = eventItem.EventDate,
                 Venue = eventItem.Venue,
-                CreatedBy = eventItem.CreatedBy
+                CreatedByUserId = eventItem.CreatedByUserId
             };
 
             return View(model);
@@ -142,7 +143,7 @@ namespace SisterLoveSA.Controllers
                 eventItem.Description = model.Description;
                 eventItem.EventDate = model.EventDate;
                 eventItem.Venue = model.Venue;
-                eventItem.CreatedBy = model.CreatedBy;
+                eventItem.CreatedByUserId = model.CreatedByUserId;
 
                 await _context.SaveChangesAsync();
 
@@ -152,7 +153,10 @@ namespace SisterLoveSA.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating event with ID {EventId}", model.Id);
+                _logger.LogError(
+                    ex,
+                    "Error updating event with ID {EventId}",
+                    model.Id);
 
                 ModelState.AddModelError(
                     "",
@@ -182,7 +186,7 @@ namespace SisterLoveSA.Controllers
                 Description = eventItem.Description,
                 EventDate = eventItem.EventDate,
                 Venue = eventItem.Venue,
-                CreatedBy = eventItem.CreatedBy
+                CreatedByUserId = eventItem.CreatedByUserId
             };
 
             return View(model);
@@ -212,7 +216,10 @@ namespace SisterLoveSA.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting event with ID {EventId}", id);
+                _logger.LogError(
+                    ex,
+                    "Error deleting event with ID {EventId}",
+                    id);
 
                 TempData["ErrorMessage"] =
                     "Unable to delete the event. Please try again.";

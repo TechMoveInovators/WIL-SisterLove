@@ -63,9 +63,9 @@
                         </dt>
 
                         <dd class="col-sm-8">
-                            @(string.IsNullOrWhiteSpace(Model.CreatedBy)
-                                ? "Not specified"
-                                : Model.CreatedBy)
+                            @(Model.CreatedByUserId.HasValue
+                                ? $"User #{Model.CreatedByUserId.Value}"
+                                : "Not assigned")
                         </dd>
 
                     </dl>

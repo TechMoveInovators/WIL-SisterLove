@@ -43,6 +43,12 @@ namespace Sisterlove.Data
                 .HasIndex(d => d.CreatedAt);
 
             modelBuilder.Entity<Event>()
+                .HasOne(e => e.CreatedByUser)
+                .WithMany()
+                .HasForeignKey(e => e.CreatedByUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Event>()
                 .HasIndex(e => e.EventDate);
 
             modelBuilder.Entity<Event>()
