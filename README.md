@@ -17,7 +17,8 @@ The system was developed using **ASP.NET Core MVC**, **C#**, **Entity Framework 
 | **GitHub Repository** | [WIL-SisterLove](https://github.com/TechMoveInovators/WIL-SisterLove) |
 | **Azure App Service** | [Open SisterLove South Africa](https://sisterlove-sa-2026-cjh9gedtdhhebudu.southafricanorth-01.azurewebsites.net/) |
 | **Official Domain** | [sisterloveorg.co.za](https://sisterloveorg.co.za) |
-| **YouTube Demonstration** | **ADD YOUTUBE LINK HERE** |
+| **YouTube Demonstration** |[https://youtube.com/shorts/_YUxawGgfrY?si=ju8_FMNSfJ3ZCfEE](https://youtube.com/shorts/_YUxawGgfrY?si=ju8_FMNSfJ3ZCfEE)
+|
 
 ### YouTube Demonstration
 
