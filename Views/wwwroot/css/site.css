@@ -2256,10 +2256,9 @@ textarea.form-control {
 
 
 /* =========================================================
-   GET INVOLVED — NEW COHESIVE DESIGN
+   GET INVOLVED — HERO VISUAL (Image Circle)
 ========================================================= */
 
-/* ---------- HERO VISUAL (Image Circle) ---------- */
 .gi-hero-visual {
     position: relative;
     width: 100%;
@@ -2325,7 +2324,10 @@ textarea.form-control {
     }
 
 
-/* ---------- WAYS TO GET INVOLVED ---------- */
+/* =========================================================
+   GET INVOLVED — WAYS SECTION
+========================================================= */
+
 .gi-ways-section {
     background: var(--cream);
     padding: 6rem 0;
@@ -2336,57 +2338,77 @@ textarea.form-control {
 }
 
 
-/* ---------- VOLUNTEER SPOTLIGHT ---------- */
+/* =========================================================
+   GET INVOLVED — VOLUNTEER SPOTLIGHT
+========================================================= */
+
 .gi-volunteer-section {
     background: var(--white);
     padding: 6rem 0;
 }
 
 .gi-volunteer-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
-}
-
-.gi-volunteer-circle-grid {
     position: relative;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     aspect-ratio: 1 / 1;
+    margin: 0 auto;
 }
 
-/* Two image layout */
-.gi-grid-two .gi-circle-1 {
-    width: 65%;
-    height: 65%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.gi-grid-two .gi-circle-2 {
-    width: 55%;
-    height: 55%;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-}
-
-.gi-volunteer-circle {
-    position: absolute;
+.gi-volunteer-image-circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(36, 20, 61, 0.20);
+    background-color: var(--purple);
+}
+
+.gi-volunteer-image {
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 15px 40px rgba(36, 20, 61, 0.15);
-    border: 5px solid var(--white);
-    transition: transform 0.4s ease;
-    background-color: var(--purple); /* Fallback color */
+    transition: transform 0.8s ease;
 }
 
-    .gi-volunteer-circle:hover {
-        transform: scale(1.05);
-        z-index: 10;
+.gi-volunteer-image-circle:hover .gi-volunteer-image {
+    transform: scale(1.05);
+}
+
+/* Floating badge on the volunteer circle */
+.gi-volunteer-badge {
+    position: absolute;
+    bottom: 10px;
+    left: -20px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(36, 20, 61, 0.15);
+    z-index: 10;
+}
+
+    .gi-volunteer-badge i {
+        font-size: 1.8rem;
+        color: var(--turquoise);
+    }
+
+    .gi-volunteer-badge strong {
+        display: block;
+        color: var(--purple);
+        font-size: 1rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .gi-volunteer-badge span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 600;
     }
 
 .gi-volunteer-content .btn-primary {
@@ -2412,18 +2434,6 @@ textarea.form-control {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
-
-    .gi-card-1,
-    .gi-card-2,
-    .gi-card-3,
-    .gi-card-4 {
-        transform: translateY(0);
-    }
-
-        .gi-card-2:hover,
-        .gi-card-4:hover {
-            transform: translateY(-10px);
-        }
 }
 
 
@@ -2496,30 +2506,10 @@ textarea.form-control {
     }
 
     /* Get Involved responsive */
-    .gi-hero-inner {
-        grid-template-columns: 1fr;
-        gap: 3.5rem;
-        text-align: center;
-    }
-
-    .gi-hero-text h1,
-    .gi-hero-lead {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .gi-hero-actions {
-        justify-content: center;
-    }
-
-    .gi-hero-visual {
+    .gi-hero-visual,
+    .gi-volunteer-visual {
         max-width: 400px;
         margin-top: 2rem;
-    }
-
-    .gi-volunteer-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
     }
 }
 
@@ -2754,43 +2744,37 @@ textarea.form-control {
     }
 
     /* Get Involved mobile */
-    .gi-hero {
-        padding: 4.5rem 0 4rem;
-    }
-
-    .gi-hero-text h1 {
-        font-size: 2.2rem;
-    }
-
-    .gi-hero-visual {
-        max-width: 300px;
-    }
-
-    .gi-volunteer-circle-grid {
-        max-width: 350px;
-        margin: 0 auto;
-    }
-
     .gi-ways-section,
-    .gi-volunteer-section,
-    .gi-cta {
+    .gi-volunteer-section {
         padding: 4rem 0;
     }
 
-    .gi-grid {
-        grid-template-columns: 1fr;
-        padding-bottom: 0;
+    .gi-hero-visual,
+    .gi-volunteer-visual {
+        max-width: 300px;
     }
 
-    .gi-cta-buttons {
-        flex-direction: column;
-        align-items: stretch;
+    .gi-floating-card,
+    .gi-volunteer-badge {
+        bottom: -15px;
+        left: -10px;
+        padding: 0.8rem 1.2rem;
     }
 
-    .gi-btn {
-        justify-content: center;
-        width: 100%;
-    }
+        .gi-floating-card i,
+        .gi-volunteer-badge i {
+            font-size: 1.4rem;
+        }
+
+        .gi-floating-card strong,
+        .gi-volunteer-badge strong {
+            font-size: 0.9rem;
+        }
+
+        .gi-floating-card span,
+        .gi-volunteer-badge span {
+            font-size: 0.7rem;
+        }
 }
 
 
@@ -2837,11 +2821,11 @@ textarea.form-control {
 
     /* HERO CIRCULAR SLIDESHOW MOBILE ADJUSTMENTS */
     .hero-visual {
-        max-width: 320px; /* Make the circle smaller on mobile */
+        max-width: 320px;
     }
 
     .center-badge {
-        width: 110px; /* Scale down the badge */
+        width: 110px;
         height: 110px;
         font-size: 12px;
     }
@@ -2851,7 +2835,7 @@ textarea.form-control {
         }
 
     .floating-card {
-        bottom: -15px; /* Adjust overlap for smaller screens */
+        bottom: -15px;
         left: -10px;
         padding: 12px 18px;
     }
@@ -2865,56 +2849,30 @@ textarea.form-control {
         }
 
     /* Get Involved small mobile adjustments */
-    .gi-floating-card {
+    .gi-hero-visual,
+    .gi-volunteer-visual {
+        max-width: 280px;
+    }
+
+    .gi-floating-card,
+    .gi-volunteer-badge {
         bottom: -15px;
         left: -10px;
         padding: 0.8rem 1.2rem;
     }
 
-        .gi-floating-card i {
+        .gi-floating-card i,
+        .gi-volunteer-badge i {
             font-size: 1.4rem;
         }
 
-        .gi-floating-card strong {
+        .gi-floating-card strong,
+        .gi-volunteer-badge strong {
             font-size: 0.9rem;
         }
 
-        .gi-floating-card span {
+        .gi-floating-card span,
+        .gi-volunteer-badge span {
             font-size: 0.7rem;
         }
-
-    .gi-volunteer-circle-grid {
-        max-width: 280px;
-    }
-    /* =========================================================
-   GET INVOLVED — ACCENT CIRCLE
-   (for the Volunteer Spotlight when only one image is available)
-========================================================= */
-
-    .gi-accent-circle {
-        background: linear-gradient(135deg, var(--turquoise) 0%, var(--purple) 100%) !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: none !important;
-    }
-
-        .gi-accent-circle i {
-            color: var(--white);
-            font-size: 2.5rem;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-        }
-
-    /* Scale the icon on smaller screens */
-    @media (max-width: 650px) {
-        .gi-accent-circle i {
-            font-size: 2rem;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .gi-accent-circle i {
-            font-size: 1.6rem;
-        }
-    }
 }
