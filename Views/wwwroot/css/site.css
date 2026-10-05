@@ -598,7 +598,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   DONATE PAGE
+   DONATE PAGE — NEW DESIGN
 ========================================================= */
 
 .donate-new-section {
@@ -636,6 +636,8 @@ textarea.form-control {
     align-items: start;
 }
 
+
+/* ---------- LEFT: Aside ---------- */
 .donate-new-aside {
     display: flex;
     flex-direction: column;
@@ -717,6 +719,8 @@ textarea.form-control {
         text-transform: uppercase;
     }
 
+
+/* ---------- RIGHT: Form Card ---------- */
 .donate-new-form {
     background: var(--white);
     border-radius: 20px;
@@ -826,6 +830,8 @@ textarea.form-control {
     margin-top: 0.1rem;
 }
 
+
+/* ---------- Donation Type Radio Cards ---------- */
 .donation-type-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -876,6 +882,8 @@ textarea.form-control {
         font-size: 0.78rem;
     }
 
+
+/* ---------- Amount Options ---------- */
 .amount-options {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -926,6 +934,8 @@ textarea.form-control {
         padding-left: 2.25rem !important;
     }
 
+
+/* ---------- Security Note ---------- */
 .donate-new-form .donate-security {
     text-align: center;
     color: var(--muted);
@@ -941,7 +951,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   CONTACT PAGE
+   CONTACT PAGE — FORM STYLES
 ========================================================= */
 
 #contact-form .form-field {
@@ -1096,7 +1106,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   FOOTER
+   FOOTER — MODERN REDESIGN
 ========================================================= */
 
 .footer {
@@ -1545,7 +1555,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   OUR WORK — FOCUS AREAS
+   OUR WORK — FOCUS AREAS (Editorial List)
 ========================================================= */
 
 .focus-areas-list {
@@ -1670,7 +1680,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   PRIVACY POLICY
+   PRIVACY POLICY — NUMBERED CARDS
 ========================================================= */
 
 .privacy-grid {
@@ -1754,7 +1764,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   ACCESSIBILITY / TERMS / PRIVACY CIRCLE
+   ACCESSIBILITY / TERMS / PRIVACY — HERO CIRCLE WITH ICON
 ========================================================= */
 
 .gi-accessibility-circle,
@@ -2013,7 +2023,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   GET INVOLVED — HERO VISUAL
+   GET INVOLVED — HERO VISUAL (Image Circle)
 ========================================================= */
 
 .gi-hero-visual {
@@ -2081,7 +2091,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   GET INVOLVED — WAYS
+   GET INVOLVED — WAYS SECTION
 ========================================================= */
 
 .gi-ways-section {
@@ -2095,7 +2105,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   GET INVOLVED — VOLUNTEER
+   GET INVOLVED — VOLUNTEER SPOTLIGHT
 ========================================================= */
 
 .gi-volunteer-section {
@@ -2172,7 +2182,7 @@ textarea.form-control {
 
 
 /* =========================================================
-   MY ACCOUNT
+   MY ACCOUNT — GRID LAYOUT
 ========================================================= */
 
 .account-grid {
@@ -2443,6 +2453,7 @@ textarea.form-control {
 ========================================================= */
 
 @media (max-width: 1100px) {
+
     .involvement-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2462,7 +2473,9 @@ textarea.form-control {
     }
 }
 
+
 @media (max-width: 1000px) {
+
     .partner-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2494,7 +2507,9 @@ textarea.form-control {
     }
 }
 
+
 @media (max-width: 992px) {
+
     .nav-menu {
         gap: 1rem;
     }
@@ -2504,7 +2519,9 @@ textarea.form-control {
         }
 }
 
+
 @media (max-width: 900px) {
+
     .account-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -2515,7 +2532,9 @@ textarea.form-control {
     }
 }
 
+
 @media (max-width: 800px) {
+
     .navbar-toggle {
         display: block;
     }
@@ -2542,7 +2561,9 @@ textarea.form-control {
     }
 }
 
+
 @media (max-width: 768px) {
+
     .mobile-menu-btn {
         display: block;
     }
@@ -2597,7 +2618,9 @@ textarea.form-control {
     }
 }
 
+
 @media (max-width: 650px) {
+
     .partnerships-hero,
     .track-record-hero,
     .get-involved-hero {
@@ -2701,6 +2724,7 @@ textarea.form-control {
             font-size: 0.7rem;
         }
 
+    /* Donate page mobile */
     .donate-new-section {
         padding: 4rem 0;
     }
@@ -2725,6 +2749,7 @@ textarea.form-control {
         grid-template-columns: 1fr;
     }
 
+    /* Our Work focus areas mobile */
     .focus-area {
         grid-template-columns: 1fr;
         gap: 0.75rem;
@@ -2741,6 +2766,7 @@ textarea.form-control {
         font-size: 1.15rem;
     }
 
+    /* Privacy cards mobile */
     .privacy-card {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -2757,6 +2783,7 @@ textarea.form-control {
         font-size: 1.15rem;
     }
 
+    /* Accessibility/Terms/Privacy/Account hero circles */
     .gi-accessibility-circle i,
     .gi-shield-circle i,
     .gi-terms-circle i,
@@ -2766,268 +2793,83 @@ textarea.form-control {
 }
 
 
-/* =========================================================
-   ██████  FINAL GRID LOCK — BIG HERO + SMALL OUR WORK ██████
-   ═══════════════════════════════════════════════════════════
-   Uses CSS GRID for the Our Work section — nothing can break it.
-   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
 
-/* 1. MAIN HERO — BIG CIRCLE (550px) */
-.hero-section .hero-visual,
-.hero-section .gi-hero-visual,
-.gi-hero-visual {
-    flex: 0 0 550px !important;
-    width: 550px !important;
-    min-width: 550px !important;
-    max-width: 550px !important;
-    height: 550px !important;
-    aspect-ratio: 1 / 1 !important;
-}
-
-.hero-section .gi-hero-image-circle,
-.gi-hero-image-circle {
-    width: 550px !important;
-    height: 550px !important;
-    max-width: 550px !important;
-    max-height: 550px !important;
-    border-radius: 50% !important;
-}
-
-/* 2. OUR WORK — GRID LAYOUT (BULLETPROOF) */
-.work-hero-section {
-    background: #ffffff !important;
-    padding: 4rem 0 !important;
-    overflow: hidden !important;
-}
-
-    .work-hero-section .container {
-        display: grid !important;
-        grid-template-columns: 200px 1fr 280px !important;
-        gap: 2rem !important;
-        align-items: start !important;
-        max-width: 1300px !important;
-        margin: 0 auto !important;
-        padding: 0 1.5rem !important;
+    .footer {
+        padding-top: 3.5rem;
     }
 
-/* Orange badge — column 1 */
-.orange-badge-container {
-    grid-column: 1 !important;
-    margin-left: -2.5rem !important;
-    margin-top: 1rem !important;
-}
-
-.orange-badge {
-    background: #f5d7c8 !important;
-    padding: 1.1rem 1.75rem 1.1rem 2.25rem !important;
-    border-radius: 0 100px 100px 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    color: #3d1d68 !important;
-    min-width: 180px !important;
-    border: none !important;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.08) !important;
-}
-
-    .orange-badge strong {
-        font-size: 1rem !important;
-        font-weight: 800 !important;
-        margin-bottom: 0.2rem !important;
+    .footer-bottom {
+        padding: 1.2rem 0;
     }
 
-    .orange-badge span {
-        font-size: 0.75rem !important;
-        font-weight: 600 !important;
-        opacity: 0.85 !important;
+    .impact-grid {
+        grid-template-columns: 1fr;
     }
 
-/* Content wrapper — column 2 (contains left text + right image) */
-.work-hero-content-wrapper {
-    grid-column: 2 / 4 !important;
-    display: grid !important;
-    grid-template-columns: 1fr 280px !important;
-    gap: 3rem !important;
-    align-items: start !important;
-    min-width: 0 !important;
-}
-
-.work-hero-left {
-    min-width: 0 !important;
-    max-width: 620px !important;
-}
-
-    .work-hero-left .eyebrow {
-        color: #3d1d68 !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.15em !important;
-        font-size: 0.8rem !important;
-        text-transform: uppercase !important;
-        display: block !important;
-        margin-bottom: 0.75rem !important;
+    .hero-actions,
+    .work-cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-.heading-with-stats {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 1.5rem !important;
-    margin-bottom: 1.25rem !important;
-}
-
-.work-hero-left h1 {
-    font-size: clamp(1.6rem, 2.5vw, 2.4rem) !important;
-    line-height: 1.1 !important;
-    text-transform: uppercase !important;
-    color: #2d1b1a !important;
-    font-weight: 900 !important;
-    margin: 0 !important;
-    flex: 1 1 auto !important;
-    letter-spacing: -0.02em !important;
-}
-
-.work-hero-stats {
-    flex: 0 0 auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.35rem !important;
-    font-size: 0.72rem !important;
-    color: #6f6462 !important;
-    font-weight: 600 !important;
-    border-left: 2px solid #f5d7c8 !important;
-    padding-left: 0.85rem !important;
-    line-height: 1.4 !important;
-}
-
-.work-hero-left .body-text p {
-    font-size: 0.92rem !important;
-    line-height: 1.65 !important;
-    color: #6f6462 !important;
-    margin-bottom: 0.85rem !important;
-}
-
-/* Image column — locked at 280px */
-.work-hero-image {
-    width: 280px !important;
-    min-width: 280px !important;
-    max-width: 280px !important;
-    height: auto !important;
-    overflow: hidden !important;
-    display: block !important;
-}
-
-    .work-hero-image img,
-    .work-hero-image img.our-work-hero-img,
-    img.our-work-hero-img,
-    img[src*="our-work-hero"] {
-        display: block !important;
-        width: 280px !important;
-        min-width: 0 !important;
-        max-width: 280px !important;
-        height: auto !important;
-        max-height: 400px !important;
-        object-fit: cover !important;
-        object-position: center !important;
-        border-radius: 16px !important;
-        box-shadow: 0 15px 40px rgba(36, 20, 61, 0.18) !important;
-        margin: 0 !important;
-        padding: 0 !important;
+    .btn-primary,
+    .btn-secondary {
+        justify-content: center;
     }
 
-/* ═══════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════ */
-
-@media (max-width: 1100px) {
-    .hero-section .hero-visual,
-    .hero-section .gi-hero-visual,
-    .gi-hero-visual {
-        flex: 1 1 auto !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        max-width: 420px !important;
-        height: auto !important;
-        margin: 2rem auto 0 !important;
+    .hero-visual {
+        max-width: 320px;
     }
 
-    .hero-section .gi-hero-image-circle,
-    .gi-hero-image-circle {
-        width: 100% !important;
-        height: auto !important;
-        max-width: 420px !important;
-        max-height: 420px !important;
-        aspect-ratio: 1 / 1 !important;
+    .center-badge {
+        width: 110px;
+        height: 110px;
+        font-size: 12px;
     }
 
-    .work-hero-section .container {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-    }
-
-    .orange-badge-container {
-        grid-column: 1 !important;
-        margin-left: 0 !important;
-        margin-top: 0 !important;
-    }
-
-    .work-hero-content-wrapper {
-        grid-column: 1 !important;
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-    }
-
-    .work-hero-left {
-        max-width: 100% !important;
-    }
-
-    .work-hero-image {
-        width: 100% !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-        .work-hero-image img,
-        img.our-work-hero-img,
-        img[src*="our-work-hero"] {
-            width: 100% !important;
-            max-width: 350px !important;
+        .center-badge .heart-icon {
+            font-size: 20px;
         }
-}
 
-@media (max-width: 800px) {
-    .heading-with-stats {
-        flex-direction: column !important;
-        gap: 1rem !important;
+    .floating-card {
+        bottom: -15px;
+        left: -10px;
+        padding: 12px 18px;
     }
 
-    .work-hero-stats {
-        border-left: none !important;
-        border-top: 2px solid #f5d7c8 !important;
-        padding-left: 0 !important;
-        padding-top: 0.85rem !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        gap: 1rem !important;
-    }
-}
+        .floating-card strong {
+            font-size: 14px;
+        }
 
-@media (max-width: 650px) {
-    .hero-section .hero-visual,
-    .hero-section .gi-hero-visual,
-    .gi-hero-visual {
-        max-width: 320px !important;
+        .floating-card span {
+            font-size: 11px;
+        }
+
+    .gi-hero-visual,
+    .gi-volunteer-visual {
+        max-width: 280px;
     }
 
-    .hero-section .gi-hero-image-circle,
-    .gi-hero-image-circle {
-        max-width: 320px !important;
-        max-height: 320px !important;
+    .gi-floating-card,
+    .gi-volunteer-badge {
+        bottom: -15px;
+        left: -10px;
+        padding: 0.8rem 1.2rem;
     }
 
-    .work-hero-image img,
-    img.our-work-hero-img,
-    img[src*="our-work-hero"] {
-        max-width: 260px !important;
-    }
+        .gi-floating-card i,
+        .gi-volunteer-badge i {
+            font-size: 1.4rem;
+        }
+
+        .gi-floating-card strong,
+        .gi-volunteer-badge strong {
+            font-size: 0.9rem;
+        }
+
+        .gi-floating-card span,
+        .gi-volunteer-badge span {
+            font-size: 0.7rem;
+        }
 }
