@@ -2,248 +2,254 @@
     ViewBag.PageTitle = "Track Record";
 }
 
-<section class="track-record-page">
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
 
-    <!-- Hero -->
-    <section class="track-record-hero">
+    <div class="container hero-container">
 
-        <div class="container">
+        <div class="hero-content">
+            <span class="eyebrow">OUR TRACK RECORD</span>
+            <h1>
+                Building on work
+                <span>that came before.</span>
+            </h1>
+            <p>
+                Our previous programmes and initiatives form part of
+                SisterLove South Africa's continuing commitment to
+                health, justice, dignity and community empowerment.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Home" asp-action="OurWork" class="btn btn-primary">
+                    Explore Our Work
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline">
+                    Support Us
+                </a>
+            </div>
+        </div>
 
-            <div class="track-record-hero-content">
+        <!-- Circular hero image -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image"
+                     style="background-image: url('/images/track-record-hero.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-clock-rotate-left"></i>
+                <div>
+                    <strong>Since 2016</strong>
+                    <span>Programmes • Partnerships • Progress</span>
+                </div>
+            </div>
+        </div>
 
-                <span class="section-label">
-                    OUR TRACK RECORD
-                </span>
+    </div>
+</section>
 
-                <h1>
-                    Building on work
-                    that came <span>before.</span>
-                </h1>
 
+<!-- =============================================
+     INTRODUCTION
+============================================== -->
+<section class="intro-section">
+    <div class="container intro-grid">
+
+        <div>
+            <span class="section-label">PREVIOUS & LEGACY WORK</span>
+            <h2>
+                Experience that
+                continues to inform our work.
+            </h2>
+        </div>
+
+        <div>
+            <p>
+                SisterLove South Africa's history includes
+                programmes focused on HIV prevention, sexual and
+                reproductive health, human rights, women and girls,
+                and community empowerment.
+            </p>
+            <p>
+                These initiatives contribute to the experience,
+                relationships and knowledge that continue to shape
+                our work today.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     LEGACY PROGRAMMES
+============================================== -->
+<section class="focus-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">LEGACY PROGRAMMES</span>
+            <h2>Previous initiatives</h2>
+            <p>
+                A selection of programmes and projects that shaped
+                SisterLove South Africa's journey and continue to
+                inform our work.
+            </p>
+        </div>
+
+        <div class="focus-grid">
+
+            <!-- DREAMS -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span class="legacy-year">2016–2019</span>
+                <h3>DREAMS</h3>
                 <p>
-                    Our previous programmes and initiatives form part of
-                    SisterLove South Africa's continuing commitment to
-                    health, justice, dignity and community empowerment.
+                    A programme focused on reducing HIV risk among
+                    adolescent girls and young women through
+                    prevention, education and community-based support.
                 </p>
+                <span class="legacy-support">Supported through PEPFAR</span>
+            </article>
 
-            </div>
+            <!-- Healthy Love Parties -->
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Healthy Love Parties</h3>
+                <p>
+                    Community-based engagement supporting conversations
+                    around sexual health, HIV prevention and healthy
+                    relationships.
+                </p>
+            </article>
+
+            <!-- POWaR -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>POWaR</h3>
+                <p>
+                    A previous initiative forming part of SisterLove
+                    South Africa's broader programme and community
+                    engagement work.
+                </p>
+            </article>
+
+            <!-- SILC -->
+            <article class="focus-card focus-blue">
+                <div class="focus-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>SILC</h3>
+                <p>
+                    A previous programme contributing to community
+                    support, participation and empowerment.
+                </p>
+            </article>
 
         </div>
 
-    </section>
+    </div>
+</section>
 
 
-    <!-- Legacy Introduction -->
-    <section class="track-record-intro">
+<!-- =============================================
+     FEATURED PROJECT — SHOW ME YOUR NUMBER
+============================================== -->
+<section class="identity-section">
+    <div class="container identity-grid">
 
-        <div class="container">
-
-            <div class="track-record-intro-grid">
-
-                <div>
-
-                    <span class="section-label">
-                        PREVIOUS & LEGACY WORK
-                    </span>
-
-                    <h2>
-                        Experience that
-                        continues to inform our work.
-                    </h2>
-
-                </div>
-
-                <div>
-
-                    <p>
-                        SisterLove South Africa's history includes
-                        programmes focused on HIV prevention, sexual and
-                        reproductive health, human rights, women and girls,
-                        and community empowerment.
-                    </p>
-
-                    <p>
-                        These initiatives contribute to the experience,
-                        relationships and knowledge that continue to shape
-                        our work today.
-                    </p>
-
-                </div>
-
+        <!-- Circular image side -->
+        <div class="identity-visual gi-volunteer-visual">
+            <div class="gi-volunteer-image-circle">
+                <div class="gi-volunteer-image"
+                     style="background-image: url('/images/track-record-legacy.jpg');"></div>
             </div>
-
+            <div class="floating-card gi-volunteer-badge">
+                <i class="fas fa-scale-balanced"></i>
+                <div>
+                    <strong>Human Rights</strong>
+                    <span>Western Cape • Global Fund</span>
+                </div>
+            </div>
         </div>
 
-    </section>
+        <!-- Content -->
+        <div class="identity-content">
+            <span class="section-label">FEATURED INITIATIVE</span>
+            <h2>
+                Show Me Your Number —
+                Human Rights in the Western Cape.
+            </h2>
+            <p>
+                A human-rights initiative in the Western Cape
+                supported through the Global Fund. The work focused on
+                supporting women, girls and key populations to claim
+                their rights and access essential services.
+            </p>
 
-
-    <!-- Projects -->
-    <section class="legacy-projects">
-
-        <div class="container">
-
-            <div class="work-section-heading">
-
-                <span class="section-label">
-                    LEGACY PROGRAMMES
-                </span>
-
-                <h2>
-                    Previous initiatives
-                </h2>
-
-            </div>
-
-
-            <div class="legacy-grid">
-
-                <!-- DREAMS -->
-                <article class="legacy-card">
-
-                    <div class="legacy-year">
-                        2016–2019
-                    </div>
-
-                    <div class="legacy-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-
-                    <h3>
-                        DREAMS
-                    </h3>
-
-                    <p>
-                        A programme focused on reducing HIV risk among
-                        adolescent girls and young women through
-                        prevention, education and community-based support.
-                    </p>
-
-                    <span class="legacy-support">
-                        Supported through PEPFAR
-                    </span>
-
-                </article>
-
-
-                <!-- Healthy Love Parties -->
-                <article class="legacy-card">
-
-                    <div class="legacy-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-
-                    <h3>
-                        Healthy Love Parties
-                    </h3>
-
-                    <p>
-                        Community-based engagement supporting conversations
-                        around sexual health, HIV prevention and healthy
-                        relationships.
-                    </p>
-
-                </article>
-
-
-                <!-- POWaR -->
-                <article class="legacy-card">
-
-                    <div class="legacy-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-
-                    <h3>
-                        POWaR
-                    </h3>
-
-                    <p>
-                        A previous initiative forming part of SisterLove
-                        South Africa's broader programme and community
-                        engagement work.
-                    </p>
-
-                </article>
-
-
-                <!-- SILC -->
-                <article class="legacy-card">
-
-                    <div class="legacy-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-
-                    <h3>
-                        SILC
-                    </h3>
-
-                    <p>
-                        A previous programme contributing to community
-                        support, participation and empowerment.
-                    </p>
-
-                </article>
-
-
-                <!-- Show Me Your Number -->
-                <article class="legacy-card legacy-card-wide">
-
-                    <div class="legacy-icon">
-                        <i class="fas fa-scale-balanced"></i>
-                    </div>
-
+            <!-- Key highlights -->
+            <div class="work-principles">
+                <div class="work-principle">
+                    <i class="fas fa-shield-halved"></i>
                     <div>
-
-                        <h3>
-                            Show Me Your Number —
-                            Human Rights in Western Cape
-                        </h3>
-
-                        <p>
-                            A human-rights initiative in the Western Cape
-                            supported through the Global Fund.
-                        </p>
-
-                        <span class="legacy-support">
-                            Supported by the Global Fund
-                        </span>
-
+                        <strong>Rights-Based Approach</strong>
+                        <span>Advancing dignity, equality and justice.</span>
                     </div>
-
-                </article>
-
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-people-group"></i>
+                    <div>
+                        <strong>Community-Led</strong>
+                        <span>Work shaped by and for the community.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-handshake"></i>
+                    <div>
+                        <strong>Partnership Driven</strong>
+                        <span>Delivered alongside trusted partners.</span>
+                    </div>
+                </div>
             </div>
-
         </div>
 
-    </section>
+    </div>
+</section>
 
 
-    <!-- CTA -->
-    <section class="track-record-cta">
-
-        <div class="container">
-
-            <div class="track-record-cta-content">
-
-                <h2>
-                    Help us build what comes next.
-                </h2>
-
-                <p>
-                    Our previous work provides a foundation for continued
-                    community-led action.
-                </p>
-
-                <a asp-controller="Donate"
-                   asp-action="Index"
-                   class="btn-primary">
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">LOOKING AHEAD</span>
+            <h2>
+                Help us build
+                what comes next.
+            </h2>
+            <p>
+                Our previous work provides a foundation for continued
+                community-led action. Support our work or partner with
+                us to help advance health, justice and dignity.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-light">
                     Support Our Work
                 </a>
-
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-outline-light">
+                    Partner With Us
+                </a>
             </div>
-
         </div>
-
-    </section>
-
+    </div>
 </section>
