@@ -43,7 +43,9 @@
                 <i class="fas fa-calendar-check"></i>
                 <div>
                     <strong>Member Since</strong>
-                    <span>@(Model.MemberSince?.ToString("MMMM yyyy") ?? "—")</span>
+                    <span>@(Model.MemberSince.HasValue 
+                          ? Model.MemberSince.Value.ToString("MMMM yyyy") 
+                          : "—")</span>
                 </div>
             </div>
         </div>
@@ -98,7 +100,9 @@
                         <i class="fas fa-calendar-check"></i>
                         <div>
                             <strong>Member Since</strong>
-                            <span>@(Model.MemberSince?.ToString("dd MMM yyyy") ?? "—")</span>
+                            <span>@(Model.MemberSince.HasValue 
+                                  ? Model.MemberSince.Value.ToString("dd MMM yyyy") 
+                                  : "—")</span>
                         </div>
                     </div>
                     <div class="account-fact">
@@ -160,10 +164,12 @@
                     </div>
 
                     <div class="form-field">
-                        <label asp-for="MemberSince">
-                            Member Since <span class="muted">(Read-only)</span>
-                        </label>
-                        <input asp-for="MemberSince" readonly />
+                        <label>Member Since</label>
+                        <input type="text"
+                               value="@(Model.MemberSince.HasValue 
+                                      ? Model.MemberSince.Value.ToString("dd MMM yyyy") 
+                                      : "—")"
+                               readonly />
                     </div>
 
                     <div class="account-form-actions">
