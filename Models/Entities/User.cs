@@ -17,6 +17,10 @@ namespace Sisterlove.Models.Entities
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
+        [Required]
+        [MaxLength(255)]
+        public string PasswordHash { get; set; } = string.Empty;
+
         [MaxLength(30)]
         public string? PhoneNumber { get; set; }
 

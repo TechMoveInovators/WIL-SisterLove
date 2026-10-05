@@ -1,0 +1,102 @@
+﻿@model SisterLoveSA.Models.LoginViewModel
+
+@{
+    ViewBag.PageTitle = "Login";
+}
+
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">ACCOUNT LOGIN</span>
+
+            <h1>
+                Welcome
+                <span>back.</span>
+            </h1>
+
+            <p>
+                Sign in to your SisterLove South Africa account
+                to access your profile and authorised features.
+            </p>
+        </div>
+
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle gi-account-circle">
+                <i class="fas fa-right-to-bracket"></i>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="focus-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">SIGN IN</span>
+            <h2>Access your account</h2>
+            <p>
+                Enter your registered email address and password below.
+            </p>
+        </div>
+
+        <div class="account-form-card" style="max-width: 600px; margin: 0 auto;">
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="contact-banner-success"
+                     role="alert"
+                     style="margin-bottom: 2rem;">
+                    <i class="fas fa-circle-exclamation"></i>
+                    <div>
+                        <strong>Login unsuccessful</strong>
+                        <p>Please check your email address and password and try again.</p>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" asp-for="ReturnUrl" />
+
+                <div class="form-field">
+                    <label asp-for="Email">Email Address</label>
+                    <input asp-for="Email"
+                           type="email"
+                           placeholder="Enter your email address"
+                           autocomplete="email" />
+                    <span asp-validation-for="Email" class="field-error"></span>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password"
+                           type="password"
+                           placeholder="Enter your password"
+                           autocomplete="current-password" />
+                    <span asp-validation-for="Password" class="field-error"></span>
+                </div>
+
+                <div class="account-form-actions">
+                    <button type="submit" class="form-submit">
+                        Sign In
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="account-form-discard">
+                        Return Home
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</section>
