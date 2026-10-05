@@ -11,5 +11,7 @@ namespace Sisterlove.Data
         }
 
         public DbSet<Donation> Donations { get; set; }
+
+        public DbSet<Event> Events { get; set; }
     }
 }
