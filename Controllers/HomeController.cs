@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sisterlove.Models;
 using SisterLoveSA.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace SisterLoveSA.Controllers
@@ -14,7 +15,20 @@ namespace SisterLoveSA.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            // Pass the slideshow image names to the view
+            var slideshowImages = new List<string>
+            {
+                "slide1.jpg",
+                "slide2.jpg",
+                "slide3.jpg",
+                "slide4.jpg",
+                "slide5.jpg"
+            };
+
+            return View(slideshowImages);
+        }
 
         public IActionResult About()
         {
