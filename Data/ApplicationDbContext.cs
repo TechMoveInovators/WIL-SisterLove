@@ -28,6 +28,12 @@ namespace Sisterlove.Data
 
         public DbSet<Media> Media { get; set; }
 
+        public DbSet<VolunteerApplication> VolunteerApplications { get; set; }
+
+        public DbSet<FundingEnquiry> FundingEnquiries { get; set; }
+
+        public DbSet<ContactEnquiry> ContactEnquiries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -43,7 +49,7 @@ namespace Sisterlove.Data
                 .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // User → Donation
+            // Donation indexes
             modelBuilder.Entity<Donation>()
                 .HasIndex(d => d.TransactionId)
                 .IsUnique();
@@ -54,7 +60,7 @@ namespace Sisterlove.Data
             modelBuilder.Entity<Donation>()
                 .HasIndex(d => d.CreatedAt);
 
-            // User → Event
+            // Event → User
             modelBuilder.Entity<Event>()
                 .HasOne(e => e.CreatedByUser)
                 .WithMany()
@@ -133,6 +139,45 @@ namespace Sisterlove.Data
 
             modelBuilder.Entity<Media>()
                 .HasIndex(m => m.MediaType);
+
+            // User → VolunteerApplication
+            modelBuilder.Entity<VolunteerApplication>()
+                .HasOne(v => v.User)
+                .WithMany()
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<VolunteerApplication>()
+                .HasIndex(v => v.Email);
+
+            modelBuilder.Entity<VolunteerApplication>()
+                .HasIndex(v => v.SubmittedAt);
+
+            // User → FundingEnquiry
+            modelBuilder.Entity<FundingEnquiry>()
+                .HasOne(f => f.User)
+                .WithMany()
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<FundingEnquiry>()
+                .HasIndex(f => f.Email);
+
+            modelBuilder.Entity<FundingEnquiry>()
+                .HasIndex(f => f.SubmittedAt);
+
+            // User → ContactEnquiry
+            modelBuilder.Entity<ContactEnquiry>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<ContactEnquiry>()
+                .HasIndex(c => c.Email);
+
+            modelBuilder.Entity<ContactEnquiry>()
+                .HasIndex(c => c.SubmittedAt);
         }
     }
 }

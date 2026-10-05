@@ -33,5 +33,10 @@ namespace Sisterlove.Models.Entities
         public string? TransactionId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        // User → Donation relationship
+        public int? UserId { get; set; }
+
+        public User? User { get; set; }
     }
 }
