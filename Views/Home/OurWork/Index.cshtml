@@ -5,7 +5,7 @@
 <!-- =============================================
      HERO SECTION
 ============================================== -->
-<section class="hero-section">
+<section class="hero-section our-work-hero">
     <div class="hero-shape hero-shape-one"></div>
     <div class="hero-shape hero-shape-two"></div>
 
@@ -36,8 +36,8 @@
         <!-- Circular hero image -->
         <div class="hero-visual gi-hero-visual">
             <div class="gi-hero-image-circle">
-                <div class="gi-hero-image" 
-                     style="background-image: url('/images/our-work-hero.jpg');"></div>
+                <div class="gi-hero-image"
+                     style="background-image: url('@Url.Content("~/images/IMG_0004.JPG")');"></div>
             </div>
             <div class="floating-card gi-floating-card">
                 <i class="fas fa-hand-holding-heart"></i>
@@ -55,48 +55,47 @@
 <!-- =============================================
      INTRODUCTION + STATS
 ============================================== -->
-<section class="intro-section">
-    <div class="container intro-grid">
+<section class="work-hero-section">
+    <div class="container">
 
-        <div>
-            <span class="section-label">WHAT WE DO</span>
-            <h2>
-                Community-led work
-                for lasting change.
-            </h2>
-            <p style="margin-top: 1.5rem;">
-                Our work is grounded in sexual and reproductive
-                health and justice, HIV prevention and education,
-                gender justice, youth empowerment and meaningful
-                community engagement.
-            </p>
-            <p>
-                We work through education, prevention, support,
-                research, advocacy, partnerships and community
-                participation.
-            </p>
-        </div>
-
-        <!-- Stats side -->
-        <div class="work-stats">
-            <div class="work-stat">
-                <span class="work-stat-number">5</span>
-                <span class="work-stat-label">Focus Areas</span>
-            </div>
-            <div class="work-stat">
-                <span class="work-stat-number">9+</span>
-                <span class="work-stat-label">Provinces Reached</span>
-            </div>
-            <div class="work-stat">
-                <span class="work-stat-number">100%</span>
-                <span class="work-stat-label">Community-Led</span>
-            </div>
-            <div class="work-stat">
-                <span class="work-stat-number">∞</span>
-                <span class="work-stat-label">Love in Action</span>
+        <!-- Orange Badge (Left) -->
+        <div class="orange-badge-container">
+            <div class="orange-badge">
+                <strong>Locally Led</strong>
+                <span>Community • Justice • Action</span>
             </div>
         </div>
 
+        <!-- Main Content Wrapper -->
+        <div class="work-hero-content-wrapper">
+
+            <!-- LEFT: Text + Stats -->
+            <div class="work-hero-left">
+                <span class="eyebrow">WHAT WE DO</span>
+
+                <div class="heading-with-stats">
+                    <h1>COMMUNITY-LED WORK FOR LASTING CHANGE.</h1>
+
+                    <div class="work-hero-stats">
+                        <span>5 Focus Areas</span>
+                        <span>9+ Provinces Reached</span>
+                        <span>100% Community-Led</span>
+                        <span>∞ Love in Action</span>
+                    </div>
+                </div>
+
+                <div class="body-text">
+                    <p>Our work is grounded in sexual and reproductive health and justice, HIV prevention and education, gender justice, youth empowerment and meaningful community engagement.</p>
+                    <p>We work through education, prevention, support, research, advocacy, partnerships and community participation.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT: Image -->
+            <div class="work-hero-image">
+                <img src="~/images/our-work-hero.jpg" alt="Our Work Hero" class="our-work-hero-img" />
+            </div>
+
+        </div>
     </div>
 </section>
 
@@ -118,7 +117,6 @@
 
         <div class="focus-areas-list">
 
-            <!-- 01 HIV Prevention -->
             <article class="focus-area focus-area-purple">
                 <div class="focus-area-number">01</div>
                 <div class="focus-area-content">
@@ -135,7 +133,6 @@
                 </div>
             </article>
 
-            <!-- 02 SRHR -->
             <article class="focus-area focus-area-turquoise">
                 <div class="focus-area-number">02</div>
                 <div class="focus-area-content">
@@ -152,7 +149,6 @@
                 </div>
             </article>
 
-            <!-- 03 GBVF -->
             <article class="focus-area focus-area-magenta">
                 <div class="focus-area-number">03</div>
                 <div class="focus-area-content">
@@ -168,7 +164,6 @@
                 </div>
             </article>
 
-            <!-- 04 Youth -->
             <article class="focus-area focus-area-blue">
                 <div class="focus-area-number">04</div>
                 <div class="focus-area-content">
@@ -184,7 +179,6 @@
                 </div>
             </article>
 
-            <!-- 05 Partnerships -->
             <article class="focus-area focus-area-peach">
                 <div class="focus-area-number">05</div>
                 <div class="focus-area-content">
@@ -207,15 +201,14 @@
 
 
 <!-- =============================================
-     HOW WE WORK (with circular image)
+     HOW WE WORK
 ============================================== -->
-<section class="identity-section">
+<section class="identity-section our-work-identity">
     <div class="container identity-grid">
 
-        <!-- Circular image side -->
         <div class="identity-visual gi-volunteer-visual">
             <div class="gi-volunteer-image-circle">
-                <div class="gi-volunteer-image" 
+                <div class="gi-volunteer-image"
                      style="background-image: url('/images/our-work-community.jpg');"></div>
             </div>
             <div class="floating-card gi-volunteer-badge">
@@ -227,7 +220,6 @@
             </div>
         </div>
 
-        <!-- Content side -->
         <div class="identity-content">
             <span class="section-label">HOW WE WORK</span>
             <h2>
@@ -246,7 +238,6 @@
                 stakeholders.
             </p>
 
-            <!-- Three inline principles -->
             <div class="work-principles">
                 <div class="work-principle">
                     <i class="fas fa-users"></i>
