@@ -3,47 +3,217 @@
     ViewBag.PageTitle = "My Account";
 }
 
-<section style="padding: 4rem 0;">
-    <div class="container" style="max-width:700px;">
-        <h1 style="text-align:center;">My Account</h1>
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">MY ACCOUNT</span>
+            <h1>
+                Welcome back,
+                <span>@Model.FullName.</span>
+            </h1>
+            <p>
+                Manage your personal information, update your contact
+                details and keep your SisterLove South Africa account
+                secure.
+            </p>
+            <div class="hero-actions">
+                <a href="#profile" class="btn btn-primary">
+                    Edit Profile
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline">
+                    Return Home
+                </a>
+            </div>
+        </div>
+
+        <!-- Circular hero visual with user icon -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle gi-account-circle">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <strong>Member Since</strong>
+                    <span>@(Model.MemberSince.HasValue 
+                          ? Model.MemberSince.Value.ToString("MMMM yyyy") 
+                          : "—")</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     PROFILE EDIT SECTION
+============================================== -->
+<section class="focus-section" id="profile">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">PROFILE DETAILS</span>
+            <h2>Manage your information</h2>
+            <p>
+                Keep your details up to date to ensure you receive
+                relevant updates from SisterLove South Africa.
+            </p>
+        </div>
 
         @if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
         {
-            <div style="background:#e8f5e9;padding:1rem;border-radius:0.5rem;margin:1rem 0;">
-                <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+            <div class="contact-banner-success" role="status" style="max-width: 900px; margin: 0 auto 2rem;">
+                <i class="fas fa-circle-check"></i>
+                <div>
+                    <strong>Profile updated successfully</strong>
+                    <p>@TempData["SuccessMessage"]</p>
+                </div>
             </div>
         }
 
-        <form asp-action="Profile" method="post" style="margin-top:2rem;">
-            @Html.AntiForgeryToken()
+        <div class="account-grid">
 
-            <div class="form-group">
-                <label asp-for="FullName">Full Name</label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+            <!-- LEFT: Account sidebar -->
+            <aside class="account-sidebar">
+
+                <!-- Avatar header -->
+                <div class="account-avatar-card">
+                    <div class="account-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <strong>@Model.FullName</strong>
+                    <span>@Model.Email</span>
+                </div>
+
+                <!-- Quick facts -->
+                <div class="account-facts">
+                    <div class="account-fact">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <strong>Member Since</strong>
+                            <span>@(Model.MemberSince.HasValue 
+                                  ? Model.MemberSince.Value.ToString("dd MMM yyyy") 
+                                  : "—")</span>
+                        </div>
+                    </div>
+                    <div class="account-fact">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <span>@Model.Email</span>
+                        </div>
+                    </div>
+                    <div class="account-fact">
+                        <i class="fas fa-shield-halved"></i>
+                        <div>
+                            <strong>Account Status</strong>
+                            <span>Active &amp; Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sign out -->
+                <a asp-controller="Account" asp-action="Logout" class="account-signout">
+                    <i class="fas fa-right-from-bracket"></i>
+                    Sign Out
+                </a>
+
+            </aside>
+
+
+            <!-- RIGHT: Edit form -->
+            <div class="account-form-card">
+
+                <div class="account-form-header">
+                    <i class="fas fa-pen-to-square"></i>
+                    <div>
+                        <h3>Update your details</h3>
+                        <p>Changes are saved instantly when you submit.</p>
+                    </div>
+                </div>
+
+                <form asp-action="Profile" method="post" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-field">
+                        <label asp-for="FullName">Full Name</label>
+                        <input asp-for="FullName" placeholder="Enter your full name" />
+                        <span asp-validation-for="FullName" class="field-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="Email">
+                            Email <span class="muted">(Read-only)</span>
+                        </label>
+                        <input asp-for="Email" readonly />
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="PhoneNumber">Phone Number</label>
+                        <input asp-for="PhoneNumber" placeholder="+27 XX XXX XXXX" />
+                        <span asp-validation-for="PhoneNumber" class="field-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Member Since</label>
+                        <input type="text"
+                               value="@(Model.MemberSince.HasValue 
+                                      ? Model.MemberSince.Value.ToString("dd MMM yyyy") 
+                                      : "—")"
+                               readonly />
+                    </div>
+
+                    <div class="account-form-actions">
+                        <button type="submit" class="form-submit">
+                            Update Info
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <a asp-controller="Home" asp-action="Index" class="account-form-discard">
+                            Discard
+                        </a>
+                    </div>
+
+                </form>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Email">Email (Read-only)</label>
-                <input asp-for="Email" class="form-control" readonly />
-            </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="PhoneNumber">Phone Number</label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
+    </div>
+</section>
 
-            <div class="form-group">
-                <label asp-for="MemberSince">Member Since</label>
-                <input asp-for="MemberSince" class="form-control" readonly />
-            </div>
 
-            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
-                <button type="submit" class="btn-primary">Update Info</button>
-                <a href="/" class="btn-secondary">Discard</a>
-                <a href="/account/logout" style="margin-left:auto;color:#c0392b;">Sign Out</a>
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">NEED HELP?</span>
+            <h2>
+                We're here
+                if you need us.
+            </h2>
+            <p>
+                Have a question about your account or need assistance?
+                Our team is ready to help.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
+                    Contact Support
+                </a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light">
+                    Return Home
+                </a>
             </div>
-        </form>
+        </div>
     </div>
 </section>

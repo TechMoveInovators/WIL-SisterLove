@@ -1,20 +1,266 @@
-﻿@{ ViewBag.PageTitle = "Accessibility Statement"; }
-<section style="padding: 4rem 0;">
-    <div class="container" style="max-width:800px;">
-        <h1>Accessibility Statement</h1>
-        <p><strong>Last Updated:</strong> @DateTime.Now.ToString("dd MMMM yyyy")</p>
-        <h2>Our Commitment</h2>
-        <p>SisterLove South Africa is committed to ensuring our website is accessible to everyone.</p>
-        <h2>Standards</h2>
-        <p>We comply with WCAG 2.1 Level AA guidelines.</p>
-        <h2>Features</h2>
-        <ul>
-            <li>Responsive design</li>
-            <li>Keyboard navigation</li>
-            <li>Screen reader compatible</li>
-            <li>Color contrast optimized</li>
-        </ul>
-        <h2>Feedback</h2>
-        <p>Please <a href="/contact">contact us</a> with any accessibility issues.</p>
+﻿@{
+    ViewBag.PageTitle = "Accessibility Statement";
+}
+
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">ACCESSIBILITY</span>
+            <h1>
+                Everyone is
+                <span>welcome here.</span>
+            </h1>
+            <p>
+                SisterLove South Africa is committed to ensuring our
+                website is accessible to everyone — regardless of
+                ability, technology or circumstance.
+            </p>
+            <div class="hero-actions">
+                <a href="#features" class="btn btn-primary">
+                    Our Commitment
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-outline">
+                    Report an Issue
+                </a>
+            </div>
+        </div>
+
+        <!-- Circular hero visual with icon -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle gi-accessibility-circle">
+                <i class="fas fa-universal-access"></i>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-circle-check"></i>
+                <div>
+                    <strong>WCAG 2.1 AA</strong>
+                    <span>Compliant • Inclusive • Accessible</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     INTRODUCTION
+============================================== -->
+<section class="intro-section">
+    <div class="container intro-grid">
+
+        <div>
+            <span class="section-label">OUR COMMITMENT</span>
+            <h2>
+                Accessibility is
+                not optional.
+            </h2>
+        </div>
+
+        <div>
+            <p>
+                We believe every person deserves equal access to
+                information about our work, programmes and how to
+                get involved. That's why we design and maintain our
+                website with accessibility at the forefront.
+            </p>
+            <p>
+                <strong>Last updated:</strong>
+                @DateTime.Now.ToString("dd MMMM yyyy")
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     STANDARDS & FEATURES
+============================================== -->
+<section class="focus-section" id="features">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">STANDARDS &amp; FEATURES</span>
+            <h2>How we make it work</h2>
+            <p>
+                Our site is designed to comply with globally recognised
+                accessibility standards and includes the following
+                features to support all users.
+            </p>
+        </div>
+
+        <div class="focus-grid">
+
+            <!-- WCAG -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>WCAG 2.1 Level AA</h3>
+                <p>
+                    Our website follows the Web Content Accessibility
+                    Guidelines (WCAG) 2.1 at Level AA — the international
+                    standard for accessible web content.
+                </p>
+            </article>
+
+            <!-- Responsive -->
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-mobile-screen"></i>
+                </div>
+                <h3>Responsive Design</h3>
+                <p>
+                    Our website adapts seamlessly to all screen sizes —
+                    from desktop to tablet to mobile — so you can access
+                    information from any device.
+                </p>
+            </article>
+
+            <!-- Keyboard -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <h3>Keyboard Navigation</h3>
+                <p>
+                    All interactive elements can be accessed and operated
+                    using only a keyboard, without requiring a mouse or
+                    touch input.
+                </p>
+            </article>
+
+            <!-- Screen Reader -->
+            <article class="focus-card focus-blue">
+                <div class="focus-icon">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <h3>Screen Reader Friendly</h3>
+                <p>
+                    Our content is structured with semantic HTML and
+                    proper ARIA labels so screen readers can accurately
+                    convey information to visually impaired users.
+                </p>
+            </article>
+
+            <!-- Contrast -->
+            <article class="focus-card focus-peach">
+                <div class="focus-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Color Contrast</h3>
+                <p>
+                    Text and interactive elements maintain sufficient
+                    color contrast ratios to remain readable for users
+                    with low vision or color blindness.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     FEEDBACK
+============================================== -->
+<section class="identity-section">
+    <div class="container identity-grid">
+
+        <!-- Content side -->
+        <div class="identity-content">
+            <span class="section-label">FEEDBACK</span>
+            <h2>
+                Help us do
+                even better.
+            </h2>
+            <p>
+                If you encounter any accessibility barriers while using
+                our site — or if you have suggestions for improvement —
+                we'd love to hear from you.
+            </p>
+            <p>
+                Your feedback helps us make SisterLove South Africa's
+                digital presence more inclusive for everyone.
+            </p>
+
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-primary" style="margin-top:1.5rem;">
+                Contact Us
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Contact info side -->
+        <div class="identity-visual">
+            <div class="work-principles" style="margin-top:0; padding-top:0; border-top:none;">
+                <div class="work-principle">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email Us</strong>
+                        <span>info@sisterlove.org.za</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Call Us</strong>
+                        <span>+27 (0) 11 123 4567</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-comments"></i>
+                    <div>
+                        <strong>Contact Form</strong>
+                        <span>Use our online contact form</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Response Time</strong>
+                        <span>We aim to respond within 48 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">EXPLORE OUR SITE</span>
+            <h2>
+                Learn more about
+                what we do.
+            </h2>
+            <p>
+                Explore our programmes, partnerships and community work
+                — all designed with accessibility and inclusivity in mind.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Home" asp-action="OurWork" class="btn btn-light">
+                    Our Work
+                </a>
+                <a asp-controller="Home" asp-action="GetInvolved" class="btn btn-outline-light">
+                    Get Involved
+                </a>
+            </div>
+        </div>
     </div>
 </section>
