@@ -178,6 +178,24 @@ namespace Sisterlove.Data
 
             modelBuilder.Entity<ContactEnquiry>()
                 .HasIndex(c => c.SubmittedAt);
+
+            // Seed system roles
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    Id = 1,
+                    RoleName = "User",
+                    Description = "Standard website user"
+                },
+                new Role
+                {
+                    Id = 2,
+                    RoleName = "Administrator",
+                    Description = "Administrator with access to manage content and view submissions"
+                }
+            );
         }
+
+
     }
 }

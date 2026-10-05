@@ -433,6 +433,20 @@ namespace Sisterlove.Migrations
                         .IsUnique();
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Standard website user",
+                            RoleName = "User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Administrator with access to manage content and view submissions",
+                            RoleName = "Administrator"
+                        });
                 });
 
             modelBuilder.Entity("Sisterlove.Models.Entities.User", b =>
@@ -529,9 +543,11 @@ namespace Sisterlove.Migrations
 
             modelBuilder.Entity("Sisterlove.Models.Entities.Donation", b =>
                 {
-                    b.HasOne("Sisterlove.Models.Entities.User", null)
+                    b.HasOne("Sisterlove.Models.Entities.User", "User")
                         .WithMany("Donations")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Sisterlove.Models.Entities.Event", b =>
