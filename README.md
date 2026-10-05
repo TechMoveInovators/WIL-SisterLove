@@ -1,5 +1,4 @@
-import pypandoc
-from pathlib import Path
+
 
 readme = r"""# SisterLove South Africa
 
