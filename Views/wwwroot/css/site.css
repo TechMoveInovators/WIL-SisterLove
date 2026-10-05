@@ -2886,4 +2886,35 @@ textarea.form-control {
     .gi-volunteer-circle-grid {
         max-width: 280px;
     }
+    /* =========================================================
+   GET INVOLVED — ACCENT CIRCLE
+   (for the Volunteer Spotlight when only one image is available)
+========================================================= */
+
+    .gi-accent-circle {
+        background: linear-gradient(135deg, var(--turquoise) 0%, var(--purple) 100%) !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: none !important;
+    }
+
+        .gi-accent-circle i {
+            color: var(--white);
+            font-size: 2.5rem;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+    /* Scale the icon on smaller screens */
+    @media (max-width: 650px) {
+        .gi-accent-circle i {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .gi-accent-circle i {
+            font-size: 1.6rem;
+        }
+    }
 }
