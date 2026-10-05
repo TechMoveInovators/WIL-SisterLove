@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SisterLoveSA.Models;
 using Sisterlove.Data;
@@ -20,6 +22,9 @@ namespace SisterLoveSA.Controllers
         }
 
         // GET: /Event
+        // Public page - anyone can view events.
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var events = await _context.Events
@@ -41,6 +46,8 @@ namespace SisterLoveSA.Controllers
         }
 
         // GET: /Event/Create
+        // Only authenticated users can create events.
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -53,6 +60,7 @@ namespace SisterLoveSA.Controllers
         }
 
         // POST: /Event/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EventViewModel model)
@@ -64,26 +72,58 @@ namespace SisterLoveSA.Controllers
 
             try
             {
+                // Get the authenticated user's email from the login claim.
+                var email = User.FindFirstValue(ClaimTypes.Email);
+
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    _logger.LogWarning(
+                        "Authenticated user attempted to create an event without an email claim.");
+
+                    return Challenge();
+                }
+
+                // Find the real user in the database.
+                var currentUser = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == email);
+
+                if (currentUser == null)
+                {
+                    _logger.LogWarning(
+                        "No database user found for authenticated email {Email}.",
+                        email);
+
+                    return Forbid();
+                }
+
                 var newEvent = new Event
                 {
                     EventName = model.EventName,
                     Description = model.Description,
                     EventDate = model.EventDate,
                     Venue = model.Venue,
-                    CreatedByUserId = model.CreatedByUserId,
+
+                    // IMPORTANT:
+                    // The user ID comes from the database,
+                    // NOT from the submitted form.
+                    CreatedByUserId = currentUser.Id,
+
                     CreatedAt = DateTime.UtcNow
                 };
 
                 _context.Events.Add(newEvent);
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Event created successfully.";
+                TempData["SuccessMessage"] =
+                    "Event created successfully.";
 
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error creating event");
+                _logger.LogError(
+                    ex,
+                    "Error creating event.");
 
                 ModelState.AddModelError(
                     "",
@@ -94,6 +134,8 @@ namespace SisterLoveSA.Controllers
         }
 
         // GET: /Event/Edit/5
+        // Only authenticated users can edit events.
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -113,6 +155,8 @@ namespace SisterLoveSA.Controllers
                 Description = eventItem.Description,
                 EventDate = eventItem.EventDate,
                 Venue = eventItem.Venue,
+
+                // Display the existing creator.
                 CreatedByUserId = eventItem.CreatedByUserId
             };
 
@@ -120,6 +164,7 @@ namespace SisterLoveSA.Controllers
         }
 
         // POST: /Event/Edit
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EventViewModel model)
@@ -139,15 +184,21 @@ namespace SisterLoveSA.Controllers
                     return NotFound();
                 }
 
+                // Only update fields that the user is allowed
+                // to change.
                 eventItem.EventName = model.EventName;
                 eventItem.Description = model.Description;
                 eventItem.EventDate = model.EventDate;
                 eventItem.Venue = model.Venue;
-                eventItem.CreatedByUserId = model.CreatedByUserId;
+
+                // DO NOT update CreatedByUserId from the form.
+                // The original creator remains associated
+                // with the event.
 
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Event updated successfully.";
+                TempData["SuccessMessage"] =
+                    "Event updated successfully.";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -155,7 +206,7 @@ namespace SisterLoveSA.Controllers
             {
                 _logger.LogError(
                     ex,
-                    "Error updating event with ID {EventId}",
+                    "Error updating event with ID {EventId}.",
                     model.Id);
 
                 ModelState.AddModelError(
@@ -167,6 +218,8 @@ namespace SisterLoveSA.Controllers
         }
 
         // GET: /Event/Delete/5
+        // Only authenticated users can access the delete confirmation.
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -193,7 +246,9 @@ namespace SisterLoveSA.Controllers
         }
 
         // POST: /Event/Delete
-        [HttpPost, ActionName("Delete")]
+        [Authorize]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -208,9 +263,11 @@ namespace SisterLoveSA.Controllers
                 }
 
                 _context.Events.Remove(eventItem);
+
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Event deleted successfully.";
+                TempData["SuccessMessage"] =
+                    "Event deleted successfully.";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -218,7 +275,7 @@ namespace SisterLoveSA.Controllers
             {
                 _logger.LogError(
                     ex,
-                    "Error deleting event with ID {EventId}",
+                    "Error deleting event with ID {EventId}.",
                     id);
 
                 TempData["ErrorMessage"] =

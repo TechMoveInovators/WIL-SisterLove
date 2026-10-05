@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Sisterlove.Models.Entities.Donation>
+
+@{
+    ViewData["Title"] = "Donations";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1>Donations</h1>
+            <p class="text-muted">View donations submitted through the website.</p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Donor</th>
+                    <th>Email</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Payment</th>
+                    <th>Transaction</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var donation in Model)
+                {
+                    <tr>
+                        <td>@donation.DonorName</td>
+                        <td>@donation.Email</td>
+                        <td>R @donation.Amount.ToString("N2")</td>
+                        <td>@donation.DonationType</td>
+                        <td>@(donation.PaymentMethod ?? "N/A")</td>
+                        <td>@(donation.TransactionId ?? "N/A")</td>
+                        <td>@donation.CreatedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

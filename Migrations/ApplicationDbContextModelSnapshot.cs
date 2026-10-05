@@ -22,6 +22,55 @@ namespace Sisterlove.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Sisterlove.Models.Entities.ContactEnquiry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("SubmittedAt");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ContactEnquiries");
+                });
+
             modelBuilder.Entity("Sisterlove.Models.Entities.Donation", b =>
                 {
                     b.Property<int>("Id")
@@ -124,6 +173,243 @@ namespace Sisterlove.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Sisterlove.Models.Entities.FundingEnquiry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Enquiry")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("SubmittedAt");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FundingEnquiries");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.LegacyProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Year")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("ProjectName");
+
+                    b.ToTable("LegacyProjects");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Media", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("LegacyProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MediaType")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("NewsArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProgrammeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileName");
+
+                    b.HasIndex("LegacyProjectId");
+
+                    b.HasIndex("MediaType");
+
+                    b.HasIndex("NewsArticleId");
+
+                    b.HasIndex("ProgrammeId");
+
+                    b.ToTable("Media");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.NewsArticle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PublishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("PublishedAt");
+
+                    b.ToTable("NewsArticles");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Partnership", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("OrganisationName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Website")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("OrganisationName");
+
+                    b.ToTable("Partnerships");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Programme", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ProgrammeName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("ProgrammeName");
+
+                    b.ToTable("Programmes");
+                });
+
             modelBuilder.Entity("Sisterlove.Models.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -147,6 +433,20 @@ namespace Sisterlove.Migrations
                         .IsUnique();
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Standard website user",
+                            RoleName = "User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Administrator with access to manage content and view submissions",
+                            RoleName = "Administrator"
+                        });
                 });
 
             modelBuilder.Entity("Sisterlove.Models.Entities.User", b =>
@@ -187,14 +487,144 @@ namespace Sisterlove.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Sisterlove.Models.Entities.VolunteerApplication", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Motivation")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("SubmittedAt");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("VolunteerApplications");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.ContactEnquiry", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Sisterlove.Models.Entities.Donation", b =>
                 {
-                    b.HasOne("Sisterlove.Models.Entities.User", null)
+                    b.HasOne("Sisterlove.Models.Entities.User", "User")
                         .WithMany("Donations")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Sisterlove.Models.Entities.Event", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.FundingEnquiry", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.LegacyProject", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Media", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.LegacyProject", "LegacyProject")
+                        .WithMany("Media")
+                        .HasForeignKey("LegacyProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Sisterlove.Models.Entities.NewsArticle", "NewsArticle")
+                        .WithMany("Media")
+                        .HasForeignKey("NewsArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Sisterlove.Models.Entities.Programme", "Programme")
+                        .WithMany("Media")
+                        .HasForeignKey("ProgrammeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("LegacyProject");
+
+                    b.Navigation("NewsArticle");
+
+                    b.Navigation("Programme");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.NewsArticle", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Partnership", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CreatedByUser");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Programme", b =>
                 {
                     b.HasOne("Sisterlove.Models.Entities.User", "CreatedByUser")
                         .WithMany()
@@ -213,6 +643,31 @@ namespace Sisterlove.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.VolunteerApplication", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.LegacyProject", b =>
+                {
+                    b.Navigation("Media");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.NewsArticle", b =>
+                {
+                    b.Navigation("Media");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Programme", b =>
+                {
+                    b.Navigation("Media");
                 });
 
             modelBuilder.Entity("Sisterlove.Models.Entities.Role", b =>
