@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.PageTitle = "Access Denied";
+}
+
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">ACCESS DENIED</span>
+
+            <h1>
+                You don't have
+                <span>permission.</span>
+            </h1>
+
+            <p>
+                Your account is signed in, but you do not have permission
+                to access this section of the SisterLove South Africa website.
+            </p>
+
+            <div class="hero-actions">
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    Return Home
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a asp-controller="Account"
+                   asp-action="Profile"
+                   class="btn btn-outline">
+                    My Account
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle gi-account-circle">
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+
+    </div>
+</section>
