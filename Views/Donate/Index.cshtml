@@ -56,76 +56,116 @@
 
 
 <!-- =============================================
-     DONATION CONTENT
+     WHY DONATE — 3 Focus Cards
 ============================================== -->
-<section class="focus-section" id="donate-form">
+<section class="focus-section">
     <div class="container">
-
         <div class="section-heading">
-            <span class="section-label">MAKE AN IMPACT</span>
-            <h2>Every contribution matters.</h2>
+            <span class="section-label">WHY IT MATTERS</span>
+            <h2>Three ways your gift creates change</h2>
             <p>
-                SisterLove South Africa is a community-rooted,
-                volunteer-driven organisation working through
-                partnerships to create meaningful change.
+                Your support directly powers the programmes that
+                advance health, justice and dignity across South Africa.
             </p>
         </div>
 
-        <div class="donate-layout">
+        <div class="focus-grid">
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-people-group"></i>
+                </div>
+                <h3>Community Programmes</h3>
+                <p>
+                    Education, awareness and community engagement
+                    that reach women, girls and young people where
+                    they live.
+                </p>
+            </article>
 
-            <!-- LEFT: Why Support Us -->
-            <aside class="donate-impact-col">
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <h3>Health &amp; Prevention</h3>
+                <p>
+                    Strengthening HIV prevention, sexual and
+                    reproductive health and justice work across
+                    our partner communities.
+                </p>
+            </article>
 
-                <div class="donate-impact-card">
-                    <span class="section-label">WHERE IT GOES</span>
-                    <h3>Your gift at work.</h3>
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Youth &amp; Gender Justice</h3>
+                <p>
+                    Youth empowerment, GBVF prevention and community
+                    advocacy that helps shape a safer, fairer future.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+<!-- =============================================
+     DONATION FORM
+============================================== -->
+<section class="donate-new-section" id="donate-form">
+    <div class="container">
+
+        <div class="donate-new-header">
+            <span class="section-label">MAKE A DONATION</span>
+            <h2>Choose how you'd like to help.</h2>
+            <p>Every contribution — big or small — moves our work forward.</p>
+        </div>
+
+        <div class="donate-new-layout">
+
+            <!-- LEFT: Impact Sidebar -->
+            <aside class="donate-new-aside">
+
+                <div class="donate-new-quote">
+                    <i class="fas fa-quote-left"></i>
                     <p>
-                        Here's how your donation helps advance health,
-                        justice and dignity for women, girls and young
-                        people across South Africa.
+                        Love in action means showing up for one another.
+                        Your gift is that love, made visible.
                     </p>
+                    <span>— SisterLove South Africa</span>
+                </div>
 
-                    <div class="work-principles" style="margin-top: 1.5rem;">
-                        <div class="work-principle">
-                            <i class="fas fa-people-group"></i>
-                            <div>
-                                <strong>Community Programmes</strong>
-                                <span>Support education, awareness and community engagement.</span>
-                            </div>
-                        </div>
-                        <div class="work-principle">
-                            <i class="fas fa-heart-pulse"></i>
-                            <div>
-                                <strong>Health &amp; Prevention</strong>
-                                <span>Strengthen HIV prevention and SRHR work.</span>
-                            </div>
-                        </div>
-                        <div class="work-principle">
-                            <i class="fas fa-hand-holding-heart"></i>
-                            <div>
-                                <strong>Youth &amp; Gender Justice</strong>
-                                <span>Contribute to youth empowerment and GBVF prevention.</span>
-                            </div>
-                        </div>
+                <div class="donate-new-facts">
+                    <div class="donate-new-fact">
+                        <strong>100%</strong>
+                        <span>Community-rooted</span>
                     </div>
+                    <div class="donate-new-fact">
+                        <strong>9+</strong>
+                        <span>Provinces</span>
+                    </div>
+                    <div class="donate-new-fact">
+                        <strong>∞</strong>
+                        <span>Love in Action</span>
+                    </div>
+                </div>
 
-                    <div class="donate-note" style="margin-top: 1.75rem;">
-                        <i class="fas fa-circle-info"></i>
-                        <p>
-                            We are actively seeking funding, programme
-                            partnerships, corporate support, in-kind
-                            support and strategic collaboration.
-                        </p>
-                    </div>
+                <div class="donate-note">
+                    <i class="fas fa-circle-info"></i>
+                    <p>
+                        We are actively seeking funding, programme
+                        partnerships, corporate support, in-kind support
+                        and strategic collaboration.
+                    </p>
                 </div>
 
             </aside>
 
 
             <!-- RIGHT: Donation Form -->
-            <div class="account-form-card donate-form-card">
+            <div class="donate-new-form">
 
-                <div class="account-form-header">
+                <div class="donate-new-form-header">
                     <i class="fas fa-hand-holding-heart"></i>
                     <div>
                         <h3>Make a contribution</h3>
@@ -137,25 +177,28 @@
 
                     @Html.AntiForgeryToken()
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger validation-summary"></div>
 
-                    <!-- FULL NAME -->
-                    <div class="form-field">
-                        <label asp-for="DonorName">Full Name</label>
-                        <input asp-for="DonorName"
-                               placeholder="Enter your full name"
-                               autocomplete="name" />
-                        <span asp-validation-for="DonorName" class="field-error"></span>
-                    </div>
+                    <div class="donate-fields-row">
 
-                    <!-- EMAIL -->
-                    <div class="form-field">
-                        <label asp-for="Email">Email Address</label>
-                        <input asp-for="Email"
-                               type="email"
-                               placeholder="you@example.com"
-                               autocomplete="email" />
-                        <span asp-validation-for="Email" class="field-error"></span>
+                        <div class="form-field">
+                            <label asp-for="DonorName">Full Name</label>
+                            <input asp-for="DonorName"
+                                   placeholder="Enter your full name"
+                                   autocomplete="name" />
+                            <span asp-validation-for="DonorName" class="field-error"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="Email">Email Address</label>
+                            <input asp-for="Email"
+                                   type="email"
+                                   placeholder="you@example.com"
+                                   autocomplete="email" />
+                            <span asp-validation-for="Email" class="field-error"></span>
+                        </div>
+
                     </div>
 
                     <!-- DONATION TYPE -->
