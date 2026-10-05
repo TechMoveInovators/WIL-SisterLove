@@ -24,7 +24,6 @@ namespace SisterLoveSA.Models
         public string Venue { get; set; } = string.Empty;
 
         [Display(Name = "Created By")]
-        [MaxLength(150)]
-        public string? CreatedBy { get; set; }
+        public int? CreatedByUserId { get; set; }
     }
 }
