@@ -21,8 +21,9 @@ namespace Sisterlove.Models.Entities
         [MaxLength(200)]
         public string Venue { get; set; } = string.Empty;
 
-        [MaxLength(150)]
-        public string? CreatedBy { get; set; }
+        public int? CreatedByUserId { get; set; }
+
+        public User? CreatedByUser { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
