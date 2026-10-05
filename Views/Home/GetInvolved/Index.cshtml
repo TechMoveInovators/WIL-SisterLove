@@ -2,266 +2,173 @@
     ViewBag.PageTitle = "Get Involved";
 }
 
-<div class="gi-page">
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
 
-    <!-- =============================================
-         HERO — Warm organic, asymmetric
-    ============================================== -->
-    <section class="gi-hero">
-        <div class="gi-hero-blob gi-hero-blob-1"></div>
-        <div class="gi-hero-blob gi-hero-blob-2"></div>
-
-        <div class="gi-hero-inner">
-
-            <!-- LEFT: Text -->
-            <div class="gi-hero-text">
-                <span class="gi-hero-label">
-                    <i class="fas fa-seedling"></i>
-                    GET INVOLVED
-                </span>
-
-                <h1>
-                    There is always<br />
-                    a way to <em>help.</em>
-                </h1>
-
-                <p class="gi-hero-lead">
-                    Whether you volunteer your time, build a partnership,
-                    support our programmes or help amplify our work —
-                    your contribution can make a real difference.
-                </p>
-
-                <div class="gi-hero-actions">
-                    <a asp-controller="Contact"
-                       asp-action="Index"
-                       class="gi-btn gi-btn-primary">
-                        Start volunteering
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                    <a asp-controller="Donate"
-                       asp-action="Index"
-                       class="gi-btn gi-btn-ghost">
-                        Support our work
-                    </a>
-                </div>
-            </div>
-
-            <!-- RIGHT: Illustrated card -->
-            <div class="gi-hero-visual">
-                <div class="gi-hero-card">
-                    <div class="gi-hero-card-icon">
-                        <i class="fas fa-hands-holding-heart"></i>
-                    </div>
-                    <h3>Love in Action</h3>
-                    <p>
-                        Meaningful change grows from people coming
-                        together around shared values.
-                    </p>
-                    <div class="gi-hero-card-dots">
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
-
-                <div class="gi-hero-tag gi-hero-tag-top">
-                    <i class="fas fa-heart"></i> Community first
-                </div>
-
-                <div class="gi-hero-tag gi-hero-tag-bottom">
-                    <i class="fas fa-users"></i> Volunteer-driven
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =============================================
-         WAYS TO GET INVOLVED — Staggered cards
-    ============================================== -->
-    <section class="gi-ways">
-        <div class="gi-ways-inner">
-
-            <div class="gi-section-heading">
-                <span class="gi-mini-label">Take action</span>
-                <h2>Four simple ways<br />to make an impact</h2>
-                <p>
-                    Pick what fits your time, your skills and your passion.
-                </p>
-            </div>
-
-            <div class="gi-grid">
-
-                <!-- Volunteer -->
-                <article class="gi-card gi-card-1">
-                    <div class="gi-card-blob"></div>
-                    <div class="gi-card-icon">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <span class="gi-card-num">01</span>
-                    <h3>Volunteer</h3>
-                    <p>
-                        Give your time, skills and experience to support
-                        community-led work and initiatives.
-                    </p>
-                    <a asp-controller="Contact"
-                       asp-action="Index"
-                       class="gi-card-link">
-                        Volunteer with us
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </article>
-
-                <!-- Partner -->
-                <article class="gi-card gi-card-2">
-                    <div class="gi-card-blob"></div>
-                    <div class="gi-card-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <span class="gi-card-num">02</span>
-                    <h3>Become a Partner</h3>
-                    <p>
-                        Work with SisterLove to develop meaningful
-                        programmes and community collaborations.
-                    </p>
-                    <a asp-controller="Contact"
-                       asp-action="Index"
-                       class="gi-card-link">
-                        Explore partnership
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </article>
-
-                <!-- Donate -->
-                <article class="gi-card gi-card-3">
-                    <div class="gi-card-blob"></div>
-                    <div class="gi-card-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <span class="gi-card-num">03</span>
-                    <h3>Support Our Work</h3>
-                    <p>
-                        Financial support helps us continue our
-                        programmes, community engagement and advocacy.
-                    </p>
-                    <a asp-controller="Donate"
-                       asp-action="Index"
-                       class="gi-card-link">
-                        Support our work
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </article>
-
-                <!-- Spread the Word -->
-                <article class="gi-card gi-card-4">
-                    <div class="gi-card-blob"></div>
-                    <div class="gi-card-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <span class="gi-card-num">04</span>
-                    <h3>Spread the Word</h3>
-                    <p>
-                        Help raise awareness by sharing our work,
-                        initiatives and messages with your networks.
-                    </p>
-                    <a href="#" class="gi-card-link">
-                        Follow our work
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </article>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =============================================
-         VOLUNTEER SECTION — Warm quote card
-    ============================================== -->
-    <section class="gi-volunteer">
-        <div class="gi-volunteer-inner">
-
-            <div class="gi-volunteer-content">
-                <span class="gi-mini-label">Volunteering</span>
-
-                <h2>
-                    Your time can<br />
-                    make <em>a difference.</em>
-                </h2>
-
-                <p>
-                    SisterLove South Africa is currently volunteer-driven.
-                    We work with people who contribute their skills,
-                    knowledge and time to advance our mission.
-                </p>
-
-                <p>
-                    If you're interested in volunteering, use our contact
-                    form and select <strong>Volunteering</strong> as your
-                    reason for contacting us.
-                </p>
-
-                <a asp-controller="Contact"
-                   asp-action="Index"
-                   class="gi-btn gi-btn-primary">
-                    Volunteer with us
+    <div class="container hero-container">
+        <div class="hero-content">
+            <span class="eyebrow">GET INVOLVED</span>
+            <h1>
+                There is always
+                <span>a way to help.</span>
+            </h1>
+            <p>
+                Whether you volunteer your time, build a partnership, 
+                support our programmes or help amplify our work — 
+                your contribution can make a real difference.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">
+                    Start Volunteering
                     <i class="fas fa-arrow-right"></i>
                 </a>
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline">
+                    Support Our Work
+                </a>
             </div>
+        </div>
 
-            <div class="gi-volunteer-quote">
-                <div class="gi-quote-mark">&ldquo;</div>
-                <p>
-                    We believe meaningful change grows from people
-                    coming together around shared values, dignity
-                    and justice.
-                </p>
-                <div class="gi-quote-signature">
-                    <span class="gi-quote-line"></span>
-                    SisterLove South Africa
+        <!-- Right Side: Image with Circle Overlay -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image" style="background-image: url('/images/get-involved2.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-hands-holding-heart"></i>
+                <div>
+                    <strong>Love in Action</strong>
+                    <span>Community • Justice • Action</span>
                 </div>
             </div>
-
         </div>
-    </section>
+    </div>
+</section>
 
 
-    <!-- =============================================
-         CTA
-    ============================================== -->
-    <section class="gi-cta">
-        <div class="gi-cta-inner">
+<!-- =============================================
+     WAYS TO GET INVOLVED
+============================================== -->
+<section class="focus-section gi-ways-section">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">TAKE ACTION</span>
+            <h2>Four simple ways to make an impact</h2>
+            <p>Pick what fits your time, your skills and your passion.</p>
+        </div>
 
-            <div class="gi-cta-heart">
-                <i class="fas fa-heart"></i>
+        <div class="focus-grid gi-ways-grid">
+            <!-- Volunteer -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon"><i class="fas fa-hands-helping"></i></div>
+                <h3>Volunteer</h3>
+                <p>Give your time, skills and experience to support community-led work and initiatives.</p>
+                <a asp-controller="Contact" asp-action="Index">
+                    Volunteer with us <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Partner -->
+            <article class="focus-card focus-blue">
+                <div class="focus-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Become a Partner</h3>
+                <p>Work with SisterLove to develop meaningful programmes and community collaborations.</p>
+                <a asp-controller="Contact" asp-action="Index">
+                    Explore partnership <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Donate -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon"><i class="fas fa-heart"></i></div>
+                <h3>Support Our Work</h3>
+                <p>Financial support helps us continue our programmes, community engagement and advocacy.</p>
+                <a asp-controller="Donate" asp-action="Index">
+                    Support our work <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Spread the Word -->
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>Spread the Word</h3>
+                <p>Help raise awareness by sharing our work, initiatives and messages with your networks.</p>
+                <a href="#">
+                    Follow our work <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+<!-- =============================================
+     VOLUNTEER SPOTLIGHT
+============================================== -->
+<section class="identity-section gi-volunteer-section">
+    <div class="container identity-grid">
+        
+        <!-- Visual Side -->
+        <div class="identity-visual gi-volunteer-visual">
+            <div class="gi-volunteer-circle-grid gi-grid-two">
+                <!-- Large circle with your image -->
+                <div class="gi-volunteer-circle gi-circle-1" 
+                     style="background-image: url('/images/get-involved2.jpg');"></div>
+                
+                <!-- Small accent circle with icon -->
+                <div class="gi-volunteer-circle gi-circle-2 gi-accent-circle">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
             </div>
+        </div>
 
-            <span class="gi-cta-label">Start today</span>
-
-            <h2>Ready to get involved?</h2>
-
+        <!-- Content Side -->
+        <div class="identity-content gi-volunteer-content">
+            <span class="section-label">VOLUNTEERING</span>
+            <h2>Your time can make a difference.</h2>
             <p>
-                Contact us to find out how you can contribute to
+                SisterLove South Africa is currently volunteer-driven. 
+                We work with people who contribute their skills, 
+                knowledge and time to advance our mission.
+            </p>
+            <p>
+                If you're interested in volunteering, use our contact 
+                form and select <strong>Volunteering</strong> as your 
+                reason for contacting us.
+            </p>
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">
+                Volunteer with us
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">START TODAY</span>
+            <h2>Ready to get involved?</h2>
+            <p>
+                Contact us to find out how you can contribute to 
                 SisterLove South Africa's work.
             </p>
-
-            <div class="gi-cta-buttons">
-                <a asp-controller="Contact"
-                   asp-action="Index"
-                   class="gi-btn gi-btn-primary">
-                    Contact us
-                    <i class="fas fa-arrow-right"></i>
+            <div class="cta-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
+                    Contact Us
                 </a>
-
-                <a asp-controller="Donate"
-                   asp-action="Index"
-                   class="gi-btn gi-btn-ghost">
-                    Support our work
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline-light">
+                    Support Our Work
                 </a>
             </div>
-
         </div>
-    </section>
-
-</div>
+    </div>
+</section>
