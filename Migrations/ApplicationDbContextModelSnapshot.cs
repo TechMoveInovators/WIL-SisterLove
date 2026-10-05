@@ -92,9 +92,8 @@ namespace Sisterlove.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -115,6 +114,8 @@ namespace Sisterlove.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
 
                     b.HasIndex("EventDate");
 
@@ -191,6 +192,16 @@ namespace Sisterlove.Migrations
                     b.HasOne("Sisterlove.Models.Entities.User", null)
                         .WithMany("Donations")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Sisterlove.Models.Entities.Event", b =>
+                {
+                    b.HasOne("Sisterlove.Models.Entities.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CreatedByUser");
                 });
 
             modelBuilder.Entity("Sisterlove.Models.Entities.User", b =>
