@@ -4,371 +4,339 @@
     ViewBag.PageTitle = "Support Our Work";
 }
 
-<section class="donate-page">
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
 
-    <!-- Page Hero -->
-    <div class="donate-hero">
-        <div class="container donate-hero-inner">
+    <div class="container hero-container">
 
-            <div class="donate-hero-content">
+        <div class="hero-content">
+            <span class="eyebrow">SUPPORT OUR WORK</span>
+            <h1>
+                Support our work.
+                <span>Create change.</span>
+            </h1>
+            <p>
+                Your support helps SisterLove South Africa continue
+                community-rooted work in HIV prevention, sexual and
+                reproductive health and justice, GBVF prevention,
+                youth empowerment and community engagement.
+            </p>
+            <div class="hero-actions">
+                <a href="#donate-form" class="btn btn-primary">
+                    Make a Donation
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Home" asp-action="OurWork" class="btn btn-outline">
+                    See Our Impact
+                </a>
+            </div>
+        </div>
 
-                <span class="section-label">
-                    SISTERLOVE SOUTH AFRICA
-                </span>
+        <!-- Circular hero image -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image"
+                     style="background-image: url('/images/donate-hero.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-heart"></i>
+                <div>
+                    <strong>Love in Action</strong>
+                    <span>Community • Justice • Action</span>
+                </div>
+            </div>
+        </div>
 
-                <h1>
-                    Support Our Work.
-                    <span>Create Change.</span>
-                </h1>
+    </div>
+</section>
 
+
+<!-- =============================================
+     WHY DONATE — 3 Focus Cards
+============================================== -->
+<section class="focus-section">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">WHY IT MATTERS</span>
+            <h2>Three ways your gift creates change</h2>
+            <p>
+                Your support directly powers the programmes that
+                advance health, justice and dignity across South Africa.
+            </p>
+        </div>
+
+        <div class="focus-grid">
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-people-group"></i>
+                </div>
+                <h3>Community Programmes</h3>
                 <p>
-                    Your support helps SisterLove South Africa continue
-                    community-rooted work in HIV prevention, sexual and
-                    reproductive health and justice, GBVF prevention,
-                    youth empowerment and community engagement.
+                    Education, awareness and community engagement
+                    that reach women, girls and young people where
+                    they live.
                 </p>
+            </article>
 
-                <div class="donate-impact-tags">
-                    <span>Community</span>
-                    <span>Justice</span>
-                    <span>Action</span>
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-heart-pulse"></i>
                 </div>
+                <h3>Health &amp; Prevention</h3>
+                <p>
+                    Strengthening HIV prevention, sexual and
+                    reproductive health and justice work across
+                    our partner communities.
+                </p>
+            </article>
 
-            </div>
-
-            <div class="donate-hero-shape">
-
-                <div class="donate-heart">
-                    <i class="fas fa-heart"></i>
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
                 </div>
-
-                <strong>Love in Action</strong>
-
-            </div>
-
+                <h3>Youth &amp; Gender Justice</h3>
+                <p>
+                    Youth empowerment, GBVF prevention and community
+                    advocacy that helps shape a safer, fairer future.
+                </p>
+            </article>
         </div>
     </div>
+</section>
 
 
-    <!-- Donation Content -->
-    <div class="donate-content">
+<!-- =============================================
+     DONATION FORM
+============================================== -->
+<section class="donate-new-section" id="donate-form">
+    <div class="container">
 
-        <div class="container">
+        <div class="donate-new-header">
+            <span class="section-label">MAKE A DONATION</span>
+            <h2>Choose how you'd like to help.</h2>
+            <p>Every contribution — big or small — moves our work forward.</p>
+        </div>
 
-            <div class="donate-grid">
+        <div class="donate-new-layout">
 
-                <!-- Why Support -->
-                <div class="donate-info">
+            <!-- LEFT: Impact Sidebar -->
+            <aside class="donate-new-aside">
 
-                    <span class="section-label">
-                        MAKE AN IMPACT
-                    </span>
-
-                    <h2>
-                        Every contribution
-                        <span>matters.</span>
-                    </h2>
-
-                    <p class="donate-intro">
-                        SisterLove South Africa is a community-rooted,
-                        volunteer-driven organisation working through
-                        partnerships to create meaningful change.
+                <div class="donate-new-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p>
+                        Love in action means showing up for one another.
+                        Your gift is that love, made visible.
                     </p>
-
-
-                    <div class="impact-list">
-
-                        <div class="impact-item">
-                            <div class="impact-icon purple">
-                                <i class="fas fa-people-group"></i>
-                            </div>
-
-                            <div>
-                                <strong>Community programmes</strong>
-                                <p>
-                                    Support education, awareness and
-                                    community engagement.
-                                </p>
-                            </div>
-                        </div>
-
-
-                        <div class="impact-item">
-                            <div class="impact-icon turquoise">
-                                <i class="fas fa-heart-pulse"></i>
-                            </div>
-
-                            <div>
-                                <strong>Health &amp; prevention</strong>
-                                <p>
-                                    Help strengthen HIV prevention and
-                                    sexual and reproductive health work.
-                                </p>
-                            </div>
-                        </div>
-
-
-                        <div class="impact-item">
-                            <div class="impact-icon peach">
-                                <i class="fas fa-hand-holding-heart"></i>
-                            </div>
-
-                            <div>
-                                <strong>Youth &amp; gender justice</strong>
-                                <p>
-                                    Contribute to youth empowerment and
-                                    GBVF prevention initiatives.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="donate-note">
-
-                        <i class="fas fa-circle-info"></i>
-
-                        <p>
-                            We are actively seeking funding, programme
-                            partnerships, corporate support, in-kind support
-                            and strategic collaboration.
-                        </p>
-
-                    </div>
-
+                    <span>— SisterLove South Africa</span>
                 </div>
 
-
-                <!-- Donation Form -->
-                <div class="donate-form-container">
-
-                    <div class="donate-form-header">
-
-                        <span class="form-step">
-                            SUPPORT OUR WORK
-                        </span>
-
-                        <h2>
-                            Make a contribution
-                        </h2>
-
-                        <p>
-                            Every contribution helps us continue our work
-                            with communities across South Africa.
-                        </p>
-
+                <div class="donate-new-facts">
+                    <div class="donate-new-fact">
+                        <strong>100%</strong>
+                        <span>Community-rooted</span>
                     </div>
+                    <div class="donate-new-fact">
+                        <strong>9+</strong>
+                        <span>Provinces</span>
+                    </div>
+                    <div class="donate-new-fact">
+                        <strong>∞</strong>
+                        <span>Love in Action</span>
+                    </div>
+                </div>
+
+                <div class="donate-note">
+                    <i class="fas fa-circle-info"></i>
+                    <p>
+                        We are actively seeking funding, programme
+                        partnerships, corporate support, in-kind support
+                        and strategic collaboration.
+                    </p>
+                </div>
+
+            </aside>
 
 
-                    <form asp-action="Index" method="post">
+            <!-- RIGHT: Donation Form -->
+            <div class="donate-new-form">
 
-                        @Html.AntiForgeryToken()
+                <div class="donate-new-form-header">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <div>
+                        <h3>Make a contribution</h3>
+                        <p>Every contribution helps us continue our work.</p>
+                    </div>
+                </div>
 
-                        <div asp-validation-summary="All"
-                             class="text-danger validation-summary">
-                        </div>
+                <form asp-action="Index" method="post" novalidate>
 
+                    @Html.AntiForgeryToken()
 
-                        <!-- Name -->
-                        <div class="form-group">
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger validation-summary"></div>
 
-                            <label asp-for="DonorName">
-                                Full Name
-                            </label>
+                    <div class="donate-fields-row">
 
+                        <div class="form-field">
+                            <label asp-for="DonorName">Full Name</label>
                             <input asp-for="DonorName"
-                                   class="form-control"
-                                   placeholder="Enter your full name" />
-
-                            <span asp-validation-for="DonorName"
-                                  class="text-danger">
-                            </span>
-
+                                   placeholder="Enter your full name"
+                                   autocomplete="name" />
+                            <span asp-validation-for="DonorName" class="field-error"></span>
                         </div>
 
-
-                        <!-- Email -->
-                        <div class="form-group">
-
-                            <label asp-for="Email">
-                                Email Address
-                            </label>
-
+                        <div class="form-field">
+                            <label asp-for="Email">Email Address</label>
                             <input asp-for="Email"
                                    type="email"
-                                   class="form-control"
-                                   placeholder="you@example.com" />
-
-                            <span asp-validation-for="Email"
-                                  class="text-danger">
-                            </span>
-
+                                   placeholder="you@example.com"
+                                   autocomplete="email" />
+                            <span asp-validation-for="Email" class="field-error"></span>
                         </div>
 
+                    </div>
 
-                        <!-- Donation Type -->
-                        <div class="form-group">
+                    <!-- DONATION TYPE -->
+                    <div class="form-field">
+                        <label>Donation Type</label>
 
-                            <label>
-                                Donation Type
+                        <div class="donation-type-options">
+
+                            <label class="radio-card">
+                                <input type="radio" asp-for="DonationType" value="0" checked />
+                                <span class="radio-content">
+                                    <strong>One-Time</strong>
+                                    <small>Make a single contribution</small>
+                                </span>
                             </label>
 
-                            <div class="donation-type-options">
-
-                                <label class="radio-card">
-
-                                    <input type="radio"
-                                           asp-for="DonationType"
-                                           value="0"
-                                           checked />
-
-                                    <span>
-                                        <strong>One-Time</strong>
-                                        <small>Make a single contribution</small>
-                                    </span>
-
-                                </label>
-
-
-                                <label class="radio-card">
-
-                                    <input type="radio"
-                                           asp-for="DonationType"
-                                           value="1" />
-
-                                    <span>
-                                        <strong>Monthly</strong>
-                                        <small>Support us regularly</small>
-                                    </span>
-
-                                </label>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Amount -->
-                        <div class="form-group">
-
-                            <label asp-for="Amount">
-                                Choose an Amount
+                            <label class="radio-card">
+                                <input type="radio" asp-for="DonationType" value="1" />
+                                <span class="radio-content">
+                                    <strong>Monthly</strong>
+                                    <small>Support us regularly</small>
+                                </span>
                             </label>
 
-                            <div class="amount-options">
+                        </div>
+                    </div>
 
-                                @foreach (var amt in Model.PresetAmounts)
-                                {
-                                    <button type="button"
-                                            class="amount-btn"
-                                            onclick="setAmount(@amt)">
-                                        R@(amt.ToString("N0"))
-                                    </button>
-                                }
+                    <!-- AMOUNT -->
+                    <div class="form-field">
+                        <label asp-for="Amount">Choose an Amount</label>
 
-                            </div>
-
-
-                            <div class="custom-amount">
-
-                                <span>R</span>
-
-                                <input asp-for="Amount"
-                                       type="number"
-                                       class="form-control"
-                                       placeholder="Enter custom amount"
-                                       min="1" />
-
-                            </div>
-
-                            <span asp-validation-for="Amount"
-                                  class="text-danger">
-                            </span>
-
+                        <div class="amount-options">
+                            @foreach (var amt in Model.PresetAmounts)
+                            {
+                                <button type="button"
+                                        class="amount-btn"
+                                        data-amount="@amt"
+                                        onclick="setAmount(this, @amt)">
+                                    R@(amt.ToString("N0"))
+                                </button>
+                            }
                         </div>
 
-
-                        <!-- Message -->
-                        <div class="form-group">
-
-                            <label asp-for="Message">
-                                Message <span>(Optional)</span>
-                            </label>
-
-                            <textarea asp-for="Message"
-                                      class="form-control"
-                                      rows="4"
-                                      placeholder="Leave a message for SisterLove South Africa"></textarea>
-
+                        <div class="custom-amount">
+                            <span class="currency-prefix">R</span>
+                            <input asp-for="Amount"
+                                   type="number"
+                                   placeholder="Or enter custom amount"
+                                   min="1" />
                         </div>
 
+                        <span asp-validation-for="Amount" class="field-error"></span>
+                    </div>
 
-                        <!-- Submit -->
-                        <button type="submit"
-                                class="donate-submit">
+                    <!-- MESSAGE -->
+                    <div class="form-field">
+                        <label asp-for="Message">
+                            Message <span class="muted">(Optional)</span>
+                        </label>
+                        <textarea asp-for="Message"
+                                  rows="4"
+                                  placeholder="Leave a message for SisterLove South Africa"></textarea>
+                        <span asp-validation-for="Message" class="field-error"></span>
+                    </div>
 
-                            <i class="fas fa-heart"></i>
+                    <!-- SUBMIT -->
+                    <button type="submit" class="form-submit">
+                        <i class="fas fa-heart"></i>
+                        Support Our Work
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
 
-                            Support Our Work
+                    <p class="donate-security">
+                        <i class="fas fa-lock"></i>
+                        Your information is handled securely.
+                    </p>
 
-                            <i class="fas fa-arrow-right"></i>
-
-                        </button>
-
-
-                        <p class="donate-security">
-
-                            <i class="fas fa-lock"></i>
-
-                            Your information is handled securely.
-
-                        </p>
-
-                    </form>
-
-                </div>
+                </form>
 
             </div>
 
         </div>
 
     </div>
+</section>
 
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">BEYOND DONATIONS</span>
+            <h2>Other ways to help.</h2>
+            <p>
+                Not able to donate right now? There are many other ways
+                to support our work and advance health, justice and
+                dignity for women and girls.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Home" asp-action="GetInvolved" class="btn btn-light">
+                    Get Involved
+                </a>
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-outline-light">
+                    Partner With Us
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 @section Scripts {
-
     <script>
+        function setAmount(button, amt) {
+            const amountInput = document.getElementById('Amount');
+            if (!amountInput) return;
 
-        function setAmount(amt) {
+            amountInput.value = amt;
 
-            const amountInput =
-                document.getElementById('Amount');
-
-            if (amountInput) {
-
-                amountInput.value = amt;
-
-                document
-                    .querySelectorAll('.amount-btn')
-                    .forEach(button => {
-                        button.classList.remove('selected');
-                    });
-
-                const buttons =
-                    document.querySelectorAll('.amount-btn');
-
-                buttons.forEach(button => {
-
-                    if (button.textContent.trim() === 'R' + Number(amt).toLocaleString('en-ZA')) {
-                        button.classList.add('selected');
-                    }
-
-                });
-            }
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            button.classList.add('selected');
         }
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const amountInput = document.getElementById('Amount');
+            if (!amountInput) return;
+
+            amountInput.addEventListener('input', function () {
+                const val = parseFloat(this.value);
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    const btnVal = parseFloat(btn.dataset.amount);
+                    btn.classList.toggle('selected', btnVal === val);
+                });
+            });
+        });
     </script>
 }

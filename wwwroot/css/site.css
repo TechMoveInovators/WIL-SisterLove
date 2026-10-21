@@ -13,6 +13,130 @@
     --radius: 24px;
     --shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
 }
+/* OUR WORK - smaller hero image */
+.our-work-hero .gi-hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.our-work-hero .gi-hero-image-circle {
+    /* Top hero circle: set to 300x300 on desktop as requested */
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.our-work-hero .gi-hero-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 1000px) {
+    .our-work-hero .gi-hero-image-circle {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+@media (max-width: 600px) {
+    .our-work-hero .gi-hero-image-circle {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* OUR WORK - reduce community-led image size */
+.our-work-identity .gi-volunteer-visual {
+    /* Community-led (second) image: set to 300x300 on desktop as requested */
+    width: 300px !important;
+    max-width: 300px !important;
+    min-width: 300px !important;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.our-work-identity .gi-volunteer-image-circle {
+    /* reduce visual weight */
+    box-shadow: none !important;
+}
+
+.our-work-identity .gi-volunteer-image {
+    /* ensure background scales and centers */
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* WORK HERO - layout and image sizing */
+.work-hero-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 280px; /* text + image column */
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.work-hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-hero-image .our-work-hero-img {
+    width: 100%;
+    max-width: 200px; /* make the our-work-hero image smaller on desktop */
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+    .work-hero-content-wrapper {
+        grid-template-columns: 1fr 200px;
+    }
+
+    .work-hero-image .our-work-hero-img {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 600px) {
+    .work-hero-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .work-hero-image {
+        order: 2;
+    }
+
+    .work-hero-image .our-work-hero-img {
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .our-work-identity .gi-volunteer-visual {
+        width: 240px !important;
+        max-width: 240px !important;
+        min-width: 240px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .our-work-identity .gi-volunteer-visual {
+        width: 180px !important;
+        max-width: 180px !important;
+        min-width: 180px !important;
+    }
+}
+
 
 /* =========================================
    NAVIGATION

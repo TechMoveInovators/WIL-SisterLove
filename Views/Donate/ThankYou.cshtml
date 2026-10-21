@@ -2,18 +2,223 @@
     ViewBag.PageTitle = "Thank You";
 }
 
-<section style="padding: 4rem 0; text-align:center;">
-    <div class="container" style="max-width:600px;">
-        <i class="fas fa-heart fa-4x" style="color:#c0392b;margin-bottom:1.5rem;"></i>
-        <h1>Thank You, @ViewBag.DonorName</h1>
-        <p style="font-size:1.2rem;margin:1.5rem 0;">
-            We are so grateful for your generous donation of <strong>R@ViewBag.Amount</strong>.
-        </p>
-        <p>Your donation number is <strong>#@ViewBag.TransactionId</strong>.</p>
-        <p style="margin-top:1rem;">You'll receive a confirmation email soon.</p>
-        <div style="margin-top:2rem;">
-            <a href="/" class="btn-primary">Return Home</a>
-            <a href="/contact" class="btn-secondary">Get Involved</a>
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">THANK YOU</span>
+            <h1>
+                You've made
+                <span>a difference.</span>
+            </h1>
+            <p>
+                <strong>@ViewBag.DonorName</strong>, your generous gift
+                means the world to us — and to every community we serve.
+                Thank you for choosing love in action.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                    Return Home
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Home" asp-action="GetInvolved" class="btn btn-outline">
+                    Get Involved
+                </a>
+            </div>
+        </div>
+
+        <!-- Circular hero image -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image"
+                     style="background-image: url('/images/thank-you.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-heart"></i>
+                <div>
+                    <strong>Love in Action</strong>
+                    <span>Thank you for your kindness</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     DONATION RECEIPT DETAILS
+============================================== -->
+<section class="intro-section">
+    <div class="container">
+
+        <div class="section-heading" style="text-align: center; margin-bottom: 3rem;">
+            <span class="section-label">DONATION RECEIPT</span>
+            <h2>Your gift has been received.</h2>
+            <p style="max-width: 600px; margin: 1rem auto 0;">
+                A confirmation email with your full receipt is on its way.
+                Here are the details of your donation.
+            </p>
+        </div>
+
+        <!-- Receipt Card -->
+        <div style="max-width: 640px; margin: 0 auto; background: var(--white); padding: 2.5rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(36, 20, 61, 0.10); border: 1px solid rgba(61, 29, 104, 0.06);">
+
+            <!-- Amount Row -->
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; margin-bottom: 1rem; background: linear-gradient(135deg, rgba(46, 213, 198, 0.08) 0%, rgba(193, 59, 138, 0.08) 100%); border-radius: 14px;">
+                <div style="flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: linear-gradient(135deg, var(--turquoise) 0%, var(--magenta) 100%); color: var(--white); font-size: 1.3rem;">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div>
+                    <strong style="display: block; color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                        Amount Donated
+                    </strong>
+                    <span style="display: block; font-size: 1.6rem; font-weight: 800; color: var(--purple); line-height: 1.1;">
+                        R@(ViewBag.Amount)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Donor Row -->
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; margin-bottom: 1rem; background: #faf8fb; border-radius: 14px;">
+                <div style="flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: var(--purple); color: var(--white); font-size: 1.3rem;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <strong style="display: block; color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                        Donor Name
+                    </strong>
+                    <span style="display: block; font-size: 1.05rem; font-weight: 700; color: var(--purple);">
+                        @ViewBag.DonorName
+                    </span>
+                </div>
+            </div>
+
+            <!-- Transaction Row -->
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; margin-bottom: 0; background: #faf8fb; border-radius: 14px;">
+                <div style="flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: var(--magenta); color: var(--white); font-size: 1.3rem;">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <div>
+                    <strong style="display: block; color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                        Reference Number
+                    </strong>
+                    <span style="display: block; font-size: 1.05rem; font-weight: 700; color: var(--purple);">
+                        #@ViewBag.TransactionId
+                    </span>
+                </div>
+            </div>
+
+            <!-- Note -->
+            <div class="donate-note" style="margin-top: 1.75rem;">
+                <i class="fas fa-shield-halved"></i>
+                <p>
+                    Please keep your reference number for your records. A
+                    confirmation email with your full receipt has been sent
+                    to you.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     IMPACT SECTION
+============================================== -->
+<section class="identity-section" style="background: var(--cream);">
+    <div class="container identity-grid">
+
+        <!-- Circular image side -->
+        <div class="identity-visual gi-volunteer-visual">
+            <div class="gi-volunteer-image-circle">
+                <div class="gi-volunteer-image"
+                     style="background-image: url('/images/thank-you.jpg');"></div>
+            </div>
+            <div class="floating-card gi-volunteer-badge">
+                <i class="fas fa-hands-holding-heart"></i>
+                <div>
+                    <strong>Your Impact</strong>
+                    <span>Real change • Real people</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="identity-content">
+            <span class="section-label">YOUR IMPACT</span>
+            <h2>
+                Where your donation
+                goes to work.
+            </h2>
+            <p>
+                Your gift directly supports SisterLove South Africa's
+                community-led work across HIV prevention, sexual and
+                reproductive health, gender justice and youth empowerment.
+            </p>
+
+            <!-- Impact list -->
+            <div class="work-principles">
+                <div class="work-principle">
+                    <i class="fas fa-ribbon"></i>
+                    <div>
+                        <strong>HIV Prevention &amp; Education</strong>
+                        <span>Community awareness and access to information.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-heart-pulse"></i>
+                    <div>
+                        <strong>Sexual &amp; Reproductive Health</strong>
+                        <span>Advancing rights, dignity and access to care.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-people-group"></i>
+                    <div>
+                        <strong>Youth Empowerment</strong>
+                        <span>Creating opportunities through education and sport.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">KEEP THE MOMENTUM</span>
+            <h2>
+                There's more
+                we can do together.
+            </h2>
+            <p>
+                Share SisterLove with your network, volunteer your time,
+                or consider making a recurring gift to help us continue
+                this work.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Home" asp-action="GetInvolved" class="btn btn-light">
+                    Get Involved
+                </a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light">
+                    Return Home
+                </a>
+            </div>
         </div>
     </div>
 </section>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Sisterlove.Models.Entities.FundingEnquiry>
+
+@{
+    ViewData["Title"] = "Funding Enquiries";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1>Funding Enquiries</h1>
+            <p class="text-muted">Review funding and support enquiries.</p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Enquiry</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var enquiry in Model)
+                {
+                    <tr>
+                        <td>@enquiry.FullName</td>
+                        <td>@enquiry.Email</td>
+                        <td>@(enquiry.PhoneNumber ?? "N/A")</td>
+                        <td>@enquiry.Enquiry</td>
+                        <td>@enquiry.SubmittedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

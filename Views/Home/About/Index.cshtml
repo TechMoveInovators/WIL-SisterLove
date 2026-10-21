@@ -2,24 +2,239 @@
     ViewBag.PageTitle = "About Us";
 }
 
-<section style="padding: 4rem 0;">
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">ABOUT US</span>
+            <h1>
+                Locally led.
+                <span>Community rooted.</span>
+            </h1>
+            <p>
+                SisterLove South Africa is a community-based organisation
+                working alongside women, girls and young people to advance
+                health, dignity, justice and opportunity across South Africa.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">
+                    Work With Us
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a asp-controller="Home" asp-action="OurWork" class="btn btn-outline">
+                    Explore Our Work
+                </a>
+            </div>
+        </div>
+
+        <!-- Circular hero image -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image"
+                     style="background-image: url('/images/about-hero.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-hands-holding-heart"></i>
+                <div>
+                    <strong>Love in Action</strong>
+                    <span>Health • Justice • Dignity</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     WHO WE ARE
+============================================== -->
+<section class="intro-section">
+    <div class="container intro-grid">
+
+        <div>
+            <span class="section-label">WHO WE ARE</span>
+            <h2>
+                Community-based.
+                Community-driven.
+            </h2>
+        </div>
+
+        <div>
+            <p>
+                SisterLove South Africa is a locally led, volunteer-driven
+                organisation working alongside women, girls and young
+                people impacted by HIV, gender-based violence and barriers
+                to sexual and reproductive health.
+            </p>
+            <p>
+                Our work is grounded in feminist and human-rights principles,
+                and delivered through partnerships with communities, civil
+                society, government and local stakeholders.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     MISSION • VISION • VALUES
+============================================== -->
+<section class="focus-section">
     <div class="container">
-        <h1 class="section-title">About Us</h1>
-        <div class="about-grid">
-            <div class="about-card">
-                <i class="fas fa-hand-holding-heart fa-3x" style="color:#c0392b;"></i>
-                <h2>Who We Are</h2>
-                <p>SisterLove South Africa is a community-based organization supporting women and girls impacted by abuse, HIV, and reproductive health challenges.</p>
+
+        <div class="section-heading">
+            <span class="section-label">WHAT DRIVES US</span>
+            <h2>Mission, vision & values</h2>
+            <p>
+                The beliefs and commitments that shape every part of our work.
+            </p>
+        </div>
+
+        <div class="focus-grid">
+
+            <!-- Mission -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>Our Mission</h3>
+                <p>
+                    To advance HIV prevention, sexual and reproductive
+                    health and justice, and gender equality for women
+                    and girls in South Africa — through education,
+                    advocacy and compassionate community support.
+                </p>
+            </article>
+
+            <!-- Vision -->
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Our Vision</h3>
+                <p>
+                    A South Africa where every woman and girl lives with
+                    dignity, free from violence, with full access to
+                    quality healthcare and the freedom to shape her own
+                    future.
+                </p>
+            </article>
+
+            <!-- Values -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Our Values</h3>
+                <p>
+                    Love in action. Community leadership. Human rights.
+                    Gender justice. Compassion, accountability and
+                    partnership at every step of the work.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- OUR STORY -->
+<section class="identity-section">
+    <div class="container identity-grid">
+
+        <!-- Circular image -->
+        <div class="identity-visual gi-volunteer-visual">
+            <div class="gi-volunteer-image-circle">
+                <div class="gi-volunteer-image"
+                     style="background-image: url('/images/about-who-we-are.jpg');"></div>
             </div>
-            <div class="about-card">
-                <i class="fas fa-bullseye fa-3x" style="color:#c0392b;"></i>
-                <h2>Our Mission</h2>
-                <p>To end HIV and uphold reproductive health rights for all women and girls in South Africa through education, advocacy, and compassionate support.</p>
+            <div class="floating-card gi-volunteer-badge">
+                <i class="fas fa-users"></i>
+                <div>
+                    <strong>Volunteer-Driven</strong>
+                    <span>People • Purpose • Progress</span>
+                </div>
             </div>
-            <div class="about-card">
-                <i class="fas fa-star fa-3x" style="color:#c0392b;"></i>
-                <h2>Our Vision</h2>
-                <p>A South Africa where every woman and girl lives with dignity, free from violence, with access to quality healthcare.</p>
+        </div>
+
+        <!-- Content -->
+        <div class="identity-content">
+            <span class="section-label">OUR STORY</span>
+            <h2>
+                Built on love.
+                Led by community.
+            </h2>
+            <p>
+                SisterLove South Africa grew out of a simple belief: that
+                meaningful change happens when communities lead the work
+                themselves — when people closest to the challenges help
+                shape the solutions.
+            </p>
+            <p>
+                Today we continue to work through volunteers, consultants,
+                civil society, government and community partners to deliver
+                programmes that respond to real, local needs.
+            </p>
+
+            <!-- Key principles -->
+            <div class="work-principles">
+                <div class="work-principle">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <strong>Community Leadership</strong>
+                        <span>Communities are central to the change we seek.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-scale-balanced"></i>
+                    <div>
+                        <strong>Human Rights</strong>
+                        <span>Dignity, equality and justice for all.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-heart"></i>
+                    <div>
+                        <strong>Love in Action</strong>
+                        <span>Compassion turned into meaningful, lasting work.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">JOIN US</span>
+            <h2>
+                Change happens
+                when we act together.
+            </h2>
+            <p>
+                Whether you volunteer, partner with us or support our work,
+                there are many ways to help advance health, justice and
+                dignity for women and girls.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Home" asp-action="GetInvolved" class="btn btn-light">
+                    Get Involved
+                </a>
+                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline-light">
+                    Support Our Work
+                </a>
             </div>
         </div>
     </div>

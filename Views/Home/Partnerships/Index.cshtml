@@ -2,226 +2,270 @@
     ViewBag.PageTitle = "Partnerships";
 }
 
-<section class="partnerships-page">
-
-    <!-- Hero -->
-    <section class="partnerships-hero">
-        <div class="container">
-
-            <div class="partnerships-hero-content">
-
-                <span class="section-label">
-                    PARTNERSHIPS & STAKEHOLDERS
-                </span>
-
-                <h1>
-                    Change is stronger
-                    <span>together.</span>
-                </h1>
-
-                <p>
-                    SisterLove South Africa works alongside organisations,
-                    government, civil society and community stakeholders to
-                    strengthen health, justice and community-led change.
-                </p>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- Introduction -->
-    <section class="partnerships-intro">
-
-        <div class="container">
-
-            <div class="partnerships-intro-grid">
-
-                <div>
-
-                    <span class="section-label">
-                        COLLABORATION
-                    </span>
-
-                    <h2>
-                        Building meaningful
-                        partnerships.
-                    </h2>
-
-                </div>
-
-                <div>
-
-                    <p>
-                        Our partnerships allow us to connect communities,
-                        organisations and stakeholders around shared
-                        priorities in sexual and reproductive health,
-                        HIV prevention, gender justice and youth
-                        empowerment.
-                    </p>
-
-                    <p>
-                        We value relationships that are locally relevant,
-                        collaborative and grounded in human rights.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Partners -->
-    <section class="partners-section">
-
-        <div class="container">
-
-            <div class="work-section-heading">
-
-                <span class="section-label">
-                    OUR NETWORK
-                </span>
-
-                <h2>
-                    Partners and stakeholders
-                </h2>
-
-                <p>
-                    SisterLove South Africa has worked with and alongside
-                    organisations and stakeholders including:
-                </p>
-
-            </div>
-
-
-            <div class="partner-grid">
-
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-hashtag"></i>
-                    </div>
-
-                    <h3>Show Me Your Number</h3>
-
-                    <p>
-                        A partner connected to community engagement,
-                        human rights and advocacy work.
-                    </p>
-                </div>
-
-
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-
-                    <h3>Gugu Dlamini Foundation</h3>
-
-                    <p>
-                        Working within the broader HIV, health and
-                        human-rights landscape.
-                    </p>
-                </div>
-
-
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-people-group"></i>
-                    </div>
-
-                    <h3>Sonke Gender Justice</h3>
-
-                    <p>
-                        A civil society organisation working toward
-                        gender equality and justice.
-                    </p>
-                </div>
-
-
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-
-                    <h3>Department of Sports and Culture</h3>
-
-                    <p>
-                        Supporting opportunities for youth engagement,
-                        sport and community development.
-                    </p>
-                </div>
-
-
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-city"></i>
-                    </div>
-
-                    <h3>Local Government & Community Stakeholders</h3>
-
-                    <p>
-                        Working with local stakeholders to respond to
-                        community priorities.
-                    </p>
-                </div>
-
-
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-
-                    <h3>Civil Society Forum</h3>
-
-                    <p>
-                        Connecting with civil society networks and
-                        collective advocacy initiatives.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CTA -->
-    <section class="partnerships-cta">
-
-        <div class="container">
-
-            <div class="partnerships-cta-content">
-
-                <span class="section-label">
-                    WORK WITH US
-                </span>
-
-                <h2>
-                    Let's build stronger
-                    communities together.
-                </h2>
-
-                <p>
-                    Interested in partnering with SisterLove South Africa?
-                    We'd love to hear from you.
-                </p>
-
-                <a asp-controller="Contact"
-                   asp-action="Index"
-                   class="btn-primary">
-                    Start a Conversation
+<!-- =============================================
+     HERO SECTION
+============================================== -->
+<section class="hero-section">
+    <div class="hero-shape hero-shape-one"></div>
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+            <span class="eyebrow">PARTNERSHIPS</span>
+            <h1>
+                Change is stronger
+                <span>together.</span>
+            </h1>
+            <p>
+                SisterLove South Africa works alongside organisations,
+                government, civil society and community stakeholders to
+                strengthen health, justice and community-led change.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">
+                    Partner With Us
                     <i class="fas fa-arrow-right"></i>
                 </a>
-
+                <a asp-controller="Home" asp-action="OurWork" class="btn btn-outline">
+                    Explore Our Work
+                </a>
             </div>
+        </div>
+
+        <!-- Circular hero image -->
+        <div class="hero-visual gi-hero-visual">
+            <div class="gi-hero-image-circle">
+                <div class="gi-hero-image"
+                     style="background-image: url('/images/partnerships-hero.jpg');"></div>
+            </div>
+            <div class="floating-card gi-floating-card">
+                <i class="fas fa-handshake"></i>
+                <div>
+                    <strong>Together</strong>
+                    <span>Partners • Stakeholders • Community</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     INTRODUCTION
+============================================== -->
+<section class="intro-section">
+    <div class="container intro-grid">
+
+        <div>
+            <span class="section-label">COLLABORATION</span>
+            <h2>
+                Building meaningful
+                partnerships.
+            </h2>
+        </div>
+
+        <div>
+            <p>
+                Our partnerships allow us to connect communities,
+                organisations and stakeholders around shared
+                priorities in sexual and reproductive health,
+                HIV prevention, gender justice and youth
+                empowerment.
+            </p>
+            <p>
+                We value relationships that are locally relevant,
+                collaborative and grounded in human rights.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     PARTNERS GRID
+============================================== -->
+<section class="focus-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">OUR NETWORK</span>
+            <h2>Partners and stakeholders</h2>
+            <p>
+                SisterLove South Africa has worked with and alongside
+                organisations and stakeholders including:
+            </p>
+        </div>
+
+        <div class="focus-grid">
+
+            <!-- Show Me Your Number -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-hashtag"></i>
+                </div>
+                <h3>Show Me Your Number</h3>
+                <p>
+                    A partner connected to community engagement,
+                    human rights and advocacy work.
+                </p>
+            </article>
+
+            <!-- Gugu Dlamini Foundation -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Gugu Dlamini Foundation</h3>
+                <p>
+                    Working within the broader HIV, health and
+                    human-rights landscape.
+                </p>
+            </article>
+
+            <!-- Sonke Gender Justice -->
+            <article class="focus-card focus-turquoise">
+                <div class="focus-icon">
+                    <i class="fas fa-people-group"></i>
+                </div>
+                <h3>Sonke Gender Justice</h3>
+                <p>
+                    A civil society organisation working toward
+                    gender equality and justice.
+                </p>
+            </article>
+
+            <!-- Department of Sports and Culture -->
+            <article class="focus-card focus-blue">
+                <div class="focus-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Department of Sports &amp; Culture</h3>
+                <p>
+                    Supporting opportunities for youth engagement,
+                    sport and community development.
+                </p>
+            </article>
+
+            <!-- Local Government -->
+            <article class="focus-card focus-purple">
+                <div class="focus-icon">
+                    <i class="fas fa-city"></i>
+                </div>
+                <h3>Local Government &amp; Stakeholders</h3>
+                <p>
+                    Working with local stakeholders to respond to
+                    community priorities.
+                </p>
+            </article>
+
+            <!-- Civil Society Forum -->
+            <article class="focus-card focus-magenta">
+                <div class="focus-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Civil Society Forum</h3>
+                <p>
+                    Connecting with civil society networks and
+                    collective advocacy initiatives.
+                </p>
+            </article>
 
         </div>
 
-    </section>
+    </div>
+</section>
 
+
+<!-- =============================================
+     FEATURED PARTNERSHIP
+============================================== -->
+<section class="identity-section">
+    <div class="container identity-grid">
+
+        <!-- Circular image side -->
+        <div class="identity-visual gi-volunteer-visual">
+            <div class="gi-volunteer-image-circle">
+                <div class="gi-volunteer-image"
+                     style="background-image: url('/images/partnerships-partner.jpg');"></div>
+            </div>
+            <div class="floating-card gi-volunteer-badge">
+                <i class="fas fa-people-group"></i>
+                <div>
+                    <strong>Sonke Gender Justice</strong>
+                    <span>Gender Equality • Human Rights</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="identity-content">
+            <span class="section-label">FEATURED PARTNERSHIP</span>
+            <h2>
+                Stronger together.
+                Better with partners.
+            </h2>
+            <p>
+                Alongside partners like Sonke Gender Justice, we work
+                to advance gender equality, prevent gender-based
+                violence and support communities to claim their rights.
+            </p>
+
+            <!-- Key partnership values -->
+            <div class="work-principles">
+                <div class="work-principle">
+                    <i class="fas fa-shield-halved"></i>
+                    <div>
+                        <strong>Shared Values</strong>
+                        <span>Dignity, equality and justice for all.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-people-group"></i>
+                    <div>
+                        <strong>Community-Led</strong>
+                        <span>Work shaped by and for the community.</span>
+                    </div>
+                </div>
+                <div class="work-principle">
+                    <i class="fas fa-handshake"></i>
+                    <div>
+                        <strong>Long-Term Collaboration</strong>
+                        <span>Building relationships that last.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =============================================
+     CTA SECTION
+============================================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <span class="section-label">WORK WITH US</span>
+            <h2>
+                Let's build stronger
+                communities together.
+            </h2>
+            <p>
+                Interested in partnering with SisterLove South Africa?
+                We'd love to hear from you.
+            </p>
+            <div class="cta-actions">
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
+                    Start a Conversation
+                </a>
+                <a asp-controller="Home" asp-action="OurWork" class="btn btn-outline-light">
+                    Explore Our Work
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
