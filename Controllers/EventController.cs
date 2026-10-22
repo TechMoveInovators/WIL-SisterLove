@@ -1,28 +1,32 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SisterLoveSA.Models;
 using Sisterlove.Data;
 using Sisterlove.Models.Entities;
+using Sisterlove.Services;
+using SisterLoveSA.Models;
+using SisterLoveSA.Services;
+using System.Security.Claims;
 
 namespace SisterLoveSA.Controllers
 {
     public class EventController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IVolunteerService _volunteerService;
         private readonly ILogger<EventController> _logger;
 
         public EventController(
             ApplicationDbContext context,
+            IVolunteerService volunteerService,
             ILogger<EventController> logger)
         {
             _context = context;
+            _volunteerService = volunteerService;
             _logger = logger;
         }
 
         // GET: /Event
-        // Public page - anyone can view events.
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -45,8 +49,38 @@ namespace SisterLoveSA.Controllers
             return View(events);
         }
 
+        // GET: /Event/Volunteer
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Volunteer()
+        {
+            return View(new VolunteerViewModel());
+        }
+
+        // POST: /Event/Volunteer
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Volunteer(VolunteerViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var success = await _volunteerService.SubmitVolunteerApplicationAsync(model);
+
+            if (success)
+            {
+                TempData["SuccessMessage"] = "Thank you! Your volunteer application has been submitted.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            ModelState.AddModelError("", "Unable to submit volunteer application. Please try again.");
+            return View(model);
+        }
+
         // GET: /Event/Create
-        // Only authenticated users can create events.
         [Authorize]
         [HttpGet]
         public IActionResult Create()
@@ -72,16 +106,11 @@ namespace SisterLoveSA.Controllers
 
             try
             {
-                // Get the authenticated user's database ID
-                // from the NameIdentifier claim.
-                var userIdClaim =
-                    User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 if (!int.TryParse(userIdClaim, out var userId))
                 {
-                    _logger.LogWarning(
-                        "Authenticated user attempted to create an event without a valid user ID claim.");
-
+                    _logger.LogWarning("Authenticated user attempted to create an event without a valid user ID claim.");
                     return Challenge();
                 }
 
@@ -91,39 +120,25 @@ namespace SisterLoveSA.Controllers
                     Description = model.Description,
                     EventDate = model.EventDate,
                     Venue = model.Venue,
-
-                    // The creator ID comes from the authenticated
-                    // user's claim, NOT from the submitted form.
                     CreatedByUserId = userId,
-
                     CreatedAt = DateTime.UtcNow
                 };
 
                 _context.Events.Add(newEvent);
-
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] =
-                    "Event created successfully.";
-
+                TempData["SuccessMessage"] = "Event created successfully.";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Error creating event.");
-
-                ModelState.AddModelError(
-                    "",
-                    "Unable to create the event. Please try again.");
-
+                _logger.LogError(ex, "Error creating event.");
+                ModelState.AddModelError("", "Unable to create the event. Please try again.");
                 return View(model);
             }
         }
 
         // GET: /Event/Edit/5
-        // Only authenticated users can edit events.
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -171,39 +186,25 @@ namespace SisterLoveSA.Controllers
                     return NotFound();
                 }
 
-                // Update editable event information only.
                 eventItem.EventName = model.EventName;
                 eventItem.Description = model.Description;
                 eventItem.EventDate = model.EventDate;
                 eventItem.Venue = model.Venue;
 
-                // CreatedByUserId is deliberately NOT updated
-                // from the submitted form.
-
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] =
-                    "Event updated successfully.";
-
+                TempData["SuccessMessage"] = "Event updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Error updating event with ID {EventId}.",
-                    model.Id);
-
-                ModelState.AddModelError(
-                    "",
-                    "Unable to update the event. Please try again.");
-
+                _logger.LogError(ex, "Error updating event with ID {EventId}.", model.Id);
+                ModelState.AddModelError("", "Unable to update the event. Please try again.");
                 return View(model);
             }
         }
 
         // GET: /Event/Delete/5
-        // Only authenticated users can access delete confirmation.
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
@@ -248,24 +249,15 @@ namespace SisterLoveSA.Controllers
                 }
 
                 _context.Events.Remove(eventItem);
-
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] =
-                    "Event deleted successfully.";
-
+                TempData["SuccessMessage"] = "Event deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Error deleting event with ID {EventId}.",
-                    id);
-
-                TempData["ErrorMessage"] =
-                    "Unable to delete the event. Please try again.";
-
+                _logger.LogError(ex, "Error deleting event with ID {EventId}.", id);
+                TempData["ErrorMessage"] = "Unable to delete the event. Please try again.";
                 return RedirectToAction(nameof(Index));
             }
         }

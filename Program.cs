@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using SisterLoveSA.Services;
 using Sisterlove.Data;
+using Sisterlove.Services;
+using SisterLoveSA.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,6 +86,15 @@ builder.Services.AddAuthentication(
             // authenticated user remains active
             options.SlidingExpiration = true;
         });
+
+//API INTEGRATION
+
+builder.Services.AddHttpClient("NodeApi", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "http://localhost:4000/api");
+});
+
+builder.Services.AddScoped<IVolunteerService, VolunteerService>();
 
 // ============================================================
 // BUILD APPLICATION

@@ -1,20 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Sisterlove.Data;
-using Sisterlove.Models.Entities;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
 using SisterLoveSA.Models;
 
 namespace SisterLoveSA.Services
 {
     public class DonationService : IDonationService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HttpClient _httpClient;
         private readonly ILogger<DonationService> _logger;
 
         public DonationService(
-            ApplicationDbContext context,
+            IHttpClientFactory httpClientFactory,
             ILogger<DonationService> logger)
         {
-            _context = context;
+            _httpClient = httpClientFactory.CreateClient("NodeApi");
             _logger = logger;
         }
 
@@ -22,37 +21,44 @@ namespace SisterLoveSA.Services
         {
             try
             {
-                var transactionId = GenerateTransactionId();
-
-                var donation = new Donation
+                var payload = new
                 {
-                    DonorName = model.DonorName,
-                    Email = model.Email,
-                    Amount = model.Amount ?? 0,
-                    Message = model.Message,
-                    DonationType = model.DonationType.ToString(),
-                    TransactionId = transactionId,
-                    CreatedAt = DateTime.UtcNow
+                    name = model.DonorName, // Fixed: Changed from donorName to name to match Node controller
+                    email = model.Email,
+                    amount = model.Amount ?? 0,
+                    message = model.Message
                 };
 
-                _context.Donations.Add(donation);
-                await _context.SaveChangesAsync();
+                // Calls http://localhost:4000/api/donations
+                var response = await _httpClient.PostAsJsonAsync("/api/donations", payload);
 
-                var result = new DonationResult
+                if (response.IsSuccessStatusCode)
                 {
-                    Success = true,
-                    TransactionId = transactionId,
-                    DonorName = model.DonorName,
-                    Amount = model.Amount ?? 0
+                    var responseString = await response.Content.ReadAsStringAsync();
+
+                    var result = new DonationResult
+                    {
+                        Success = true,
+                        TransactionId = $"SL-{DateTime.Now.Year}-API",
+                        DonorName = model.DonorName,
+                        Amount = model.Amount ?? 0
+                    };
+
+                    await SendConfirmationEmail(result);
+                    return result;
+                }
+
+                _logger.LogWarning("Failed to send donation to Node API. Status Code: {StatusCode}", response.StatusCode);
+
+                return new DonationResult
+                {
+                    Success = false,
+                    ErrorMessage = "Unable to process donation via Node API. Please try again."
                 };
-
-                await SendConfirmationEmail(result);
-
-                return result;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing donation");
+                _logger.LogError(ex, "Error processing donation via Node API");
 
                 return new DonationResult
                 {
@@ -79,14 +85,6 @@ namespace SisterLoveSA.Services
                 _logger.LogError(ex, "Error sending confirmation email");
                 return false;
             }
-        }
-
-        private string GenerateTransactionId()
-        {
-            var random = new Random();
-            var number = random.Next(1000, 9999);
-
-            return $"SL-{DateTime.Now.Year}-{number}";
         }
     }
 }

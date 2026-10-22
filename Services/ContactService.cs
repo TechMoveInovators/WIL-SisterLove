@@ -1,58 +1,49 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Net.Http.Json;
 using SisterLoveSA.Models;
-using Sisterlove.Data;
-using Sisterlove.Models.Entities;
 
 namespace SisterLoveSA.Services
 {
     public class ContactService : IContactService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HttpClient _httpClient;
         private readonly ILogger<ContactService> _logger;
 
         public ContactService(
-            ApplicationDbContext context,
+            IHttpClientFactory httpClientFactory,
             ILogger<ContactService> logger)
         {
-            _context = context;
+            _httpClient = httpClientFactory.CreateClient("NodeApi");
             _logger = logger;
         }
 
-        public async Task<bool> SubmitEnquiryAsync(
-            ContactViewModel model)
+        public async Task<bool> SubmitEnquiryAsync(ContactViewModel model)
         {
             try
             {
-                var enquiry = new ContactEnquiry
+                var payload = new
                 {
-                    FullName = model.Name,
-                    Email = model.Email,
-                    PhoneNumber = model.Phone,
-                    Subject = model.Subject.ToString(),
-                    Message = model.Message,
-                    SubmittedAt = DateTime.UtcNow
+                    name = model.Name,
+                    email = model.Email,
+                    phone = model.Phone,
+                    subject = model.Subject.ToString(),
+                    message = model.Message
                 };
 
-                _context.ContactEnquiries.Add(enquiry);
+                // Updated to include the full path correctly
+                var response = await _httpClient.PostAsJsonAsync("/api/contacts", payload);
 
-                await _context.SaveChangesAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    _logger.LogInformation("Contact enquiry successfully sent to Node API for {Email}", model.Email);
+                    return true;
+                }
 
-                _logger.LogInformation(
-                    "Contact enquiry saved successfully. " +
-                    "Enquiry ID: {EnquiryId}, Email: {Email}, Subject: {Subject}",
-                    enquiry.Id,
-                    enquiry.Email,
-                    enquiry.Subject);
-
-                return true;
+                _logger.LogWarning("Failed to send contact enquiry to Node API. Status Code: {StatusCode}", response.StatusCode);
+                return false;
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Error saving contact enquiry from {Email}",
-                    model.Email);
-
+                _logger.LogError(ex, "Error communicating with Node API for contact email {Email}", model.Email);
                 return false;
             }
         }
