@@ -1,133 +1,218 @@
-﻿<footer class="footer">
-    <!-- Decorative background shapes -->
-    <div class="footer-shape footer-shape-1"></div>
-    <div class="footer-shape footer-shape-2"></div>
-
-    <div class="footer-container">
+﻿
+<footer class="sl-footer">
+    <div class="sl-footer-container">
 
         <!-- TOP: Brand + Newsletter -->
-        <div class="footer-top">
+        <div class="sl-footer-top">
 
-            <div class="footer-brand">
-                <a asp-controller="Home" asp-action="Index" class="footer-logo">
-                    <div class="footer-logo-mark">
+            <div class="sl-footer-brand">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="sl-footer-logo">
+
+                    <span class="sl-footer-logo-mark">
                         <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="footer-logo-text">
+                    </span>
+
+                    <span class="sl-footer-logo-text">
                         <strong>SisterLove</strong>
                         <span>South Africa</span>
-                    </div>
+                    </span>
                 </a>
 
-                <p class="footer-tagline">
+                <p class="sl-footer-tagline">
                     Love in Action — supporting communities through
                     HIV prevention, sexual and reproductive health,
                     gender justice and youth empowerment.
                 </p>
 
-                <div class="footer-social">
+                <div class="sl-footer-social">
                     <a href="#" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
+
                     <a href="#" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
+
                     <a href="#" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
+
                     <a href="#" aria-label="LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
+
             </div>
 
             <!-- Newsletter -->
-            <div class="footer-newsletter">
-                <h4>Stay in touch</h4>
-                <p>Get updates about our work, programmes and events.</p>
-                <form class="footer-newsletter-form">
-                    <input type="email"
+            <div class="sl-footer-newsletter">
+
+                <span class="sl-footer-eyebrow">
+                    STAY CONNECTED
+                </span>
+
+                <h3>
+                    Stay in touch<span>.</span>
+                </h3>
+
+                <p>
+                    Get updates about our work, programmes and events.
+                    Stay connected with the SisterLove South Africa community.
+                </p>
+
+                <form class="sl-footer-newsletter-form">
+                    <label class="sl-footer-sr-only"
+                           for="footer-newsletter-email">
+                        Email address
+                    </label>
+
+                    <input id="footer-newsletter-email"
+                           type="email"
+                           name="email"
                            placeholder="Your email address"
-                           aria-label="Email address" />
-                    <button type="submit" aria-label="Subscribe">
+                           autocomplete="email"
+                           required />
+
+                    <button type="submit"
+                            aria-label="Subscribe">
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </form>
+
             </div>
 
         </div>
+
+        <div class="sl-footer-divider"></div>
 
         <!-- MIDDLE: Link columns -->
-        <div class="footer-grid">
+        <div class="sl-footer-grid">
 
-            <div class="footer-links">
+            <div class="sl-footer-links">
                 <h4>Quick Links</h4>
-                <ul>
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="Home" asp-action="About">About Us</a></li>
-                    <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
-                    <li><a asp-controller="Donate" asp-action="Index">Support Our Work</a></li>
-                </ul>
+
+                <a asp-controller="Home"
+                   asp-action="Index">Home</a>
+
+                <a asp-controller="Home"
+                   asp-action="About">About Us</a>
+
+                <a asp-controller="Contact"
+                   asp-action="Index">Contact Us</a>
+
+                <a asp-controller="Donate"
+                   asp-action="Index">Support Our Work</a>
             </div>
 
-            <div class="footer-links">
+            <div class="sl-footer-links">
                 <h4>Explore</h4>
-                <ul>
-                    <li><a href="/Home/OurWork">Our Work</a></li>
-                    <li><a href="/Home/Partnerships">Partnerships</a></li>
-                    <li><a href="/Home/TrackRecord">Track Record</a></li>
-                    <li><a href="/Home/GetInvolved">Get Involved</a></li>
-                </ul>
+
+                <a href="/Home/OurWork">Our Work</a>
+
+                <a href="/Home/Partnerships">Partnerships</a>
+
+                <a href="/Home/TrackRecord">Track Record</a>
+
+                <a href="/Home/GetInvolved">Get Involved</a>
             </div>
 
-            <div class="footer-links">
+            <div class="sl-footer-links">
                 <h4>Legal</h4>
-                <ul>
-                    <li><a asp-controller="Legal" asp-action="Terms">Terms &amp; Conditions</a></li>
-                    <li><a asp-controller="Legal" asp-action="Privacy">Privacy Policy</a></li>
-                    <li><a asp-controller="Legal" asp-action="Accessibility">Accessibility</a></li>
-                </ul>
+
+                <a asp-controller="Legal"
+                   asp-action="Terms">Terms &amp; Conditions</a>
+
+                <a asp-controller="Legal"
+                   asp-action="Privacy">Privacy Policy</a>
+
+                <a asp-controller="Legal"
+                   asp-action="Accessibility">Accessibility</a>
             </div>
 
-            <div class="footer-contact">
+            <div class="sl-footer-contact">
                 <h4>Get in Touch</h4>
 
-                <a href="mailto:info@sisterlove.org.za" class="footer-contact-item">
-                    <span class="footer-contact-icon">
+                <a href="mailto:info@sisterlove.org.za"
+                   class="sl-footer-contact-item">
+
+                    <span class="sl-footer-contact-icon">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <span>info@sisterlove.org.za</span>
+
+                    <span class="sl-footer-contact-text">
+                        <small>Email us</small>
+                        info@sisterlove.org.za
+                    </span>
                 </a>
 
-                <a href="tel:+27111234567" class="footer-contact-item">
-                    <span class="footer-contact-icon">
+                <a href="tel:+27111234567"
+                   class="sl-footer-contact-item">
+
+                    <span class="sl-footer-contact-icon">
                         <i class="fas fa-phone"></i>
                     </span>
-                    <span>+27 (0) 11 123 4567</span>
+
+                    <span class="sl-footer-contact-text">
+                        <small>Call us</small>
+                        +27 (0) 11 123 4567
+                    </span>
                 </a>
 
-                <div class="footer-contact-item">
-                    <span class="footer-contact-icon">
+                <div class="sl-footer-contact-item">
+
+                    <span class="sl-footer-contact-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </span>
-                    <span>Johannesburg,<br />South Africa</span>
+
+                    <span class="sl-footer-contact-text">
+                        <small>Our location</small>
+                        Johannesburg,<br />
+                        South Africa
+                    </span>
                 </div>
+
+                <a asp-controller="Donate"
+                   asp-action="Index"
+                   class="sl-footer-donate">
+
+                    <span>
+                        <small>MAKE A DIFFERENCE</small>
+                        Support Our Work
+                    </span>
+
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
             </div>
 
         </div>
 
-        <!-- BOTTOM: Copyright + legal -->
-        <div class="footer-bottom">
+        <!-- BOTTOM: Copyright -->
+        <div class="sl-footer-bottom">
+
             <p>
-                &copy; @DateTime.Now.Year SisterLove South Africa. All rights reserved.
+                &copy; @DateTime.Now.Year SisterLove South Africa.
+                All rights reserved.
             </p>
-            <div class="footer-bottom-links">
-                <a asp-controller="Legal" asp-action="Terms">Terms</a>
+
+            <div class="sl-footer-bottom-links">
+                <a asp-controller="Legal"
+                   asp-action="Terms">Terms</a>
+
                 <span>•</span>
-                <a asp-controller="Legal" asp-action="Privacy">Privacy</a>
+
+                <a asp-controller="Legal"
+                   asp-action="Privacy">Privacy</a>
+
                 <span>•</span>
-                <a asp-controller="Legal" asp-action="Accessibility">Accessibility</a>
+
+                <a asp-controller="Legal"
+                   asp-action="Accessibility">Accessibility</a>
             </div>
+
         </div>
 
     </div>
