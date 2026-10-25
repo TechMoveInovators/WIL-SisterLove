@@ -1,7 +1,5 @@
 package com.example.slisaconnect.ui
 
-package za.org.slisa.connect.ui
-
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,9 +21,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import za.org.slisa.connect.model.AdminArea
-import za.org.slisa.connect.model.canOpen
-import za.org.slisa.connect.ui.screens.*
+import com.example.slisaconnect.model.AdminArea
+import com.example.slisaconnect.model.canOpen
+import com.example.slisaconnect.ui.screens.*
 
 object Routes {
     const val HOME = "home"

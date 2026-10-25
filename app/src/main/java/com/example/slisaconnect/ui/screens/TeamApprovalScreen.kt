@@ -1,6 +1,6 @@
-package com.example.slisaconnect.ui.screens
-
 @file:OptIn(ExperimentalMaterial3Api::class)
+
+package com.example.slisaconnect.ui.screens
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
 
 @Composable
 fun TeamApprovalScreen(onBack: () -> Unit, vm: AppViewModel = viewModel()) {

@@ -1,4 +1,4 @@
-package za.org.slisa.connect.ui.theme
+package com.example.slisaconnect.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -6,7 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import za.org.slisa.connect.model.TeamStatus
+import com.example.slisaconnect.model.TeamStatus
 
 val Night = Color(0xFF18101F)
 val NightText = Color(0xFFF4ECFB)

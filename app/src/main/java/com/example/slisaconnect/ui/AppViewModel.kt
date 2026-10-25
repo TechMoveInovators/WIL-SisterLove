@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import za.org.slisa.connect.BuildConfig
-import za.org.slisa.connect.data.AppRepository
-import za.org.slisa.connect.data.SeedData
-import za.org.slisa.connect.model.*
+import com.example.slisaconnect.BuildConfig
+import com.example.slisaconnect.data.AppRepository
+import com.example.slisaconnect.data.SeedData
+import com.example.slisaconnect.model.*
 
 /** One instance shared by every screen (it is scoped to the activity). */
 class AppViewModel(private val repo: AppRepository = AppRepository(startingState())) : ViewModel() {

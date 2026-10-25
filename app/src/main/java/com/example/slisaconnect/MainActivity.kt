@@ -1,12 +1,12 @@
-package za.org.slisaconnect
+package com.example.slisaconnect
 
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import za.org.slisa.connect.ui.SlisaApp
-import za.org.slisa.connect.ui.theme.SlisaTheme
+import com.example.slisaconnect.ui.SlisaApp
+import com.example.slisaconnect.ui.theme.SlisaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

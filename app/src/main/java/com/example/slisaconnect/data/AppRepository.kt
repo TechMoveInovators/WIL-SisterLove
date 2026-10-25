@@ -1,6 +1,5 @@
 package com.example.slisaconnect.data
 
-
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -9,7 +8,7 @@ import java.util.UUID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import za.org.slisa.connect.model.*
+import com.example.slisaconnect.model.*
 
 /**
  * In-memory store. Every write checks the signed-in user's permission here, not only in the UI.

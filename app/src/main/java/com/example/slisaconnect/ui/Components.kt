@@ -1,7 +1,6 @@
-package com.example.slisaconnect.ui
-
 @file:OptIn(ExperimentalMaterial3Api::class)
 
+package com.example.slisaconnect.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -33,9 +32,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import za.org.slisa.connect.BuildConfig
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.theme.*
+import com.example.slisaconnect.BuildConfig
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.theme.*
 
 private val dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy", Locale("en", "ZA"))
 fun LocalDate.pretty(): String = format(dateFormat)

@@ -1,7 +1,7 @@
 package com.example.slisaconnect.data
 
 import java.time.LocalDate
-import za.org.slisa.connect.model.*
+import com.example.slisaconnect.model.*
 
 /** Demo data for the prototype. Replace with a real backend later. */
 object SeedData {

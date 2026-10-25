@@ -1,10 +1,8 @@
 package com.example.slisaconnect.ui.screens
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
@@ -18,9 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
-import za.org.slisa.connect.ui.theme.NightMuted
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
+import com.example.slisaconnect.ui.theme.NightMuted
 
 @Composable
 fun AdminDashboardScreen(
@@ -114,4 +112,3 @@ private fun ResourceCard(r: SupportResource, state: AppState, vm: AppViewModel) 
         }
     }
 }
-

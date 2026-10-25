@@ -1,7 +1,6 @@
-package com.example.slisaconnect.ui.screens
-
 @file:OptIn(ExperimentalMaterial3Api::class)
 
+package com.example.slisaconnect.ui.screens
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -23,9 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import java.time.LocalDate
-import za.org.slisa.connect.data.AppRepository
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
+import com.example.slisaconnect.data.AppRepository
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
 
 private val ageGroups = listOf("U13", "U15", "U17", "U19", "Open")
 
