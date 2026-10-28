@@ -1,12 +1,14 @@
 package com.example.slisaconnect.ui.theme
 
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.example.slisaconnect.model.TeamStatus
+import za.org.slisa.connect.model.TeamStatus
 
 val Night = Color(0xFF18101F)
 val NightText = Color(0xFFF4ECFB)
@@ -14,6 +16,19 @@ val NightMuted = Color(0xFFBFAED1)
 val Lime = Color(0xFFC9EA6B)
 val LimeText = Color(0xFF1C2A00)
 val Magenta = Color(0xFFC0179A)
+
+// Dashboard tiles from the design. They keep their colours in both themes and always carry dark text.
+val TileBlue = Color(0xFF8DB8D4)
+val TilePink = Color(0xFFFF6BF2)
+val TileLime = Color(0xFFC6EB6E)
+val TileViolet = Color(0xFFC77DFF)
+val TileText = Color(0xFF1D1029)
+
+/** The soft purple glow behind the welcome, sign in and sign up screens. */
+@Composable
+fun authBackground(): Brush =
+    if (isSystemInDarkTheme()) Brush.radialGradient(listOf(Color(0xFF3A2354), Color(0xFF1D1129), Color(0xFF150C20)))
+    else Brush.radialGradient(listOf(Color(0xFFFFFFFF), Color(0xFFE6D2F6), Color(0xFFC79BE6)))
 
 private val LightColors = lightColorScheme(
     primary = Color(0xFF6E2AA8), onPrimary = Color.White,
