@@ -27,7 +27,11 @@ import com.example.slisaconnect.ui.theme.*
 @Composable
 fun DashboardScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
-    val me = state.currentUser ?: return
+    val me = state.currentUser
+    if (me == null) {
+        LaunchedEffect(Unit) { nav.to(Routes.WELCOME) }
+        return
+    }
     val first = state.profiles[me.id]?.first?.ifBlank { null } ?: me.name.substringBefore(" ")
     val today = vm.today()
     val upcoming = state.upcomingEvents(today).take(3)

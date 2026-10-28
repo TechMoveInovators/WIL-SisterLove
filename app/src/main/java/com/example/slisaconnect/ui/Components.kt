@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -358,6 +359,7 @@ fun Field(
     minLines: Int = 1,
     password: Boolean = false,
     imeAction: ImeAction = ImeAction.Next,
+    onDone: (() -> Unit)? = null,
 ) {
     var shown by remember { mutableStateOf(false) }
     OutlinedTextField(
@@ -370,6 +372,7 @@ fun Field(
         singleLine = singleLine,
         minLines = minLines,
         keyboardOptions = KeyboardOptions(keyboardType = if (password) KeyboardType.Password else keyboard, imeAction = imeAction),
+        keyboardActions = KeyboardActions(onDone = { onDone?.invoke() }),
         visualTransformation = if (password && !shown) PasswordVisualTransformation() else VisualTransformation.None,
         trailingIcon = if (password) {
             { TextButton(onClick = { shown = !shown }) { Text(if (shown) "Hide" else "Show") } }

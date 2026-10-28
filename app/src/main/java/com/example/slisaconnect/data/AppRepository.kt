@@ -149,7 +149,7 @@ class AppRepository(
         val errors = Validators.signUp(form)
         if (errors.isNotEmpty()) return Outcome.Failed(errors.values.first())
         val email = form.email.trim().lowercase()
-        if (accounts.any { it.email == email }) return Outcome.Failed("An account with this email already exists. Try signing in.")
+        if (accounts.any { it.email.trim().lowercase() == email }) return Outcome.Failed("An account with this email already exists. Try signing in.")
         val s = _state.value
         val id = newId("u")
         val salt = hasher.newSalt()
@@ -179,7 +179,8 @@ class AppRepository(
 
     @Synchronized
     fun signIn(email: String, password: String, remember: Boolean): Outcome {
-        val acc = accounts.firstOrNull { it.email == email.trim().lowercase() }
+        val cleanEmail = email.trim().lowercase()
+        val acc = accounts.firstOrNull { it.email.trim().lowercase() == cleanEmail }
         // Hash even when the email is unknown so both cases take the same time.
         val ok = if (acc != null) hasher.matches(password, acc.salt, acc.hash) else { hasher.hash(password, hasher.newSalt()); false }
         if (acc == null || !ok) return Outcome.Failed("Email or password is incorrect.")
@@ -245,7 +246,7 @@ class AppRepository(
         val errors = Validators.profile(profile.first, profile.last, profile.email, profile.phone)
         if (errors.isNotEmpty()) return@guarded Change.Fail(errors.values.first())
         val email = profile.email.trim().lowercase()
-        if (accounts.any { it.userId != me.id && it.email == email }) {
+        if (accounts.any { it.userId != me.id && it.email.trim().lowercase() == email }) {
             return@guarded Change.Fail("That email is already used by another account.")
         }
         val clean = profile.copy(first = profile.first.trim(), last = profile.last.trim(), email = email, phone = profile.phone.trim())

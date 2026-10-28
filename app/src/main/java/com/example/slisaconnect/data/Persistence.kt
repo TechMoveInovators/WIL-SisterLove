@@ -160,7 +160,7 @@ object SnapshotCodec {
             },
             audit = root.list("audit").map { AuditEntry(it.l("time"), it.s("actor"), it.s("message")) },
         )
-        val accounts = root.list("accounts").map { Account(it.s("userId"), it.s("email"), it.s("salt"), it.s("hash")) }
+        val accounts = root.list("accounts").map { Account(it.s("userId"), it.s("email").trim().lowercase(), it.s("salt"), it.s("hash")) }
         return Snapshot(state, accounts, remember)
     }
 }

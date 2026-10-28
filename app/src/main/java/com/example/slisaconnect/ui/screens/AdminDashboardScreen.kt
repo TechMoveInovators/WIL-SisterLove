@@ -19,7 +19,11 @@ import com.example.slisaconnect.ui.*
 @Composable
 fun AdminDashboardScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
-    val me = state.currentUser ?: return
+    val me = state.currentUser
+    if (me == null) {
+        LaunchedEffect(Unit) { nav.to(Routes.WELCOME) }
+        return
+    }
     val today = vm.today()
 
     ScreenFrame(

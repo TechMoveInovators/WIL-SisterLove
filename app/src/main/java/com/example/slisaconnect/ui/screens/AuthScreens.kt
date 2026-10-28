@@ -25,7 +25,10 @@ import com.example.slisaconnect.model.*
 import com.example.slisaconnect.ui.*
 import com.example.slisaconnect.ui.theme.authBackground
 
-/** The Home Page in the design: logo, tagline and a Next button. */
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.sp
+
+/** The Home Page in the design: logo, tagline and Sign In / Register choices. */
 @Composable
 fun WelcomeScreen(nav: Navigator) {
     Column(
@@ -42,7 +45,16 @@ fun WelcomeScreen(nav: Navigator) {
             color = MaterialTheme.colorScheme.onBackground,
         )
         Spacer(Modifier.weight(1f))
-        PillButton("Next", Modifier.fillMaxWidth()) { nav.to(Routes.SIGN_IN) }
+        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            PillButton("Sign In", Modifier.fillMaxWidth()) { nav.to(Routes.SIGN_IN) }
+            OutlinedButton(
+                onClick = { nav.to(Routes.SIGN_UP) },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
+                shape = RoundedCornerShape(50),
+            ) {
+                Text("Register Account".uppercase(), fontWeight = FontWeight.Bold, letterSpacing = 0.5.sp)
+            }
+        }
     }
 }
 
@@ -64,10 +76,14 @@ fun SignInScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
         }
         if (error != null) return
         busy = true
-        // Success needs no navigation here: the app swaps to the signed-in screens as soon as the account is active.
         vm.signIn(email, password, stay) { out ->
             busy = false
-            if (out is Outcome.Failed) error = out.message
+            if (out is Outcome.Failed) {
+                error = out.message
+            } else if (out is Outcome.Done) {
+                val isStaff = vm.state.value.currentUser?.role?.isStaff == true
+                nav.to(if (isStaff) Routes.ADMIN else Routes.HOME)
+            }
         }
     }
 
@@ -81,7 +97,7 @@ fun SignInScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
         Text("Sign In", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, modifier = Modifier.align(Alignment.Start))
 
         Field(email, { email = it; error = null }, "Email", keyboard = KeyboardType.Email)
-        Field(password, { password = it; error = null }, "Password", password = true, imeAction = ImeAction.Done)
+        Field(password, { password = it; error = null }, "Password", password = true, imeAction = ImeAction.Done, onDone = { submit() })
 
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -134,14 +150,19 @@ fun SignUpScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
 
     fun submit() {
         if (busy) return
-        val form = SignUpForm(first, last, ageGroup, province, phone, email, password, confirm)
+        val form = SignUpForm(first, last, ageGroup, province, phone, email.trim(), password, confirm)
         errors = Validators.signUp(form)
         problem = null
         if (errors.isNotEmpty()) return
         busy = true
         vm.signUp(form) { out ->
             busy = false
-            if (out is Outcome.Failed) problem = out.message
+            if (out is Outcome.Failed) {
+                problem = out.message
+            } else if (out is Outcome.Done) {
+                val isStaff = vm.state.value.currentUser?.role?.isStaff == true
+                nav.to(if (isStaff) Routes.ADMIN else Routes.HOME)
+            }
         }
     }
 
@@ -174,10 +195,15 @@ fun SignUpScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
         Field(phone, { phone = it; errors = errors - "phone" }, "Phone number (optional)", keyboard = KeyboardType.Phone, error = errors["phone"])
         Field(email, { email = it; errors = errors - "email" }, "Email address", keyboard = KeyboardType.Email, error = errors["email"])
         Field(password, { password = it; errors = errors - "password" }, "Create password", password = true, error = errors["password"], hint = "At least 8 characters, with letters and numbers.")
-        Field(confirm, { confirm = it; errors = errors - "confirm" }, "Confirm password", password = true, error = errors["confirm"], imeAction = ImeAction.Done)
+        Field(confirm, { confirm = it; errors = errors - "confirm" }, "Confirm password", password = true, error = errors["confirm"], imeAction = ImeAction.Done, onDone = { submit() })
         FieldError(problem)
 
         PillButton(if (busy) "Creating account…" else "Submit", Modifier.fillMaxWidth(), enabled = !busy) { submit() }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Already have an account?", style = MaterialTheme.typography.bodySmall)
+            TextButton(onClick = { nav.to(Routes.SIGN_IN) }) { Text("Sign In", fontWeight = FontWeight.Bold) }
+        }
         Spacer(Modifier.height(8.dp))
     }
 }

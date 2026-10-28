@@ -52,7 +52,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun background(work: () -> Outcome, done: (Outcome) -> Unit) {
         viewModelScope.launch {
-            val out = withContext(Dispatchers.Default) { work() }
+            val out = try {
+                withContext(Dispatchers.Default) { work() }
+            } catch (e: Exception) {
+                Outcome.Failed(e.message ?: "An unexpected error occurred. Please try again.")
+            }
             done(out)
         }
     }
