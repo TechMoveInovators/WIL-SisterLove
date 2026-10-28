@@ -1,114 +1,93 @@
 package com.example.slisaconnect.ui.screens
 
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.slisaconnect.model.*
-import com.example.slisaconnect.ui.*
-import com.example.slisaconnect.ui.theme.NightMuted
+import za.org.slisa.connect.BuildConfig
+import za.org.slisa.connect.model.*
+import za.org.slisa.connect.ui.*
 
+/** The admin side's home. Every row is shown, but rows outside the signed-in role are locked. */
 @Composable
-fun AdminDashboardScreen(
-    onBack: () -> Unit,
-    onUsers: () -> Unit,
-    onTeams: () -> Unit,
-    onEvents: () -> Unit,
-    vm: AppViewModel = viewModel(),
-) {
+fun AdminDashboardScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
-    val me = state.currentUser
+    val me = state.currentUser ?: return
+    val today = vm.today()
 
-    ScreenFrame(title = "Admin dashboard", route = "/admin", onBack = onBack) {
-        NightPanel {
-            Text(me.role.label, style = MaterialTheme.typography.bodySmall, color = NightMuted)
-            Text("Welcome back, ${me.name.substringBefore(" ")}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-        }
-
-        // Overview tiles: only the numbers this role is allowed to see.
-        val tiles = buildList {
-            if (state.can(Permission.USERS_VIEW)) add("${state.users.size} of 352" to "Registered users")
+    ScreenFrame(
+        title = "Admin Dashboard", subtitle = me.role.label,
+        actions = { BellAction(state.unreadCount) { nav.tab(Routes.ADMIN_ALERTS) } },
+    ) {
+        val tiles = buildList<@Composable (Modifier) -> Unit> {
+            if (state.can(Permission.USERS_VIEW)) add { m -> StatTile("${state.users.size}", "People", m) }
             if (state.can(Permission.TEAMS_REVIEW)) {
-                add("${state.teams.size}" to "Teams registered")
-                add("${state.pendingReviews}" to "Pending reviews")
+                add { m -> StatTile("${state.pendingReviews}", "Teams to review", m) }
+                add { m -> StatTile("${state.teams.size}", "Teams registered", m) }
             }
-            if (state.can(Permission.EVENTS_MANAGE)) add("${state.events.count { it.published }}" to "Published events")
-        }
-        if (tiles.isNotEmpty()) {
-            SectionTitle("Overview")
-            tiles.chunked(2).forEach { rowTiles ->
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    rowTiles.forEach { (value, label) -> StatTile(value, label, Modifier.weight(1f)) }
-                    if (rowTiles.size == 1) Spacer(Modifier.weight(1f))
-                }
+            if (state.can(Permission.EVENTS_MANAGE)) {
+                add { m -> StatTile("${state.events.count { it.published && it.isUpcoming(today) }}", "Live events", m) }
+            }
+            if (state.can(Permission.SUPPORT_VIEW)) {
+                add { m -> StatTile("${state.resources.count { it.status != ResourceStatus.PUBLISHED }}", "Contacts to check", m) }
+            }
+            if (state.can(Permission.LEARNING_MANAGE)) {
+                add { m -> StatTile("${state.articles.count { it.published }}", "Articles live", m) }
             }
         }
+        TileGrid(tiles)
 
-        SectionTitle("Management menu")
-        MenuRow("User management", "View accounts and assign roles", Icons.Default.Person, state.can(Permission.USERS_VIEW), onUsers)
-        MenuRow("Team approval", "Review and approve team registrations", Icons.Default.Star, state.can(Permission.TEAMS_REVIEW), onTeams, state.pendingReviews)
-        MenuRow("Event management", "Create events, deadlines and fixtures", Icons.Default.DateRange, state.can(Permission.EVENTS_MANAGE), onEvents)
+        SectionTitle("Manage")
+        ListRow("User Management", "Roles and access", Icons.Default.Person, locked = !state.canOpen(AdminArea.USERS), onClick = { nav.to(Routes.ADMIN_USERS) })
+        ListRow("Sports & Team Registration", "Review, approve, entries", Icons.Default.Star, locked = !state.canOpen(AdminArea.TEAMS),
+            badge = if (state.canOpen(AdminArea.TEAMS)) state.pendingReviews else 0, onClick = { nav.to(Routes.ADMIN_TEAMS) })
+        ListRow("Events & Competitions", "Publish to the user dashboard", Icons.Default.DateRange, locked = !state.canOpen(AdminArea.EVENTS), onClick = { nav.to(Routes.ADMIN_EVENTS) })
+        ListRow("Women's Hub & Support", "Verify and publish contacts", Icons.Default.Favorite, locked = !state.canOpen(AdminArea.SUPPORT), onClick = { nav.to(Routes.ADMIN_SUPPORT) })
+        ListRow("Learning Content", "Articles for the Learn tab", Icons.Default.Info, locked = !state.canOpen(AdminArea.LEARNING), onClick = { nav.to(Routes.ADMIN_LEARNING) })
+        ListRow("Reports & Impact", "Numbers across the platform", Icons.Default.List, onClick = { nav.to(Routes.ADMIN_REPORTS) })
 
-        // Support resources are invisible to every role without SUPPORT_VIEW.
-        if (state.can(Permission.SUPPORT_VIEW)) {
-            SectionTitle("Support resources", "Private · staff only")
-            NoteBox("Contacts are hidden from every other role. A resource is shown in the app only after it is verified, then published by a platform admin.")
-            state.resources.forEach { r -> ResourceCard(r, state, vm) }
-        }
+        OutlinedButton(onClick = { nav.tab(Routes.HOME) }, Modifier.fillMaxWidth()) { Text("View as user") }
 
-        if (state.can(Permission.AUDIT_VIEW)) {
+        if (BuildConfig.DEBUG && state.can(Permission.USERS_MANAGE)) {
             Panel {
-                SectionTitle("Recent activity")
-                state.audit.take(5).forEach { a ->
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(a.time, fontFamily = FontFamily.Monospace, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("${a.actor} · ${a.message}", style = MaterialTheme.typography.bodySmall)
-                    }
+                Text("Test build only", fontWeight = FontWeight.Bold)
+                Muted("Adds clearly marked sample events, articles and helplines so you can see the user side filled in. Not in the release app.")
+                OutlinedButton(onClick = { vm.addSampleContent() }) { Text("Load sample content") }
+            }
+        }
+    }
+}
+
+@Composable
+fun AdminAccountScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
+    val state by vm.state.collectAsStateWithLifecycle()
+    val me = state.currentUser ?: return
+    var confirmOut by remember { mutableStateOf(false) }
+    ScreenFrame(title = "Account") {
+        Panel {
+            Row(horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                Avatar(me.name, 56)
+                Column {
+                    Text(me.name, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
+                    Muted(state.profiles[me.id]?.email ?: "")
+                    PlainChip(me.role.label)
                 }
             }
+            Muted(me.role.description)
         }
+        SectionTitle("What your role can do")
+        Panel { Permission.values().forEach { p -> FactRow(p.label, if (state.can(p)) "Yes" else "No") } }
+        ListRow("Edit profile", null, Icons.Default.Edit, onClick = { nav.to(Routes.EDIT_PROFILE) })
+        ListRow("Privacy & security", null, Icons.Default.Lock, onClick = { nav.to(Routes.SECURITY) })
+        OutlinedButton(onClick = { nav.tab(Routes.HOME) }, Modifier.fillMaxWidth()) { Text("View as user") }
+        OutlinedButton(onClick = { confirmOut = true }, Modifier.fillMaxWidth()) { Text("Log out") }
     }
-}
-
-@Composable
-private fun MenuRow(title: String, subtitle: String, icon: androidx.compose.ui.graphics.vector.ImageVector, allowed: Boolean, onClick: () -> Unit, badge: Int = 0) {
-    if (allowed) ListRow(title, subtitle, icon, onClick = onClick, badge = badge)
-    else ListRow(title, "Not available for your role", locked = true)
-}
-
-@Composable
-private fun ResourceCard(r: SupportResource, state: AppState, vm: AppViewModel) {
-    Panel {
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
-            Column(Modifier.weight(1f)) {
-                Text(r.name, fontWeight = FontWeight.Bold)
-                Text("${r.kind} · from ${r.source}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            when (r.status) {
-                ResourceStatus.SUBMITTED -> PlainChip("Submitted")
-                ResourceStatus.VERIFIED -> WarnChip("Verified")
-                ResourceStatus.PUBLISHED -> GoodChip("Published")
-            }
-        }
-        Text("Contact on file: ${r.maskedContact}", fontFamily = FontFamily.Monospace, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        if (r.status == ResourceStatus.SUBMITTED && state.can(Permission.REFERRALS_VERIFY)) {
-            LimeButton("Mark verified") { vm.verifyResource(r.id) }
-        }
-        if (r.status == ResourceStatus.VERIFIED) {
-            if (state.can(Permission.SUPPORT_PUBLISH)) Button(onClick = { vm.publishResource(r.id) }) { Text("Publish") }
-            else Text("Waiting for an admin to publish.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
+    if (confirmOut) SignOutDialog(onDismiss = { confirmOut = false }) { vm.signOut() }
 }

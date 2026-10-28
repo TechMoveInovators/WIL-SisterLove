@@ -1,48 +1,83 @@
 package com.example.slisaconnect.ui
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import java.io.File
+import java.time.LocalDate
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import com.example.slisaconnect.BuildConfig
-import com.example.slisaconnect.data.AppRepository
-import com.example.slisaconnect.data.SeedData
-import com.example.slisaconnect.model.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import za.org.slisa.connect.data.AppRepository
+import za.org.slisa.connect.data.FileStore
+import za.org.slisa.connect.model.*
 
-/** One instance shared by every screen (it is scoped to the activity). */
-class AppViewModel(private val repo: AppRepository = AppRepository(startingState())) : ViewModel() {
-    val state = repo.state
+/**
+ * One instance shared by every screen. It owns the saved data and hands every action to the repository,
+ * which checks the signed-in person's permission again before changing anything.
+ */
+class AppViewModel(app: Application) : AndroidViewModel(app) {
+    private val repo = AppRepository(
+        store = FileStore(File(app.filesDir, "slisa-connect.json")),
+        // On-device data only: the first person to create an account on a fresh install becomes the platform admin.
+        // Turn this off when accounts move online (see README, "Going online").
+        firstAccountIsAdmin = true,
+    )
+
+    val state: StateFlow<AppState> = repo.state
+
+    /** True until the first account exists. The sign-up screen uses it to explain who becomes the admin. */
+    val isFreshInstall: Boolean get() = repo.isFreshInstall
+    val firstAccountBecomesAdmin: Boolean get() = repo.firstAccountBecomesAdmin
 
     private val _messages = MutableSharedFlow<String>(extraBufferCapacity = 8)
     val messages: SharedFlow<String> = _messages.asSharedFlow()
 
-    private fun Outcome.report(): Outcome = also { _messages.tryEmit(message) }
+    fun today(): LocalDate = LocalDate.now()
 
     fun toast(text: String) { _messages.tryEmit(text) }
 
-    // Prototype only
-    fun switchUser(id: String) = repo.switchUser(id)
+    /** Shows the outcome's message (when there is one) and warns if the phone could not save. */
+    private fun Outcome.report(): Outcome {
+        if (message.isNotBlank()) _messages.tryEmit(message)
+        repo.lastSaveError?.let { _messages.tryEmit("Warning: your changes could not be saved on this phone.") }
+        return this
+    }
 
-    fun startReview(teamId: String) = repo.startReview(teamId).report()
-    fun approveTeam(teamId: String) = repo.approveTeam(teamId).report()
-    fun requestChanges(teamId: String, note: String) = repo.requestChanges(teamId, note).report()
-    fun approveChallenge(teamId: String) = repo.approveChallenge(teamId).report()
-    fun decideEntry(teamId: String, index: Int, decision: EntryStatus) =
-        repo.decideEntry(teamId, index, decision).report()
+    // ---- sign in and out. Password checks are slow on purpose, so they run off the main thread. ----
 
-    fun setRole(userId: String, role: Role) = repo.setRole(userId, role).report()
-    fun setActive(userId: String, active: Boolean) = repo.setActive(userId, active).report()
+    private fun background(work: () -> Outcome, done: (Outcome) -> Unit) {
+        viewModelScope.launch {
+            val out = withContext(Dispatchers.Default) { work() }
+            done(out)
+        }
+    }
 
-    fun saveEvent(event: SportsEvent) = repo.saveEvent(event).report()
-    fun setEventPublished(id: String, published: Boolean) = repo.setEventPublished(id, published).report()
-    fun deleteEvent(id: String) = repo.deleteEvent(id).report()
+    fun signUp(form: SignUpForm, done: (Outcome) -> Unit) = background({ repo.signUp(form) }, done)
+    fun signIn(email: String, password: String, remember: Boolean, done: (Outcome) -> Unit) =
+        background({ repo.signIn(email, password, remember) }, done)
 
-    fun verifyResource(id: String) = repo.verifyResource(id).report()
-    fun publishResource(id: String) = repo.publishResource(id).report()
+    fun signOut() = repo.signOut()
+
+    fun changePassword(current: String, new: String, done: (Outcome) -> Unit) =
+        background({ repo.changePassword(current, new) }, { out -> out.report(); done(out) })
+
+    fun deleteAccount(password: String, done: (Outcome) -> Unit) =
+        background({ repo.deleteAccount(password) }, { out -> out.report(); done(out) })
+
+    // ---- everyone ----
 
     fun updateProfile(profile: UserProfile) = repo.updateProfile(profile).report()
+    fun markNoticeRead(id: String) = repo.markNoticeRead(id)
+    fun markAllNoticesRead() = repo.markAllNoticesRead().report()
+    fun respondToEvent(eventId: String, going: Boolean) = repo.respondToEvent(eventId, going).report()
 
-    // Team managers and coaches
+    // ---- team managers and coaches ----
+
     fun registerTeam(draft: NewTeam) = repo.registerTeam(draft).report()
     fun resubmitTeam(teamId: String) = repo.resubmitTeam(teamId).report()
     fun addPlayer(teamId: String, player: Player) = repo.addPlayer(teamId, player).report()
@@ -54,11 +89,34 @@ class AppViewModel(private val repo: AppRepository = AppRepository(startingState
     fun submitChallenge(teamId: String) = repo.submitChallenge(teamId).report()
     fun addCoachByEmail(teamId: String, email: String) = repo.addCoachByEmail(teamId, email).report()
     fun removeCoach(teamId: String, userId: String) = repo.removeCoach(teamId, userId).report()
-}
 
-/**
- * Debug builds open as the platform admin so every screen can be tried. Release builds open as a plain member
- * (staff tools hidden) until real sign-in replaces the demo users.
- */
-private fun startingState(): AppState =
-    SeedData.initial().let { if (BuildConfig.DEBUG) it else it.copy(currentUserId = "u6") }
+    // ---- staff ----
+
+    fun startReview(teamId: String) = repo.startReview(teamId).report()
+    fun approveTeam(teamId: String) = repo.approveTeam(teamId).report()
+    fun requestChanges(teamId: String, note: String) = repo.requestChanges(teamId, note).report()
+    fun sendConsentReminder(teamId: String) = repo.sendConsentReminder(teamId).report()
+    fun approveChallenge(teamId: String) = repo.approveChallenge(teamId).report()
+    fun decideEntry(teamId: String, index: Int, decision: EntryStatus) = repo.decideEntry(teamId, index, decision).report()
+
+    fun setRole(userId: String, role: Role) = repo.setRole(userId, role).report()
+    fun setActive(userId: String, active: Boolean) = repo.setActive(userId, active).report()
+
+    fun saveEvent(event: SportsEvent) = repo.saveEvent(event).report()
+    fun setEventPublished(id: String, published: Boolean) = repo.setEventPublished(id, published).report()
+    fun deleteEvent(id: String) = repo.deleteEvent(id).report()
+
+    fun saveArticle(article: Article) = repo.saveArticle(article).report()
+    fun setArticlePublished(id: String, published: Boolean) = repo.setArticlePublished(id, published).report()
+    fun deleteArticle(id: String) = repo.deleteArticle(id).report()
+
+    fun addResource(name: String, kind: ResourceKind, contact: String, notes: String) =
+        repo.addResource(name, kind, contact, notes).report()
+    fun verifyResource(id: String) = repo.verifyResource(id).report()
+    fun publishResource(id: String) = repo.publishResource(id).report()
+    fun unpublishResource(id: String) = repo.unpublishResource(id).report()
+    fun deleteResource(id: String) = repo.deleteResource(id).report()
+
+    /** Debug builds only: fills the app with clearly marked sample events, articles and helplines. */
+    fun addSampleContent() = repo.addSampleContent().report()
+}
