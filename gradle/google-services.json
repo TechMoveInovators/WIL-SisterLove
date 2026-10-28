@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "308580599310",
+    "firebase_url": "https://slisaconnect-default-rtdb.firebaseio.com",
+    "project_id": "slisaconnect",
+    "storage_bucket": "slisaconnect.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308580599310:android:6e228a2591db079b77de5f",
+        "android_client_info": {
+          "package_name": "com.example.slisaconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyOAVmGN9QK3_1JQUliB5_mYN6hoGnDHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
