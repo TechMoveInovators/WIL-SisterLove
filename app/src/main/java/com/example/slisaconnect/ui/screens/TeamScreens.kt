@@ -1,3 +1,4 @@
+
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.example.slisaconnect.ui.screens
@@ -9,11 +10,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,39 +27,38 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import java.time.LocalDate
-import com.example.slisaconnect.data.AppRepository
-import com.example.slisaconnect.model.*
-import com.example.slisaconnect.ui.*
+import za.org.slisa.connect.data.AppRepository
+import za.org.slisa.connect.model.*
+import za.org.slisa.connect.ui.*
+import za.org.slisa.connect.ui.theme.*
 
-private val ageGroups = listOf("U13", "U15", "U17", "U19", "Open")
-
-// ---------------------------------------------------------------------------------------------
-// My teams
-// ---------------------------------------------------------------------------------------------
-
+/** Youth Base: the hub from the Youth tile. Team registration is the main action. */
 @Composable
-fun TeamHubScreen(onBack: () -> Unit, onRegister: () -> Unit, onOpen: (String) -> Unit, vm: AppViewModel = viewModel()) {
+fun YouthBaseScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
     val teams = state.myTeams
-    ScreenFrame(title = "Youth base", onBack = onBack) {
+    ScreenFrame(title = "Youth Base", onBack = { nav.back() }, actions = { BellAction(state.unreadCount) { nav.to(Routes.NOTIFICATIONS) } }) {
         NightPanel {
             Text("Register once. Play all season.", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text(
                 "Set up your soccer or netball team, keep one roster, and use the same team profile to enter SLiSA competitions.",
                 style = MaterialTheme.typography.bodySmall,
             )
-            LimeButton("Register a team", Modifier.fillMaxWidth(), onClick = onRegister)
+            LimeButton("Register your team", Modifier.fillMaxWidth()) { nav.to(Routes.TEAM_REGISTER) }
         }
         SectionTitle("My teams")
-        if (teams.isEmpty()) Panel { Text("You haven't registered a team yet.", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        if (teams.isEmpty()) EmptyState("No team yet", "Teams you register or coach will be listed here.")
         teams.forEach { t ->
             ListRow(
                 title = t.name,
                 subtitle = "${t.sport} · ${t.ageGroup} · ${t.reference}",
-                onClick = { onOpen(t.id) },
+                onClick = { nav.to(Routes.team(t.id)) },
                 trailing = { StatusChip(t.status) },
             )
         }
+        SectionTitle("More for young people")
+        ListRow("Find events", "Tournaments, training and sports days", onClick = { nav.tab(Routes.EVENTS) })
+        ListRow("Learn", "SRHR, GBVF, HIV & PrEP", onClick = { nav.tab(Routes.LEARN) })
     }
 }
 
@@ -63,51 +67,37 @@ fun TeamHubScreen(onBack: () -> Unit, onRegister: () -> Unit, onOpen: (String) -
 // ---------------------------------------------------------------------------------------------
 
 @Composable
-fun RegisterTeamScreen(onBack: () -> Unit, onRegistered: (String) -> Unit, vm: AppViewModel = viewModel()) {
+fun RegisterTeamScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     var name by rememberSaveable { mutableStateOf("") }
     var sport by rememberSaveable { mutableStateOf("Soccer") }
     var age by rememberSaveable { mutableStateOf("") }
+    var category by rememberSaveable { mutableStateOf("") }
+    var province by rememberSaveable { mutableStateOf("") }
     var coach by rememberSaveable { mutableStateOf("") }
     var errors by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
 
-    ScreenFrame(title = "Register a team", onBack = onBack) {
+    ScreenFrame(title = "Register your team", onBack = { nav.back() }) {
         NoteBox("No identity documents are needed. You will add players by initials and age, and collect guardian consent for anyone under 18.", NoteKind.GOOD)
 
-        OutlinedTextField(
-            name, { name = it; errors = errors - "name" }, label = { Text("Team name") }, singleLine = true,
-            isError = "name" in errors, supportingText = { errors["name"]?.let { Text(it) } }, modifier = Modifier.fillMaxWidth(),
-        )
-
         Text("Sport", style = MaterialTheme.typography.labelLarge)
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            listOf("Soccer", "Netball").forEach { s -> FilterChip(selected = sport == s, onClick = { sport = s }, label = { Text(s) }) }
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            ColourTile("Soccer", "Boys, girls, mixed", Icons.Default.Star, TileBlue, Modifier.weight(1f).alpha(if (sport == "Soccer") 1f else 0.55f)) { sport = "Soccer" }
+            ColourTile("Netball", "Girls, mixed", Icons.Default.Favorite, TilePink, Modifier.weight(1f).alpha(if (sport == "Netball") 1f else 0.55f)) { sport = "Netball" }
         }
+        Field(name, { name = it; errors = errors - "name" }, "Team name", error = errors["name"])
+        DropdownField("Age group", age, Validators.teamAgeGroups, errors["ageGroup"]) { age = it; errors = errors - "ageGroup" }
+        DropdownField("Category", category, Validators.teamCategories, errors["category"]) { category = it; errors = errors - "category" }
+        DropdownField("Province", province, Validators.provinces, errors["province"]) { province = it; errors = errors - "province" }
+        Field(coach, { coach = it; errors = errors - "coach" }, "Coach's name", error = errors["coach"], imeAction = ImeAction.Done)
 
-        Text("Age group", style = MaterialTheme.typography.labelLarge)
-        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            ageGroups.forEach { a -> FilterChip(selected = age == a, onClick = { age = a; errors = errors - "ageGroup" }, label = { Text(a) }) }
+        PillButton("Submit registration", Modifier.fillMaxWidth()) {
+            errors = Validators.team(name, sport, age, category, province, coach)
+            if (errors.isEmpty()) {
+                val result = vm.registerTeam(NewTeam(name.trim(), sport, age, category, province, coach.trim()))
+                if (result is Outcome.Done && result.id != null) nav.replace(Routes.team(result.id), Routes.TEAM_REGISTER)
+            }
         }
-        FieldError(errors["ageGroup"])
-
-        OutlinedTextField(
-            coach, { coach = it; errors = errors - "coach" }, label = { Text("Coach's name") }, singleLine = true,
-            isError = "coach" in errors, supportingText = { errors["coach"]?.let { Text(it) } }, modifier = Modifier.fillMaxWidth(),
-        )
-
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {
-                errors = Validators.team(name, sport, age, coach)
-                if (errors.isEmpty()) {
-                    val result = vm.registerTeam(NewTeam(name, sport, age, coach))
-                    if (result is Outcome.Done && result.id != null) onRegistered(result.id)
-                }
-            },
-        ) { Text("Submit registration") }
-        Text(
-            "You will get a reference number and the status Submitted. Registering a team does not enter it into a tournament.",
-            style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Muted("You will get a reference number and the status Submitted. Registering a team does not enter it into a tournament.")
     }
 }
 
@@ -118,12 +108,13 @@ fun RegisterTeamScreen(onBack: () -> Unit, onRegistered: (String) -> Unit, vm: A
 private val tabTitles = listOf("Overview", "Players", "Compete", "Team")
 
 @Composable
-fun TeamDashboardScreen(teamId: String, onBack: () -> Unit, vm: AppViewModel = viewModel()) {
+fun TeamDashboardScreen(teamId: String, nav: Navigator, vm: AppViewModel = viewModel()) {
+    val onBack = { nav.back() }
     val state by vm.state.collectAsStateWithLifecycle()
     val team = state.teams.firstOrNull { it.id == teamId }
     var tab by rememberSaveable { mutableStateOf(0) }
 
-    // A team is private to its manager and coaches. Anyone else (including after switching demo users) is turned away.
+    // A team is private to its manager and coaches. Anyone else is turned away.
     if (team == null || !state.canEditRoster(team)) {
         ScreenFrame(title = "Team", onBack = onBack) {
             Panel {
@@ -172,6 +163,8 @@ private fun OverviewTab(team: Team, state: AppState, isManager: Boolean, vm: App
     Panel {
         FactRow("Sport", team.sport)
         FactRow("Age group", team.ageGroup)
+        FactRow("Category", team.category)
+        FactRow("Province", team.province)
         FactRow("Coach", team.coach)
         FactRow("Manager", state.users.firstOrNull { it.id == team.managerId }?.name ?: "Unknown")
         FactRow("Players", "${team.players.size}")
@@ -179,7 +172,7 @@ private fun OverviewTab(team: Team, state: AppState, isManager: Boolean, vm: App
     NoteBox("Approved means the team is registered. Entering a competition is a separate step that a coordinator confirms.")
 
     SectionTitle("Notifications")
-    team.notices().forEach { n ->
+    team.checklist().forEach { n ->
         Panel {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (n.urgent) WarnChip("To do")
@@ -456,13 +449,5 @@ private fun TeamProfileForm(team: Team, onSave: (String, String, String) -> Unit
                 if (errors.isEmpty()) onSave(description, email, phone)
             },
         ) { Text("Save") }
-    }
-}
-
-@Composable
-private fun FactRow(label: String, value: String) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(label, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(value, fontWeight = FontWeight.SemiBold)
     }
 }
