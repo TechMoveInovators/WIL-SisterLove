@@ -1,165 +1,179 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.example.slisaconnect.ui.screens
 
+
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.slisaconnect.model.*
-import com.example.slisaconnect.ui.*
-import com.example.slisaconnect.ui.theme.NightMuted
+import za.org.slisa.connect.model.*
+import za.org.slisa.connect.ui.*
 
-/** Visible to every signed-in user. Staff also get a link into the protected admin area. */
 @Composable
-fun ProfileScreen(onEdit: () -> Unit, onOpenAdmin: () -> Unit, onOpenTeams: () -> Unit, onOpenTeam: (String) -> Unit, vm: AppViewModel = viewModel()) {
+fun ProfileScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
-    val me = state.currentUser
+    val me = state.currentUser ?: return
     val profile = state.profiles[me.id]
-    val displayName = profile?.let { "${it.first} ${it.last}" } ?: me.name
-    val myTeams = state.myTeams
+    var confirmOut by remember { mutableStateOf(false) }
 
-    ScreenFrame(title = "My profile") {
-        NightPanel {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Avatar(displayName)
+    ScreenFrame(title = "My Profile", actions = { BellAction(state.unreadCount) { nav.to(Routes.NOTIFICATIONS) } }) {
+        Panel {
+            Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                Avatar(me.name, 60)
                 Column {
-                    Text(displayName, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                    Text("SLiSA Connect · ${me.role.label}", style = MaterialTheme.typography.bodySmall, color = NightMuted)
+                    Text(me.name, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Muted(profile?.email ?: "")
+                    Muted(listOfNotNull(me.province.ifBlank { null }, profile?.ageGroup?.ifBlank { null }).joinToString(" · "))
                 }
             }
-            LimeButton("Edit your profile", Modifier.fillMaxWidth(), onClick = onEdit)
+            if (me.role.isStaff) PlainChip(me.role.label)
         }
+        SectionTitle("My activities")
+        ListRow("My teams", "${state.myTeams.size} registered", Icons.Default.Star, onClick = { nav.to(Routes.YOUTH) })
+        ListRow("My events", "Events you've responded to", Icons.Default.DateRange, onClick = { nav.to(Routes.MY_EVENTS) })
+        ListRow("Notifications", if (state.unreadCount > 0) "${state.unreadCount} unread" else "All caught up", Icons.Default.Notifications, badge = state.unreadCount, onClick = { nav.to(Routes.NOTIFICATIONS) })
 
-        SectionTitle("My teams", if (myTeams.isEmpty()) null else "${myTeams.size}")
-        myTeams.forEach { t ->
-            ListRow(
-                title = t.name,
-                subtitle = "${t.sport} · ${t.ageGroup} · ${t.reference}",
-                onClick = { onOpenTeam(t.id) },
-                trailing = { StatusChip(t.status) },
-            )
+        SectionTitle("Account")
+        ListRow("Edit profile", "Name, contact and notification choices", Icons.Default.Edit, onClick = { nav.to(Routes.EDIT_PROFILE) })
+        ListRow("Privacy & security", "Change password, delete account", Icons.Default.Lock, onClick = { nav.to(Routes.SECURITY) })
+        ListRow("Help & contact", "Helplines and support", Icons.Default.Info, onClick = { nav.to(Routes.HELP) })
+        if (me.role.isStaff) ListRow("Back to admin", me.role.label, Icons.Default.Settings, onClick = { nav.to(Routes.ADMIN) })
+        OutlinedButton(onClick = { confirmOut = true }, Modifier.fillMaxWidth()) {
+            Icon(Icons.AutoMirrored.Filled.ExitToApp, null); Spacer(Modifier.width(8.dp)); Text("Log out")
         }
-        ListRow(
-            title = if (myTeams.isEmpty()) "Register your team" else "Register another team",
-            subtitle = "Register once, keep one roster, enter many competitions",
-            icon = Icons.Default.Add,
-            onClick = onOpenTeams,
-        )
-
-        if (me.role.isStaff) {
-            SectionTitle("Staff tools")
-            ListRow("Admin dashboard", "Protected area. Your access is checked on every page.", Icons.Default.Lock, onClick = onOpenAdmin)
-        }
-
-        SectionTitle("Account & preferences")
-        ListRow("Personal information", "Name and contact details", onClick = onEdit)
-        ListRow("Notifications", "Approval updates and reminders", onClick = onEdit)
-        ListRow("Privacy & security", "Password, permissions and data choices", onClick = { vm.toast("Privacy & security is outside the first prototype.") })
-        ListRow("Accessibility", "Text size and display preferences", onClick = { vm.toast("Accessibility is outside the first prototype.") })
-        ListRow("Help & contact", "Get assistance", onClick = { vm.toast("Help is outside the first prototype.") })
-        ListRow("Log out", "Securely sign out of your account", Icons.AutoMirrored.Filled.ExitToApp, onClick = { vm.toast("Signed out (demo only).") })
     }
+    if (confirmOut) SignOutDialog(onDismiss = { confirmOut = false }) { vm.signOut() }
 }
 
-private val provinces = listOf(
-    "Eastern Cape", "Free State", "Gauteng", "KwaZulu-Natal", "Limpopo",
-    "Mpumalanga", "North West", "Northern Cape", "Western Cape",
-)
-private val ageGroups = listOf("Under 18", "18-24", "25-34", "35-44", "45+")
+@Composable
+fun SignOutDialog(onDismiss: () -> Unit, onConfirm: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Log out?") },
+        text = { Text("You'll need your email and password to get back in.") },
+        confirmButton = { TextButton(onClick = onConfirm) { Text("Log out") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
+    )
+}
 
 @Composable
-fun EditProfileScreen(onDone: () -> Unit, vm: AppViewModel = viewModel()) {
+fun EditProfileScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
-    val me = state.currentUser
-    val saved = state.profiles[me.id]
-        ?: UserProfile(me.name.substringBefore(" "), me.name.substringAfter(" ", ""), "", "", me.province, "25-34")
-
-    // Keyed on the user so switching demo users resets the form.
-    var first by rememberSaveable(me.id) { mutableStateOf(saved.first) }
-    var last by rememberSaveable(me.id) { mutableStateOf(saved.last) }
-    var email by rememberSaveable(me.id) { mutableStateOf(saved.email) }
-    var phone by rememberSaveable(me.id) { mutableStateOf(saved.phone) }
-    var province by rememberSaveable(me.id) { mutableStateOf(saved.province) }
-    var ageGroup by rememberSaveable(me.id) { mutableStateOf(saved.ageGroup) }
-    var nApprovals by rememberSaveable(me.id) { mutableStateOf(saved.notifyApprovals) }
-    var nReminders by rememberSaveable(me.id) { mutableStateOf(saved.notifyReminders) }
-    var nEvents by rememberSaveable(me.id) { mutableStateOf(saved.notifyEvents) }
+    val me = state.currentUser ?: return
+    val p = state.profiles[me.id] ?: return
+    var first by rememberSaveable { mutableStateOf(p.first) }
+    var last by rememberSaveable { mutableStateOf(p.last) }
+    var email by rememberSaveable { mutableStateOf(p.email) }
+    var phone by rememberSaveable { mutableStateOf(p.phone) }
+    var province by rememberSaveable { mutableStateOf(p.province) }
+    var age by rememberSaveable { mutableStateOf(p.ageGroup) }
+    var approvals by rememberSaveable { mutableStateOf(p.notifyApprovals) }
+    var reminders by rememberSaveable { mutableStateOf(p.notifyReminders) }
+    var events by rememberSaveable { mutableStateOf(p.notifyEvents) }
     var errors by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
 
-    ScreenFrame(title = "Edit profile", onBack = onDone) {
-        NoteBox("We only ask for what the app needs. No ID number, home address or date of birth.", NoteKind.GOOD)
-
+    ScreenFrame(title = "Edit Profile", onBack = { nav.back() }) {
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            OutlinedTextField(first, { first = it; errors = errors - "first" }, label = { Text("First name") }, singleLine = true,
-                isError = "first" in errors, supportingText = { errors["first"]?.let { Text(it) } }, modifier = Modifier.weight(1f))
-            OutlinedTextField(last, { last = it; errors = errors - "last" }, label = { Text("Last name") }, singleLine = true,
-                isError = "last" in errors, supportingText = { errors["last"]?.let { Text(it) } }, modifier = Modifier.weight(1f))
+            Field(first, { first = it; errors = errors - "first" }, "Name", Modifier.weight(1f), error = errors["first"])
+            Field(last, { last = it; errors = errors - "last" }, "Last name", Modifier.weight(1f), error = errors["last"])
         }
-        OutlinedTextField(email, { email = it; errors = errors - "email" }, label = { Text("Email") }, singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            isError = "email" in errors, supportingText = { errors["email"]?.let { Text(it) } }, modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(phone, { phone = it; errors = errors - "phone" }, label = { Text("Phone (optional)") }, singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-            supportingText = { Text(errors["phone"] ?: "Only used if you ask for a call.") }, isError = "phone" in errors,
-            modifier = Modifier.fillMaxWidth())
+        Field(email, { email = it; errors = errors - "email" }, "Email address", error = errors["email"], keyboard = KeyboardType.Email)
+        Field(phone, { phone = it; errors = errors - "phone" }, "Phone number (optional)", error = errors["phone"], keyboard = KeyboardType.Phone)
+        DropdownField("Province", province, Validators.provinces) { province = it }
+        DropdownField("Age group", age, Validators.ageGroups) { age = it }
+        NoteBox("We keep an age group and province, not your date of birth or home address.", NoteKind.GOOD)
 
-        Dropdown("Province", province, provinces) { province = it }
-        Dropdown("Age group", ageGroup, ageGroups) { ageGroup = it }
+        SectionTitle("Notifications")
+        SwitchRow("Team updates", approvals, "Approvals, requests for changes, entry decisions") { approvals = it }
+        SwitchRow("Reminders", reminders, "Missing consent forms and deadlines") { reminders = it }
+        SwitchRow("New events and learning", events, "When SLiSA publishes something new") { events = it }
 
-        Panel {
-            SectionTitle("Notifications")
-            SwitchRow("Team approval updates", nApprovals) { nApprovals = it }
-            SwitchRow("Missing-document reminders", nReminders) { nReminders = it }
-            SwitchRow("New events near me", nEvents) { nEvents = it }
+        PillButton("Save", Modifier.fillMaxWidth()) {
+            errors = Validators.profile(first, last, email, phone)
+            if (errors.isEmpty()) {
+                val out = vm.updateProfile(UserProfile(first.trim(), last.trim(), email.trim(), phone.trim(), province, age, approvals, reminders, events))
+                if (out is Outcome.Done) nav.back()
+            }
+        }
+    }
+}
+
+@Composable
+fun PrivacySecurityScreen(nav: Navigator, vm: AppViewModel = viewModel()) {
+    var current by remember { mutableStateOf("") }
+    var new by remember { mutableStateOf("") }
+    var confirm by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf<String?>(null) }
+    var delPassword by remember { mutableStateOf("") }
+    var delError by remember { mutableStateOf<String?>(null) }
+    var confirmDelete by remember { mutableStateOf(false) }
+
+    ScreenFrame(title = "Privacy & security", onBack = { nav.back() }) {
+        SectionTitle("Change password")
+        Field(current, { current = it; error = null }, "Current password", password = true)
+        Field(new, { new = it; error = null }, "New password", password = true, hint = "At least 8 characters, with letters and numbers.")
+        Field(confirm, { confirm = it; error = null }, "Confirm new password", password = true, imeAction = ImeAction.Done)
+        FieldError(error)
+        PillButton("Change password", Modifier.fillMaxWidth()) {
+            error = when {
+                new != confirm -> "The new passwords don't match."
+                else -> Validators.password(new)
+            }
+            if (error == null) vm.changePassword(current, new) { out ->
+                if (out is Outcome.Failed) error = out.message else { current = ""; new = ""; confirm = "" }
+            }
         }
 
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {
-                errors = Validators.profile(first, last, email, phone)
-                if (errors.isEmpty()) {
-                    val result = vm.updateProfile(
-                        UserProfile(first.trim(), last.trim(), email.trim(), phone.trim(), province, ageGroup, nApprovals, nReminders, nEvents),
-                    )
-                    if (result is Outcome.Done) onDone()
-                }
+        SectionTitle("Your data")
+        NoteBox("Your account and roster details are stored on this phone only. Nothing is uploaded.")
+
+        SectionTitle("Delete account")
+        Muted("This removes your account and the teams you manage. It can't be undone.")
+        Field(delPassword, { delPassword = it; delError = null }, "Enter your password to confirm", password = true, imeAction = ImeAction.Done)
+        FieldError(delError)
+        OutlinedButton(onClick = { confirmDelete = true }, Modifier.fillMaxWidth(), enabled = delPassword.isNotEmpty()) { Text("Delete my account") }
+    }
+    if (confirmDelete) {
+        AlertDialog(
+            onDismissRequest = { confirmDelete = false },
+            title = { Text("Delete your account?") },
+            text = { Text("Your profile and the teams you manage will be removed from this phone.") },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirmDelete = false
+                    vm.deleteAccount(delPassword) { out -> if (out is Outcome.Failed) delError = out.message }
+                }) { Text("Delete") }
             },
-        ) { Text("Save changes") }
-    }
-}
-
-@Composable
-private fun SwitchRow(label: String, checked: Boolean, onChange: (Boolean) -> Unit) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-        Text(label, Modifier.weight(1f))
-        Switch(checked = checked, onCheckedChange = onChange)
-    }
-}
-
-@Composable
-private fun Dropdown(label: String, value: String, options: List<String>, onSelect: (String) -> Unit) {
-    var open by remember { mutableStateOf(false) }
-    ExposedDropdownMenuBox(expanded = open, onExpandedChange = { open = it }) {
-        OutlinedTextField(
-            value = value, onValueChange = {}, readOnly = true, label = { Text(label) },
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = open) },
-            modifier = Modifier.menuAnchor().fillMaxWidth(),
+            dismissButton = { TextButton(onClick = { confirmDelete = false }) { Text("Cancel") } },
         )
-        ExposedDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
-            options.forEach { o -> DropdownMenuItem(text = { Text(o) }, onClick = { onSelect(o); open = false }) }
+    }
+}
+
+@Composable
+fun HelpScreen(nav: Navigator) {
+    val ctx = LocalContext.current
+    ScreenFrame(title = "Help & contact", onBack = { nav.back() }) {
+        Muted("If you are in danger, call the police or 112 first.")
+        Helplines.all.forEach { h ->
+            Panel(onClick = { ctx.dial(h.number) }) {
+                Text(h.name, fontWeight = FontWeight.Bold)
+                Muted(h.note)
+                Text(h.number, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+            }
         }
+        Muted("Last checked ${Helplines.CHECKED}.")
+        ListRow("More support contacts", "Verified local services", Icons.Default.Favorite, onClick = { nav.to(Routes.SUPPORT) })
     }
 }
