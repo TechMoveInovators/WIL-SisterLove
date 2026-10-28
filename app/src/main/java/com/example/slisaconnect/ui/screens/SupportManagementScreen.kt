@@ -14,8 +14,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
 
 /** Support contacts: added, then verified, then published. Users only ever see published ones. */
 @Composable

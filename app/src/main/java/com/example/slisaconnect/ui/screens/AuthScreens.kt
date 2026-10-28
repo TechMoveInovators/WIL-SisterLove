@@ -1,7 +1,5 @@
 package com.example.slisaconnect.ui.screens
 
-package za.org.slisa.connect.ui.screens
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,10 +20,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.R
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
-import za.org.slisa.connect.ui.theme.authBackground
+import com.example.slisaconnect.R
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
+import com.example.slisaconnect.ui.theme.authBackground
 
 /** The Home Page in the design: logo, tagline and a Next button. */
 @Composable

@@ -8,14 +8,8 @@ import java.util.UUID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import za.org.slisa.connect.model.*
+import com.example.slisaconnect.model.*
 
-/**
- * The app's data, kept on this phone. Every write checks the signed-in person's permission here, not only in the screens,
- * and every change that matters to someone else drops a message into that person's notification inbox.
- *
- * This is the layer a Firebase version replaces. Keep the public functions the same and the screens do not change.
- */
 class AppRepository(
     private val store: Store = MemoryStore(),
     private val clock: () -> Long = { System.currentTimeMillis() },

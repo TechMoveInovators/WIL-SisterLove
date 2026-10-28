@@ -3,7 +3,7 @@ package com.example.slisaconnect.data
 
 import java.io.File
 import java.time.LocalDate
-import za.org.slisa.connect.model.*
+import com.example.slisaconnect.model.*
 
 /** Everything that is saved on the phone: the app's data, the sign-ins, and whether to stay signed in. */
 data class Snapshot(val state: AppState, val accounts: List<Account>, val rememberMe: Boolean)

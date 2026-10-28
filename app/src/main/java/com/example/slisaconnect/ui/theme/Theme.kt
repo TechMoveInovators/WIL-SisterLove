@@ -8,7 +8,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import za.org.slisa.connect.model.TeamStatus
+import com.example.slisaconnect.model.TeamStatus
 
 val Night = Color(0xFF18101F)
 val NightText = Color(0xFFF4ECFB)

@@ -45,8 +45,8 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.theme.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.theme.*
 
 private val dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH)
 private val timeFormat = DateTimeFormatter.ofPattern("d MMM, HH:mm", Locale.ENGLISH)

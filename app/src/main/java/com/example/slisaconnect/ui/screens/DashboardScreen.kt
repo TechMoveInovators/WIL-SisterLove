@@ -18,10 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.R
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
-import za.org.slisa.connect.ui.theme.*
+import com.example.slisaconnect.R
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
+import com.example.slisaconnect.ui.theme.*
 
 /** The Dashboard in the design: "Who are you?" tiles, plus what admins have published for users. */
 @Composable

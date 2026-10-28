@@ -23,8 +23,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.screens.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.screens.*
 
 /** Every screen in the app. The first group is before sign-in, then the user side, then the staff-only admin side. */
 object Routes {

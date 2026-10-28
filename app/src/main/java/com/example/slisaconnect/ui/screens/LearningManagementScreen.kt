@@ -14,8 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
 
 /** Articles for the Learn tab. Publishing notifies users who want updates. */
 @Composable

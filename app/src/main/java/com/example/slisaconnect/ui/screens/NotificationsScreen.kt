@@ -10,8 +10,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.ui.*
-import za.org.slisa.connect.ui.theme.Magenta
+import com.example.slisaconnect.ui.*
+import com.example.slisaconnect.ui.theme.Magenta
 
 /** The inbox. Shared by both sides: users see event and team updates, staff see reviews waiting for them. */
 @Composable

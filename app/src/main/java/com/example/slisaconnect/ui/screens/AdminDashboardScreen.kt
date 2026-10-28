@@ -11,9 +11,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.BuildConfig
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
+import com.example.slisaconnect.BuildConfig
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
 
 /** The admin side's home. Every row is shown, but rows outside the signed-in role are locked. */
 @Composable

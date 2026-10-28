@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import java.time.LocalDate
-import za.org.slisa.connect.data.AppRepository
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
-import za.org.slisa.connect.ui.theme.*
+import com.example.slisaconnect.data.AppRepository
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
+import com.example.slisaconnect.ui.theme.*
 
 /** Youth Base: the hub from the Youth tile. Team registration is the main action. */
 @Composable

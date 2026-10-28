@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import za.org.slisa.connect.data.AppRepository
-import za.org.slisa.connect.data.FileStore
-import za.org.slisa.connect.model.*
+import com.example.slisaconnect.data.AppRepository
+import com.example.slisaconnect.data.FileStore
+import com.example.slisaconnect.model.*
 
 /**
  * One instance shared by every screen. It owns the saved data and hands every action to the repository,

@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
 
 /** Totals only. Nothing here names a young person or exposes support records unless the role allows it. */
 @Composable

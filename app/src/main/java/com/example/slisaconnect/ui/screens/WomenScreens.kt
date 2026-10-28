@@ -13,9 +13,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import za.org.slisa.connect.model.*
-import za.org.slisa.connect.ui.*
-import za.org.slisa.connect.ui.theme.*
+import com.example.slisaconnect.model.*
+import com.example.slisaconnect.ui.*
+import com.example.slisaconnect.ui.theme.*
 
 /** Women's Base from the design: six tiles and a private "Need support?" panel. */
 @Composable

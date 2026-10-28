@@ -40,7 +40,7 @@ fun HomeScreen(onOpenAdmin: () -> Unit, onOpenYouth: () -> Unit, vm: AppViewMode
                 )
                 Column {
                     Text("Welcome", style = MaterialTheme.typography.bodySmall, color = NightMuted)
-                    Text(me.name.substringBefore(" "), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                    Text(me?.name?.substringBefore(" ") ?: "", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
                     Text("Who are you? Choose how you'll use SLiSA Connect.", style = MaterialTheme.typography.bodySmall, color = NightMuted)
                 }
             }
@@ -48,7 +48,7 @@ fun HomeScreen(onOpenAdmin: () -> Unit, onOpenYouth: () -> Unit, vm: AppViewMode
         ListRow("Youth", "Register your team, events, learning", Icons.Default.Star, onClick = onOpenYouth)
         ListRow("Women", "Safety, health, support", Icons.Default.Favorite, onClick = { vm.toast("Women is outside the first prototype.") })
         ListRow("Volunteer", "Tasks, events, hours", Icons.Default.Person, onClick = { vm.toast("Volunteer is outside the first prototype.") })
-        if (me.role.isStaff) {
+        if (me?.role?.isStaff == true) {
             ListRow("Admin", "Staff access only", Icons.Default.Lock, onClick = onOpenAdmin)
         }
     }
