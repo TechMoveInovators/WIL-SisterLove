@@ -5,336 +5,694 @@
 }
 
 <!-- =============================================
-     HERO SECTION
+     SELF-CONTAINED STYLES (no dependency on site.css)
 ============================================== -->
-<section class="hero-section">
-    <div class="hero-shape hero-shape-one"></div>
-    <div class="hero-shape hero-shape-two"></div>
+<style>
+    .donate-section {
+        --d-purple: #3d1d68;
+        --d-purple-dark: #24143d;
+        --d-purple-light: #54258b;
+        --d-turquoise: #2ed5c6;
+        --d-magenta: #c13b8a;
+        --d-cream: #faf8f0;
+        --d-text: #4a3a3a;
+        --d-muted: #6f6462;
+        --d-border: #e8e0ee;
+        --d-field: #f8f6fb;
+        --d-error: #c0392b;
+        padding: 5rem 0;
+        background: var(--d-cream);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: var(--d-text);
+        line-height: 1.6;
+    }
 
-    <div class="container hero-container">
+        .donate-section *,
+        .donate-section *::before,
+        .donate-section *::after {
+            box-sizing: border-box;
+        }
 
-        <div class="hero-content">
-            <span class="eyebrow">SUPPORT OUR WORK</span>
-            <h1>
-                Support our work.
-                <span>Create change.</span>
-            </h1>
-            <p>
-                Your support helps SisterLove South Africa continue
-                community-rooted work in HIV prevention, sexual and
-                reproductive health and justice, GBVF prevention,
-                youth empowerment and community engagement.
-            </p>
-            <div class="hero-actions">
-                <a href="#donate-form" class="btn btn-primary">
-                    Make a Donation
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a asp-controller="Home" asp-action="OurWork" class="btn btn-outline">
-                    See Our Impact
-                </a>
-            </div>
-        </div>
+        .donate-section h1,
+        .donate-section h3,
+        .donate-section h4 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            text-transform: none;
+            letter-spacing: normal;
+        }
 
-        <!-- Circular hero image -->
-        <div class="hero-visual gi-hero-visual">
-            <div class="gi-hero-image-circle">
-                <div class="gi-hero-image"
-                     style="background-image: url('/images/donate-hero.jpg');"></div>
-            </div>
-            <div class="floating-card gi-floating-card">
-                <i class="fas fa-heart"></i>
-                <div>
-                    <strong>Love in Action</strong>
-                    <span>Community • Justice • Action</span>
-                </div>
-            </div>
-        </div>
+        .donate-section .donate-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-    </div>
-</section>
+        /* ---------- Header ---------- */
+        .donate-section .donate-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3.5rem;
+        }
 
+        .donate-section .donate-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--d-magenta);
+            margin-bottom: 0.75rem;
+        }
 
-<!-- =============================================
-     WHY DONATE — 3 Focus Cards
-============================================== -->
-<section class="focus-section">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">WHY IT MATTERS</span>
-            <h2>Three ways your gift creates change</h2>
-            <p>
-                Your support directly powers the programmes that
-                advance health, justice and dignity across South Africa.
-            </p>
-        </div>
+        .donate-section .donate-header h1 {
+            font-size: clamp(2.2rem, 4vw, 3.1rem);
+            font-weight: 800;
+            color: var(--d-purple);
+            line-height: 1.15;
+            margin: 0 0 1rem;
+        }
 
-        <div class="focus-grid">
-            <article class="focus-card focus-purple">
-                <div class="focus-icon">
-                    <i class="fas fa-people-group"></i>
-                </div>
-                <h3>Community Programmes</h3>
-                <p>
-                    Education, awareness and community engagement
-                    that reach women, girls and young people where
-                    they live.
-                </p>
-            </article>
+        .donate-section .donate-header p {
+            font-size: 1.1rem;
+            color: var(--d-muted);
+            line-height: 1.7;
+            margin: 0;
+        }
 
-            <article class="focus-card focus-turquoise">
-                <div class="focus-icon">
-                    <i class="fas fa-heart-pulse"></i>
-                </div>
-                <h3>Health &amp; Prevention</h3>
-                <p>
-                    Strengthening HIV prevention, sexual and
-                    reproductive health and justice work across
-                    our partner communities.
-                </p>
-            </article>
+        /* ---------- Layout ---------- */
+        .donate-section .donate-layout-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 3rem;
+            max-width: 1150px;
+            margin: 0 auto;
+            align-items: start;
+        }
 
-            <article class="focus-card focus-magenta">
-                <div class="focus-icon">
-                    <i class="fas fa-hand-holding-heart"></i>
-                </div>
-                <h3>Youth &amp; Gender Justice</h3>
-                <p>
-                    Youth empowerment, GBVF prevention and community
-                    advocacy that helps shape a safer, fairer future.
-                </p>
-            </article>
-        </div>
-    </div>
-</section>
+        /* ---------- Sidebar ---------- */
+        .donate-section .donate-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 100px;
+        }
 
+        .donate-section .impact-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(61, 29, 104, 0.08);
+        }
+
+            .donate-section .impact-card h3 {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--d-purple);
+                margin: 0 0 1rem;
+            }
+
+        .donate-section .progress-text {
+            font-size: 0.95rem;
+            color: var(--d-muted);
+            margin-bottom: 0.6rem;
+        }
+
+            .donate-section .progress-text strong {
+                color: var(--d-magenta);
+                font-size: 1.25rem;
+            }
+
+        .donate-section .progress-bar-bg {
+            background: var(--d-border);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .donate-section .progress-bar-fill {
+            background: linear-gradient(90deg, var(--d-purple) 0%, var(--d-magenta) 100%);
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .donate-section .quote-card {
+            background: linear-gradient(135deg, var(--d-purple-dark) 0%, var(--d-purple) 50%, var(--d-magenta) 100%);
+            padding: 2.5rem 2rem 2rem;
+            border-radius: 24px;
+            color: #fff;
+            box-shadow: 0 20px 40px rgba(36, 20, 61, 0.25);
+            position: relative;
+        }
+
+        .donate-section .quote-icon {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .donate-section .quote-card p {
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.6;
+            font-weight: 500;
+            margin: 1rem 0 1.5rem;
+            color: #fff;
+        }
+
+        .donate-section .quote-card span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--d-turquoise);
+        }
+
+        .donate-section .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .donate-section .fact-item {
+            background: #fff;
+            padding: 1.25rem 0.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(61, 29, 104, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+
+            .donate-section .fact-item strong {
+                display: block;
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: var(--d-purple);
+                margin-bottom: 0.25rem;
+            }
+
+            .donate-section .fact-item span {
+                display: block;
+                font-size: 0.7rem;
+                font-weight: 700;
+                color: var(--d-muted);
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            }
+
+        .donate-section .partner-card {
+            background: rgba(46, 213, 198, 0.1);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(46, 213, 198, 0.3);
+        }
+
+            .donate-section .partner-card h4 {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--d-purple);
+                margin: 0 0 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .donate-section .partner-card p {
+                font-size: 0.9rem;
+                margin: 0 0 1rem;
+                line-height: 1.5;
+            }
+
+        .donate-section .text-link {
+            color: var(--d-magenta);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+            .donate-section .text-link:hover {
+                text-decoration: underline;
+            }
+
+        /* ---------- Form card ---------- */
+        .donate-section .donate-form-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(36, 20, 61, 0.1);
+            border: 1px solid rgba(61, 29, 104, 0.06);
+        }
+
+        .donate-section .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .donate-section .form-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--d-purple);
+            margin: 0 0 1rem;
+        }
+
+            .donate-section .form-title .optional {
+                font-weight: 400;
+                font-size: 0.9rem;
+                color: var(--d-muted);
+            }
+
+        /* One-time / monthly toggle */
+        .donate-section .donation-type-toggle {
+            display: flex;
+            background: var(--d-field);
+            border: 1px solid var(--d-border);
+            border-radius: 50px;
+            padding: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+            .donate-section .donation-type-toggle input[type="radio"] {
+                display: none;
+            }
+
+            .donate-section .donation-type-toggle label {
+                flex: 1;
+                text-align: center;
+                padding: 0.8rem 1rem;
+                border-radius: 50px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 0.95rem;
+                color: var(--d-muted);
+                margin: 0;
+                user-select: none;
+                transition: all 0.25s ease;
+            }
+
+            .donate-section .donation-type-toggle input[type="radio"]:checked + label {
+                background: var(--d-purple);
+                color: #fff;
+                box-shadow: 0 6px 16px rgba(61, 29, 104, 0.25);
+            }
+
+        /* Amount buttons */
+        .donate-section .input-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--d-purple);
+            margin-bottom: 0.8rem;
+        }
+
+        .donate-section .mt-4 {
+            margin-top: 1.5rem;
+        }
+
+        .donate-section .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .donate-section .amount-btn {
+            background: #fff;
+            border: 2px solid var(--d-border);
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--d-purple);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+            .donate-section .amount-btn:hover {
+                border-color: var(--d-purple);
+                background: #fcfaff;
+            }
+
+            .donate-section .amount-btn.selected {
+                background: var(--d-purple);
+                border-color: var(--d-purple);
+                color: #fff;
+                box-shadow: 0 8px 20px rgba(61, 29, 104, 0.25);
+                transform: translateY(-2px);
+            }
+
+        /* Custom amount */
+        .donate-section .custom-amount-wrapper {
+            display: flex;
+            align-items: center;
+            border: 2px solid var(--d-border);
+            border-radius: 12px;
+            padding: 0.4rem 1rem;
+            background: var(--d-field);
+            margin-top: 0.5rem;
+            transition: all 0.25s ease;
+        }
+
+            .donate-section .custom-amount-wrapper:focus-within,
+            .donate-section .custom-amount-wrapper.active {
+                border-color: var(--d-purple);
+                background: #fff;
+                box-shadow: 0 0 0 4px rgba(61, 29, 104, 0.1);
+            }
+
+        .donate-section .currency-prefix {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--d-purple);
+            margin-right: 0.5rem;
+        }
+
+        .donate-section .custom-amount-wrapper input {
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            background: transparent !important;
+            padding: 0.6rem 0 !important;
+            width: 100%;
+            font-family: inherit;
+            font-size: 1.1rem;
+            color: var(--d-text);
+        }
+
+        /* Text fields */
+        .donate-section .donate-fields-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .donate-section .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+            .donate-section .input-group label {
+                font-size: 0.88rem;
+                font-weight: 600;
+                color: var(--d-purple);
+            }
+
+            .donate-section .input-group input,
+            .donate-section .input-group textarea {
+                width: 100%;
+                padding: 1rem 1.25rem;
+                font-family: inherit;
+                font-size: 0.95rem;
+                color: var(--d-text);
+                background: var(--d-field);
+                border: 2px solid var(--d-border);
+                border-radius: 12px;
+                transition: all 0.2s;
+            }
+
+                .donate-section .input-group input::placeholder,
+                .donate-section .input-group textarea::placeholder {
+                    color: #a99fb5;
+                }
+
+                .donate-section .input-group input:focus,
+                .donate-section .input-group textarea:focus {
+                    outline: none;
+                    border-color: var(--d-purple);
+                    background: #fff;
+                    box-shadow: 0 0 0 4px rgba(61, 29, 104, 0.1);
+                }
+
+            .donate-section .input-group textarea {
+                resize: vertical;
+                min-height: 110px;
+            }
+
+        .donate-section .form-divider {
+            border: 0;
+            height: 1px;
+            background: var(--d-border);
+            margin: 2rem 0;
+        }
+
+        /* Submit */
+        .donate-section .btn-donate {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--d-purple) 0%, var(--d-magenta) 100%);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(193, 59, 138, 0.3);
+            transition: all 0.3s ease;
+        }
+
+            .donate-section .btn-donate:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 35px rgba(193, 59, 138, 0.4);
+            }
+
+        .donate-section .security-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--d-muted);
+            margin: 1.5rem 0 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--d-border);
+        }
+
+            .donate-section .security-note i {
+                color: var(--d-turquoise);
+            }
+
+        /* Validation */
+        .donate-section .field-error,
+        .donate-section .text-danger {
+            display: block;
+            color: var(--d-error);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+    /* ---------- Responsive ---------- */
+    @@media (max-width: 1000px) {
+        .donate-section .donate-layout-wrapper {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .donate-section .donate-sidebar {
+            position: static;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .donate-section {
+            padding: 3rem 0;
+        }
+
+            .donate-section .donate-form-card {
+                padding: 1.75rem;
+            }
+
+            .donate-section .donate-fields-row {
+                grid-template-columns: 1fr;
+            }
+
+            .donate-section .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+    }
+</style>
 
 <!-- =============================================
      DONATION FORM
 ============================================== -->
-<section class="donate-new-section" id="donate-form">
-    <div class="container">
+<section class="donate-section" id="donate-form">
+    <div class="donate-wrap">
 
-        <div class="donate-new-header">
-            <span class="section-label">MAKE A DONATION</span>
-            <h2>Choose how you'd like to help.</h2>
-            <p>Every contribution — big or small — moves our work forward.</p>
+        <!-- HEADER -->
+        <div class="donate-header">
+            <span class="donate-label">MAKE A DONATION</span>
+            <h1>Your Love, Made Visible.</h1>
+            <p>Every contribution, big or small, moves us forward. Tell us how you'd like to support our work.</p>
         </div>
 
-        <div class="donate-new-layout">
+        <div class="donate-layout-wrapper">
 
             <!-- LEFT: Impact Sidebar -->
-            <aside class="donate-new-aside">
+            <aside class="donate-sidebar">
+                <div class="impact-card">
+                    <h3>Our Progress</h3>
+                    <div class="progress-text">
+                        <strong>75%</strong> of our monthly goal reached
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
 
-                <div class="donate-new-quote">
-                    <i class="fas fa-quote-left"></i>
-                    <p>
-                        Love in action means showing up for one another.
-                        Your gift is that love, made visible.
-                    </p>
+                <div class="quote-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p>Love in action means showing up for one another. Your gift is that love, made visible.</p>
                     <span>— SisterLove South Africa</span>
                 </div>
 
-                <div class="donate-new-facts">
-                    <div class="donate-new-fact">
+                <div class="facts-grid">
+                    <div class="fact-item">
                         <strong>100%</strong>
                         <span>Community-rooted</span>
                     </div>
-                    <div class="donate-new-fact">
+                    <div class="fact-item">
                         <strong>9+</strong>
                         <span>Provinces</span>
                     </div>
-                    <div class="donate-new-fact">
+                    <div class="fact-item">
                         <strong>∞</strong>
                         <span>Love in Action</span>
                     </div>
                 </div>
 
-                <div class="donate-note">
-                    <i class="fas fa-circle-info"></i>
-                    <p>
-                        We are actively seeking funding, programme
-                        partnerships, corporate support, in-kind support
-                        and strategic collaboration.
-                    </p>
+                <div class="partner-card">
+                    <h4><i class="fas fa-handshake-angle"></i> Partner with us</h4>
+                    <p>We are actively seeking corporate support and strategic collaboration.</p>
+                    <a href="/Contact" class="text-link">Get in touch &rarr;</a>
                 </div>
-
             </aside>
 
-
             <!-- RIGHT: Donation Form -->
-            <div class="donate-new-form">
-
-                <div class="donate-new-form-header">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <div>
-                        <h3>Make a contribution</h3>
-                        <p>Every contribution helps us continue our work.</p>
-                    </div>
-                </div>
-
+            <div class="donate-form-card">
                 <form asp-action="Index" method="post" novalidate>
-
                     @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
 
-                    <div asp-validation-summary="ModelOnly"
-                         class="text-danger validation-summary"></div>
+                    <!-- STEP 1: AMOUNT -->
+                    <div class="form-group">
+                        <h3 class="form-title">1. Choose your gift</h3>
 
-                    <div class="donate-fields-row">
+                        <div class="donation-type-toggle">
+                            <input type="radio" asp-for="DonationType" value="0" id="type-onetime" checked />
+                            <label for="type-onetime">One-Time Gift</label>
 
-                        <div class="form-field">
-                            <label asp-for="DonorName">Full Name</label>
-                            <input asp-for="DonorName"
-                                   placeholder="Enter your full name"
-                                   autocomplete="name" />
-                            <span asp-validation-for="DonorName" class="field-error"></span>
+                            <input type="radio" asp-for="DonationType" value="1" id="type-monthly" />
+                            <label for="type-monthly">Monthly Support</label>
                         </div>
 
-                        <div class="form-field">
-                            <label asp-for="Email">Email Address</label>
-                            <input asp-for="Email"
-                                   type="email"
-                                   placeholder="you@example.com"
-                                   autocomplete="email" />
-                            <span asp-validation-for="Email" class="field-error"></span>
-                        </div>
+                        <div class="mt-4">
+                            <label class="input-label">Select an Amount</label>
+                            <div class="amount-grid">
+                                @foreach (var amt in Model.PresetAmounts)
+                                {
+                                    <button type="button" class="amount-btn" data-amount="@amt" onclick="setAmount(this, @amt)">
+                                        R@(amt.ToString("N0"))
+                                    </button>
+                                }
+                                <button type="button" class="amount-btn custom-btn" onclick="focusCustomAmount()">Other</button>
+                            </div>
 
-                    </div>
-
-                    <!-- DONATION TYPE -->
-                    <div class="form-field">
-                        <label>Donation Type</label>
-
-                        <div class="donation-type-options">
-
-                            <label class="radio-card">
-                                <input type="radio" asp-for="DonationType" value="0" checked />
-                                <span class="radio-content">
-                                    <strong>One-Time</strong>
-                                    <small>Make a single contribution</small>
-                                </span>
-                            </label>
-
-                            <label class="radio-card">
-                                <input type="radio" asp-for="DonationType" value="1" />
-                                <span class="radio-content">
-                                    <strong>Monthly</strong>
-                                    <small>Support us regularly</small>
-                                </span>
-                            </label>
-
+                            <!-- Custom Amount Input -->
+                            <div class="custom-amount-wrapper" id="customAmountWrapper">
+                                <span class="currency-prefix">R</span>
+                                <input asp-for="Amount" type="number" id="customAmountInput" placeholder="Enter custom amount" min="1" />
+                            </div>
+                            <span asp-validation-for="Amount" class="field-error"></span>
                         </div>
                     </div>
 
-                    <!-- AMOUNT -->
-                    <div class="form-field">
-                        <label asp-for="Amount">Choose an Amount</label>
+                    <hr class="form-divider" />
 
-                        <div class="amount-options">
-                            @foreach (var amt in Model.PresetAmounts)
-                            {
-                                <button type="button"
-                                        class="amount-btn"
-                                        data-amount="@amt"
-                                        onclick="setAmount(this, @amt)">
-                                    R@(amt.ToString("N0"))
-                                </button>
-                            }
+                    <!-- STEP 2: DETAILS -->
+                    <div class="form-group">
+                        <h3 class="form-title">2. Your Details</h3>
+                        <div class="donate-fields-row">
+                            <div class="input-group">
+                                <label asp-for="DonorName">Full Name</label>
+                                <input asp-for="DonorName" placeholder="Jane Doe" autocomplete="name" />
+                                <span asp-validation-for="DonorName" class="field-error"></span>
+                            </div>
+                            <div class="input-group">
+                                <label asp-for="Email">Email Address</label>
+                                <input asp-for="Email" type="email" placeholder="jane@example.com" autocomplete="email" />
+                                <span asp-validation-for="Email" class="field-error"></span>
+                            </div>
                         </div>
-
-                        <div class="custom-amount">
-                            <span class="currency-prefix">R</span>
-                            <input asp-for="Amount"
-                                   type="number"
-                                   placeholder="Or enter custom amount"
-                                   min="1" />
-                        </div>
-
-                        <span asp-validation-for="Amount" class="field-error"></span>
                     </div>
 
-                    <!-- MESSAGE -->
-                    <div class="form-field">
-                        <label asp-for="Message">
-                            Message <span class="muted">(Optional)</span>
-                        </label>
-                        <textarea asp-for="Message"
-                                  rows="4"
-                                  placeholder="Leave a message for SisterLove South Africa"></textarea>
-                        <span asp-validation-for="Message" class="field-error"></span>
+                    <!-- STEP 3: MESSAGE -->
+                    <div class="form-group">
+                        <h3 class="form-title">3. Leave a message <span class="optional">(Optional)</span></h3>
+                        <div class="input-group">
+                            <textarea asp-for="Message" rows="3" placeholder="Tell us why you're supporting SisterLove..."></textarea>
+                        </div>
                     </div>
 
                     <!-- SUBMIT -->
-                    <button type="submit" class="form-submit">
-                        <i class="fas fa-heart"></i>
-                        Support Our Work
-                        <i class="fas fa-arrow-right"></i>
+                    <button type="submit" class="btn-donate">
+                        <i class="fas fa-heart"></i> Donate Securely
                     </button>
 
-                    <p class="donate-security">
-                        <i class="fas fa-lock"></i>
-                        Your information is handled securely.
+                    <p class="security-note">
+                        <i class="fas fa-lock"></i> Your information is 100% secure.
                     </p>
-
                 </form>
-
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- =============================================
-     CTA SECTION
-============================================== -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <span class="section-label">BEYOND DONATIONS</span>
-            <h2>Other ways to help.</h2>
-            <p>
-                Not able to donate right now? There are many other ways
-                to support our work and advance health, justice and
-                dignity for women and girls.
-            </p>
-            <div class="cta-actions">
-                <a asp-controller="Home" asp-action="GetInvolved" class="btn btn-light">
-                    Get Involved
-                </a>
-                <a asp-controller="Contact" asp-action="Index" class="btn btn-outline-light">
-                    Partner With Us
-                </a>
             </div>
         </div>
     </div>
 </section>
-
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script>
         function setAmount(button, amt) {
-            const amountInput = document.getElementById('Amount');
+            const amountInput = document.getElementById('customAmountInput');
             if (!amountInput) return;
-
             amountInput.value = amt;
 
-            document.querySelectorAll('.amount-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
+            document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
+            document.getElementById('customAmountWrapper').classList.remove('active');
+        }
+
+        function focusCustomAmount() {
+            document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelector('.custom-btn').classList.add('selected');
+            document.getElementById('customAmountWrapper').classList.add('active');
+            document.getElementById('customAmountInput').focus();
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            const amountInput = document.getElementById('Amount');
+            const amountInput = document.getElementById('customAmountInput');
             if (!amountInput) return;
+
+            // Highlight the matching preset if the page loads with a value
+            const initial = parseFloat(amountInput.value);
+            if (initial) {
+                document.querySelectorAll('.amount-btn:not(.custom-btn)').forEach(btn => {
+                    btn.classList.toggle('selected', parseFloat(btn.dataset.amount) === initial);
+                });
+            }
 
             amountInput.addEventListener('input', function () {
                 const val = parseFloat(this.value);
+                if (val) document.getElementById('customAmountWrapper').classList.add('active');
+
                 document.querySelectorAll('.amount-btn').forEach(btn => {
-                    const btnVal = parseFloat(btn.dataset.amount);
-                    btn.classList.toggle('selected', btnVal === val);
+                    if (!btn.classList.contains('custom-btn')) {
+                        btn.classList.toggle('selected', parseFloat(btn.dataset.amount) === val);
+                    }
                 });
             });
         });
