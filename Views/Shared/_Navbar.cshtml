@@ -1,4 +1,236 @@
-﻿<nav class="site-navbar">
+﻿@{
+    // Highlights the link for the page the visitor is currently on
+    var path = (Context.Request.Path.Value ?? "/").TrimEnd('/');
+    if (path == "") { path = "/"; }
+
+    bool IsActive(string prefix)
+    {
+        return path.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
+    }
+
+    var isHome = path == "/" ||
+                 path.Equals("/Home", StringComparison.OrdinalIgnoreCase) ||
+                 path.Equals("/Home/Index", StringComparison.OrdinalIgnoreCase);
+}
+
+<!-- =============================================
+     NAVBAR STYLES (self-contained, scoped to .site-navbar)
+============================================== -->
+<style>
+    .site-navbar {
+        --n-purple: #3d1d68;
+        --n-purple-light: #54258b;
+        --n-turquoise: #2ed5c6;
+        --n-magenta: #c13b8a;
+
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.94);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(61, 29, 104, 0.06);
+        padding: 0.7rem 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        transition: box-shadow 0.3s ease, padding 0.3s ease;
+    }
+
+    .site-navbar.is-scrolled {
+        box-shadow: 0 8px 30px rgba(36, 20, 61, 0.1);
+        padding: 0.5rem 0;
+    }
+
+    .site-navbar *,
+    .site-navbar *::before,
+    .site-navbar *::after {
+        box-sizing: border-box;
+    }
+
+    .site-navbar .nav-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+
+    /* ---------- Logo ---------- */
+    .site-navbar .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+
+    .site-navbar .logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #1f1235;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+    .site-navbar .logo-text span {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--n-magenta);
+    }
+
+    /* ---------- Links ---------- */
+    .site-navbar .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .site-navbar .nav-menu a {
+        position: relative;
+        padding: 0.55rem 0.85rem;
+        color: var(--n-purple);
+        font-size: 0.93rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        border-radius: 999px;
+        transition: color 0.25s ease, background 0.25s ease;
+    }
+
+    .site-navbar .nav-menu a:not(.nav-support)::after {
+        content: "";
+        position: absolute;
+        left: 0.85rem;
+        right: 0.85rem;
+        bottom: 0.2rem;
+        height: 2px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--n-turquoise), var(--n-magenta));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .site-navbar .nav-menu a:not(.nav-support):hover {
+        color: var(--n-magenta);
+    }
+
+    .site-navbar .nav-menu a:not(.nav-support):hover::after,
+    .site-navbar .nav-menu a.active::after {
+        transform: scaleX(1);
+    }
+
+    .site-navbar .nav-menu a.active:not(.nav-support) {
+        color: var(--n-magenta);
+    }
+
+    /* Support button */
+    .site-navbar .nav-menu a.nav-support {
+        margin: 0 0.4rem;
+        padding: 0.65rem 1.4rem;
+        color: #fff;
+        background: linear-gradient(135deg, var(--n-purple) 0%, var(--n-magenta) 100%);
+        box-shadow: 0 8px 20px rgba(193, 59, 138, 0.28);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .site-navbar .nav-menu a.nav-support:hover {
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(193, 59, 138, 0.4);
+    }
+
+    /* ---------- Mobile button ---------- */
+    .site-navbar .mobile-menu-btn {
+        display: none;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        background: rgba(61, 29, 104, 0.07);
+        border: none;
+        border-radius: 12px;
+        color: var(--n-purple);
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: background 0.25s ease;
+    }
+
+    .site-navbar .mobile-menu-btn:hover {
+        background: rgba(61, 29, 104, 0.14);
+    }
+
+    /* ---------- Responsive ---------- */
+    @@media (max-width: 1100px) {
+        .site-navbar .nav-menu a {
+            padding: 0.5rem 0.6rem;
+            font-size: 0.88rem;
+        }
+
+        .site-navbar .nav-menu a.nav-support {
+            padding: 0.6rem 1.1rem;
+        }
+    }
+
+    @@media (max-width: 960px) {
+        .site-navbar .mobile-menu-btn {
+            display: flex;
+        }
+
+        .site-navbar .nav-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.25rem;
+            padding: 1rem 1.5rem 1.5rem;
+            background: #fff;
+            border-top: 1px solid rgba(61, 29, 104, 0.08);
+            box-shadow: 0 20px 40px rgba(36, 20, 61, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+        }
+
+        .site-navbar .nav-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .site-navbar .nav-menu a {
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            border-radius: 12px;
+            white-space: normal;
+        }
+
+        .site-navbar .nav-menu a:not(.nav-support):hover,
+        .site-navbar .nav-menu a.active:not(.nav-support) {
+            background: rgba(193, 59, 138, 0.08);
+        }
+
+        .site-navbar .nav-menu a:not(.nav-support)::after {
+            display: none;
+        }
+
+        .site-navbar .nav-menu a.nav-support {
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+    }
+</style>
+
+<nav class="site-navbar" id="siteNavbar">
     <div class="nav-container">
 
         <!-- Logo -->
@@ -22,10 +254,11 @@
 
         <!-- Mobile menu button -->
         <button class="mobile-menu-btn"
+                id="navToggle"
                 type="button"
                 aria-label="Open navigation"
                 aria-expanded="false"
-                onclick="toggleMenu()">
+                aria-controls="mainNavigation">
 
             <i class="fas fa-bars"></i>
 
@@ -35,16 +268,65 @@
         <!-- Navigation -->
         <div class="nav-menu" id="mainNavigation">
 
-            <a asp-controller="Home" asp-action="Index">Home</a>
-            <a href="/Home/About">About Us</a>
-            <a href="/Home/OurWork">Our Work</a>
-            <a href="/Home/Partnerships">Partnerships</a>
-            <a href="/Home/TrackRecord">Track Record</a>
-            <a href="/Home/GetInvolved">Get Involved</a>
+            <a asp-controller="Home" asp-action="Index" class="@(isHome ? "active" : "")">Home</a>
+            <a href="/Home/About" class="@(IsActive("/Home/About") ? "active" : "")">About Us</a>
+            <a href="/Home/OurWork" class="@(IsActive("/Home/OurWork") ? "active" : "")">Our Work</a>
+            <a href="/Home/Partnerships" class="@(IsActive("/Home/Partnerships") ? "active" : "")">Partnerships</a>
+            <a href="/Home/TrackRecord" class="@(IsActive("/Home/TrackRecord") ? "active" : "")">Track Record</a>
+            <a href="/Home/GetInvolved" class="@(IsActive("/Home/GetInvolved") ? "active" : "")">Get Involved</a>
             <a href="/Donate" class="nav-support">Support Our Work</a>
-            <a href="/Contact">Contact</a>
+            <a href="/Contact" class="@(IsActive("/Contact") ? "active" : "")">Contact</a>
 
         </div>
 
     </div>
 </nav>
+
+<script>
+    (function () {
+        var nav = document.getElementById('siteNavbar');
+        var toggle = document.getElementById('navToggle');
+        var menu = document.getElementById('mainNavigation');
+        if (!nav || !toggle || !menu) return;
+
+        var icon = toggle.querySelector('i');
+
+        function setOpen(open) {
+            menu.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+            if (icon) {
+                icon.className = open ? 'fas fa-xmark' : 'fas fa-bars';
+            }
+        }
+
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            setOpen(!menu.classList.contains('active'));
+        });
+
+        // Close when a link is chosen, when clicking elsewhere, or on Escape
+        menu.addEventListener('click', function (e) {
+            if (e.target.closest('a')) setOpen(false);
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!nav.contains(e.target)) setOpen(false);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') setOpen(false);
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 960) setOpen(false);
+        });
+
+        // Soft shadow once the page scrolls
+        function onScroll() {
+            nav.classList.toggle('is-scrolled', window.scrollY > 10);
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    })();
+</script>

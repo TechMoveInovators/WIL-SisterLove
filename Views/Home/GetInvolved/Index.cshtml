@@ -3,6 +3,363 @@
 }
 
 <!-- =============================================
+     SELF-CONTAINED STYLES (scoped to .gv sections)
+============================================== -->
+<style>
+    .gv {
+        --g-purple: #3d1d68;
+        --g-purple-dark: #24143d;
+        --g-turquoise: #2ed5c6;
+        --g-magenta: #c13b8a;
+        --g-blue: #3b6fd4;
+        --g-cream: #faf8f0;
+        --g-text: #4a3a3a;
+        --g-muted: #6f6462;
+
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: var(--g-text);
+        line-height: 1.6;
+    }
+
+    .gv *,
+    .gv *::before,
+    .gv *::after {
+        box-sizing: border-box;
+    }
+
+    .gv h2,
+    .gv h3 {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+    .gv .gv-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .gv .gv-label {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--g-magenta);
+        margin-bottom: 0.75rem;
+    }
+
+    .gv .gv-heading {
+        font-size: clamp(2rem, 3.6vw, 2.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--g-purple);
+        margin: 0 0 1rem;
+    }
+
+    .gv .gv-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .gv .gv-btn-primary {
+        background: linear-gradient(135deg, var(--g-purple) 0%, var(--g-magenta) 100%);
+        color: #fff;
+        box-shadow: 0 10px 25px rgba(193, 59, 138, 0.3);
+    }
+
+    .gv .gv-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(193, 59, 138, 0.4);
+    }
+
+    /* ---------- Ways to get involved ---------- */
+    .gv-ways {
+        padding: 6rem 0;
+        background: var(--g-cream);
+    }
+
+    .gv-ways .gv-section-head {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 3.5rem;
+    }
+
+    .gv-ways .gv-section-head p {
+        font-size: 1.1rem;
+        color: var(--g-muted);
+        margin: 0;
+    }
+
+    .gv-ways .gv-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .gv-ways .gv-card {
+        --accent: var(--g-purple);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-radius: 24px;
+        padding: 2.25rem 1.75rem 1.75rem;
+        border: 1px solid rgba(61, 29, 104, 0.06);
+        box-shadow: 0 8px 25px rgba(36, 20, 61, 0.06);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gv-ways .gv-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--accent);
+    }
+
+    .gv-ways .gv-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 45px rgba(36, 20, 61, 0.14);
+    }
+
+    .gv-ways .gv-card-purple { --accent: var(--g-purple); }
+    .gv-ways .gv-card-blue { --accent: var(--g-blue); }
+    .gv-ways .gv-card-magenta { --accent: var(--g-magenta); }
+    .gv-ways .gv-card-turquoise { --accent: var(--g-turquoise); }
+
+    .gv-ways .gv-card-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 1.4rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .gv-ways .gv-card h3 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--g-purple);
+        margin: 0 0 0.6rem;
+    }
+
+    .gv-ways .gv-card p {
+        flex: 1;
+        margin: 0 0 1.5rem;
+        color: var(--g-muted);
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .gv-ways .gv-card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 0.92rem;
+        color: var(--g-purple);
+        text-decoration: none;
+        transition: gap 0.25s ease, color 0.25s ease;
+    }
+
+    .gv-ways .gv-card-link:hover {
+        color: var(--g-magenta);
+        gap: 0.8rem;
+    }
+
+    /* ---------- Volunteer spotlight ---------- */
+    .gv-volunteer {
+        padding: 6rem 0;
+        background: #fff;
+    }
+
+    .gv-volunteer .gv-vol-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .gv-volunteer .gv-vol-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .gv-volunteer .gv-vol-circle {
+        width: min(100%, 460px);
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        padding: 10px;
+        background: linear-gradient(135deg, var(--g-turquoise) 0%, var(--g-magenta) 100%);
+        box-shadow: 0 25px 60px rgba(36, 20, 61, 0.2);
+    }
+
+    .gv-volunteer .gv-vol-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        background-color: #ece6f3;
+    }
+
+    .gv-volunteer .gv-vol-badge {
+        position: absolute;
+        right: 0;
+        bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        background: #fff;
+        padding: 1rem 1.4rem;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(36, 20, 61, 0.18);
+    }
+
+    .gv-volunteer .gv-vol-badge i {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--g-turquoise) 0%, var(--g-magenta) 100%);
+        color: #fff;
+    }
+
+    .gv-volunteer .gv-vol-badge strong {
+        display: block;
+        color: var(--g-purple);
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .gv-volunteer .gv-vol-badge span {
+        font-size: 0.8rem;
+        color: var(--g-muted);
+    }
+
+    .gv-volunteer .gv-vol-content p {
+        font-size: 1.05rem;
+        color: var(--g-muted);
+        line-height: 1.75;
+        margin: 0 0 1rem;
+    }
+
+    .gv-volunteer .gv-vol-content p strong {
+        color: var(--g-purple);
+    }
+
+    .gv-volunteer .gv-vol-content .gv-btn {
+        margin-top: 1rem;
+    }
+
+    /* ---------- CTA ---------- */
+    .gv-cta {
+        padding: 6rem 0;
+        background: linear-gradient(135deg, var(--g-purple-dark) 0%, var(--g-purple) 55%, var(--g-magenta) 100%);
+        text-align: center;
+        color: #fff;
+    }
+
+    .gv-cta .gv-label {
+        color: var(--g-turquoise);
+    }
+
+    .gv-cta h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: #fff;
+        margin: 0 0 1rem;
+    }
+
+    .gv-cta p {
+        max-width: 620px;
+        margin: 0 auto 2rem;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .gv-cta .gv-cta-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .gv-cta .gv-btn-light {
+        background: #fff;
+        color: var(--g-purple);
+    }
+
+    .gv-cta .gv-btn-light:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .gv-cta .gv-btn-outline {
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        color: #fff;
+    }
+
+    .gv-cta .gv-btn-outline:hover {
+        background: #fff;
+        color: var(--g-purple);
+        transform: translateY(-3px);
+    }
+
+    /* ---------- Responsive ---------- */
+    @@media (max-width: 1100px) {
+        .gv-ways .gv-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 1000px) {
+        .gv-volunteer .gv-vol-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .gv-ways,
+        .gv-volunteer,
+        .gv-cta {
+            padding: 4rem 0;
+        }
+
+        .gv-volunteer .gv-vol-badge {
+            right: 0.5rem;
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .gv-ways .gv-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<!-- =============================================
      HERO SECTION
 ============================================== -->
 <section class="hero-section">
@@ -17,8 +374,8 @@
                 <span>a way to help.</span>
             </h1>
             <p>
-                Whether you volunteer your time, build a partnership, 
-                support our programmes or help amplify our work — 
+                Whether you volunteer your time, build a partnership,
+                support our programmes or help amplify our work —
                 your contribution can make a real difference.
             </p>
             <div class="hero-actions">
@@ -52,54 +409,56 @@
 <!-- =============================================
      WAYS TO GET INVOLVED
 ============================================== -->
-<section class="focus-section gi-ways-section">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">TAKE ACTION</span>
-            <h2>Four simple ways to make an impact</h2>
+<section class="gv gv-ways">
+    <div class="gv-wrap">
+        <div class="gv-section-head">
+            <span class="gv-label">TAKE ACTION</span>
+            <h2 class="gv-heading">Four simple ways to make an impact</h2>
             <p>Pick what fits your time, your skills and your passion.</p>
         </div>
 
-        <div class="focus-grid gi-ways-grid">
+        <div class="gv-cards">
+
             <!-- Volunteer -->
-            <article class="focus-card focus-purple">
-                <div class="focus-icon"><i class="fas fa-hands-helping"></i></div>
+            <article class="gv-card gv-card-purple">
+                <div class="gv-card-icon"><i class="fas fa-hands-helping"></i></div>
                 <h3>Volunteer</h3>
                 <p>Give your time, skills and experience to support community-led work and initiatives.</p>
-                <a asp-controller="Contact" asp-action="Index">
+                <a asp-controller="Contact" asp-action="Index" class="gv-card-link">
                     Volunteer with us <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
             <!-- Partner -->
-            <article class="focus-card focus-blue">
-                <div class="focus-icon"><i class="fas fa-handshake"></i></div>
+            <article class="gv-card gv-card-blue">
+                <div class="gv-card-icon"><i class="fas fa-handshake"></i></div>
                 <h3>Become a Partner</h3>
                 <p>Work with SisterLove to develop meaningful programmes and community collaborations.</p>
-                <a asp-controller="Contact" asp-action="Index">
+                <a asp-controller="Contact" asp-action="Index" class="gv-card-link">
                     Explore partnership <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
             <!-- Donate -->
-            <article class="focus-card focus-magenta">
-                <div class="focus-icon"><i class="fas fa-heart"></i></div>
+            <article class="gv-card gv-card-magenta">
+                <div class="gv-card-icon"><i class="fas fa-heart"></i></div>
                 <h3>Support Our Work</h3>
                 <p>Financial support helps us continue our programmes, community engagement and advocacy.</p>
-                <a asp-controller="Donate" asp-action="Index">
+                <a asp-controller="Donate" asp-action="Index" class="gv-card-link">
                     Support our work <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
             <!-- Spread the Word -->
-            <article class="focus-card focus-turquoise">
-                <div class="focus-icon"><i class="fas fa-bullhorn"></i></div>
+            <article class="gv-card gv-card-turquoise">
+                <div class="gv-card-icon"><i class="fas fa-bullhorn"></i></div>
                 <h3>Spread the Word</h3>
                 <p>Help raise awareness by sharing our work, initiatives and messages with your networks.</p>
-                <a href="#">
+                <a href="#" class="gv-card-link">
                     Follow our work <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
+
         </div>
     </div>
 </section>
@@ -108,46 +467,47 @@
 <!-- =============================================
      VOLUNTEER SPOTLIGHT
 ============================================== -->
-<section class="identity-section gi-volunteer-section">
-    <div class="container identity-grid">
-        
-        <!-- Visual Side: ONE large circular image -->
-        <div class="identity-visual gi-volunteer-visual">
-            <div class="gi-volunteer-image-circle">
-                <div class="gi-volunteer-image" 
-                     style="background-image: url('/images/getinvolved1.jpg');"></div>
-            </div>
+<section class="gv gv-volunteer">
+    <div class="gv-wrap">
+        <div class="gv-vol-grid">
 
-            <!-- Floating badge -->
-            <div class="floating-card gi-volunteer-badge">
-                <i class="fas fa-users"></i>
-                <div>
-                    <strong>Volunteer-Driven</strong>
-                    <span>People • Purpose • Progress</span>
+            <!-- Visual Side -->
+            <div class="gv-vol-visual">
+                <div class="gv-vol-circle">
+                    <div class="gv-vol-image"
+                         style="background-image: url('/images/getinvolved1.jpg');"></div>
+                </div>
+
+                <div class="gv-vol-badge">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <strong>Volunteer-Driven</strong>
+                        <span>People • Purpose • Progress</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Content Side -->
-        <div class="identity-content gi-volunteer-content">
-            <span class="section-label">VOLUNTEERING</span>
-            <h2>Your time can make a difference.</h2>
-            <p>
-                SisterLove South Africa is currently volunteer-driven. 
-                We work with people who contribute their skills, 
-                knowledge and time to advance our mission.
-            </p>
-            <p>
-                If you're interested in volunteering, use our contact 
-                form and select <strong>Volunteering</strong> as your 
-                reason for contacting us.
-            </p>
-            <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">
-                Volunteer with us
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
+            <!-- Content Side -->
+            <div class="gv-vol-content">
+                <span class="gv-label">VOLUNTEERING</span>
+                <h2 class="gv-heading">Your time can make a difference.</h2>
+                <p>
+                    SisterLove South Africa is currently volunteer-driven.
+                    We work with people who contribute their skills,
+                    knowledge and time to advance our mission.
+                </p>
+                <p>
+                    If you're interested in volunteering, use our contact
+                    form and select <strong>Volunteering</strong> as your
+                    reason for contacting us.
+                </p>
+                <a asp-controller="Contact" asp-action="Index" class="gv-btn gv-btn-primary">
+                    Volunteer with us
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
 
+        </div>
     </div>
 </section>
 
@@ -155,23 +515,21 @@
 <!-- =============================================
      CTA SECTION
 ============================================== -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <span class="section-label">START TODAY</span>
-            <h2>Ready to get involved?</h2>
-            <p>
-                Contact us to find out how you can contribute to 
-                SisterLove South Africa's work.
-            </p>
-            <div class="cta-actions">
-                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
-                    Contact Us
-                </a>
-                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline-light">
-                    Support Our Work
-                </a>
-            </div>
+<section class="gv gv-cta">
+    <div class="gv-wrap">
+        <span class="gv-label">START TODAY</span>
+        <h2>Ready to get involved?</h2>
+        <p>
+            Contact us to find out how you can contribute to
+            SisterLove South Africa's work.
+        </p>
+        <div class="gv-cta-actions">
+            <a asp-controller="Contact" asp-action="Index" class="gv-btn gv-btn-light">
+                Contact Us
+            </a>
+            <a asp-controller="Donate" asp-action="Index" class="gv-btn gv-btn-outline">
+                Support Our Work
+            </a>
         </div>
     </div>
 </section>

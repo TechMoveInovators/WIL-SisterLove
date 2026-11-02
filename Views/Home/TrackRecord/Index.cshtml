@@ -3,6 +3,431 @@
 }
 
 <!-- =============================================
+     SELF-CONTAINED STYLES (scoped to .tr sections)
+============================================== -->
+<style>
+    .tr {
+        --t-purple: #3d1d68;
+        --t-purple-dark: #24143d;
+        --t-turquoise: #2ed5c6;
+        --t-magenta: #c13b8a;
+        --t-blue: #3b6fd4;
+        --t-cream: #faf8f0;
+        --t-text: #4a3a3a;
+        --t-muted: #6f6462;
+
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: var(--t-text);
+        line-height: 1.6;
+    }
+
+    .tr *,
+    .tr *::before,
+    .tr *::after {
+        box-sizing: border-box;
+    }
+
+    .tr h2,
+    .tr h3 {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+    .tr .tr-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .tr .tr-label {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--t-magenta);
+        margin-bottom: 0.75rem;
+    }
+
+    .tr .tr-heading {
+        font-size: clamp(2rem, 3.6vw, 2.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--t-purple);
+        margin: 0 0 1rem;
+    }
+
+    .tr .tr-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    /* ---------- Introduction ---------- */
+    .tr-intro {
+        padding: 6rem 0;
+        background: #fff;
+    }
+
+    .tr-intro .tr-intro-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .tr-intro .tr-intro-text {
+        padding-left: 2rem;
+        border-left: 4px solid transparent;
+        border-image: linear-gradient(180deg, var(--t-turquoise), var(--t-magenta)) 1;
+    }
+
+    .tr-intro .tr-intro-text p {
+        font-size: 1.1rem;
+        color: var(--t-muted);
+        line-height: 1.8;
+        margin: 0 0 1.25rem;
+    }
+
+    .tr-intro .tr-intro-text p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* ---------- Legacy programmes ---------- */
+    .tr-legacy {
+        padding: 6rem 0;
+        background: var(--t-cream);
+    }
+
+    .tr-legacy .tr-section-head {
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto 3.5rem;
+    }
+
+    .tr-legacy .tr-section-head p {
+        font-size: 1.1rem;
+        color: var(--t-muted);
+        margin: 0;
+    }
+
+    .tr-legacy .tr-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .tr-legacy .tr-card {
+        --accent: var(--t-purple);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-radius: 24px;
+        padding: 2.25rem 1.75rem 1.75rem;
+        border: 1px solid rgba(61, 29, 104, 0.06);
+        box-shadow: 0 8px 25px rgba(36, 20, 61, 0.06);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tr-legacy .tr-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--accent);
+    }
+
+    .tr-legacy .tr-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 45px rgba(36, 20, 61, 0.14);
+    }
+
+    .tr-legacy .tr-card-purple { --accent: var(--t-purple); }
+    .tr-legacy .tr-card-turquoise { --accent: var(--t-turquoise); }
+    .tr-legacy .tr-card-magenta { --accent: var(--t-magenta); }
+    .tr-legacy .tr-card-blue { --accent: var(--t-blue); }
+
+    .tr-legacy .tr-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+    }
+
+    .tr-legacy .tr-card-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 1.4rem;
+    }
+
+    .tr-legacy .tr-year {
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(61, 29, 104, 0.08);
+        color: var(--t-purple);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+    }
+
+    .tr-legacy .tr-card h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--t-purple);
+        margin: 0 0 0.6rem;
+    }
+
+    .tr-legacy .tr-card p {
+        flex: 1;
+        margin: 0;
+        color: var(--t-muted);
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .tr-legacy .tr-support {
+        align-self: flex-start;
+        margin-top: 1.25rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(46, 213, 198, 0.14);
+        color: #0d7d73;
+        font-size: 0.78rem;
+        font-weight: 700;
+    }
+
+    /* ---------- Featured initiative ---------- */
+    .tr-featured {
+        padding: 6rem 0;
+        background: #fff;
+    }
+
+    .tr-featured .tr-feat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .tr-featured .tr-feat-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .tr-featured .tr-feat-circle {
+        width: min(100%, 460px);
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        padding: 10px;
+        background: linear-gradient(135deg, var(--t-turquoise) 0%, var(--t-magenta) 100%);
+        box-shadow: 0 25px 60px rgba(36, 20, 61, 0.2);
+    }
+
+    .tr-featured .tr-feat-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        background-color: #ece6f3;
+    }
+
+    .tr-featured .tr-feat-badge {
+        position: absolute;
+        right: 0;
+        bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        background: #fff;
+        padding: 1rem 1.4rem;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(36, 20, 61, 0.18);
+    }
+
+    .tr-featured .tr-feat-badge i {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--t-turquoise) 0%, var(--t-magenta) 100%);
+        color: #fff;
+    }
+
+    .tr-featured .tr-feat-badge strong {
+        display: block;
+        color: var(--t-purple);
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .tr-featured .tr-feat-badge span {
+        font-size: 0.8rem;
+        color: var(--t-muted);
+    }
+
+    .tr-featured .tr-feat-content p {
+        font-size: 1.05rem;
+        color: var(--t-muted);
+        line-height: 1.75;
+        margin: 0 0 1rem;
+    }
+
+    .tr-featured .tr-highlights {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        margin-top: 1.75rem;
+    }
+
+    .tr-featured .tr-highlight {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        background: var(--t-cream);
+        border-radius: 14px;
+        border: 1px solid rgba(61, 29, 104, 0.06);
+    }
+
+    .tr-featured .tr-highlight i {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: var(--t-purple);
+        color: #fff;
+    }
+
+    .tr-featured .tr-highlight strong {
+        display: block;
+        color: var(--t-purple);
+        font-weight: 700;
+    }
+
+    .tr-featured .tr-highlight span {
+        font-size: 0.9rem;
+        color: var(--t-muted);
+    }
+
+    /* ---------- CTA ---------- */
+    .tr-cta {
+        padding: 6rem 0;
+        background: linear-gradient(135deg, var(--t-purple-dark) 0%, var(--t-purple) 55%, var(--t-magenta) 100%);
+        text-align: center;
+        color: #fff;
+    }
+
+    .tr-cta .tr-label {
+        color: var(--t-turquoise);
+    }
+
+    .tr-cta h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: #fff;
+        margin: 0 0 1rem;
+    }
+
+    .tr-cta p {
+        max-width: 660px;
+        margin: 0 auto 2rem;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .tr-cta .tr-cta-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .tr-cta .tr-btn-light {
+        background: #fff;
+        color: var(--t-purple);
+    }
+
+    .tr-cta .tr-btn-light:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .tr-cta .tr-btn-outline {
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        color: #fff;
+    }
+
+    .tr-cta .tr-btn-outline:hover {
+        background: #fff;
+        color: var(--t-purple);
+        transform: translateY(-3px);
+    }
+
+    /* ---------- Responsive ---------- */
+    @@media (max-width: 1100px) {
+        .tr-legacy .tr-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 1000px) {
+        .tr-intro .tr-intro-grid,
+        .tr-featured .tr-feat-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .tr-intro,
+        .tr-legacy,
+        .tr-featured,
+        .tr-cta {
+            padding: 4rem 0;
+        }
+
+        .tr-intro .tr-intro-text {
+            padding-left: 1.25rem;
+        }
+
+        .tr-featured .tr-feat-badge {
+            right: 0.5rem;
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .tr-legacy .tr-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<!-- =============================================
      HERO SECTION
 ============================================== -->
 <section class="hero-section">
@@ -55,31 +480,30 @@
 <!-- =============================================
      INTRODUCTION
 ============================================== -->
-<section class="intro-section">
-    <div class="container intro-grid">
+<section class="tr tr-intro">
+    <div class="tr-wrap">
+        <div class="tr-intro-grid">
 
-        <div>
-            <span class="section-label">PREVIOUS & LEGACY WORK</span>
-            <h2>
-                Experience that
-                continues to inform our work.
-            </h2>
+            <div>
+                <span class="tr-label">PREVIOUS &amp; LEGACY WORK</span>
+                <h2 class="tr-heading">Experience that continues to inform our work.</h2>
+            </div>
+
+            <div class="tr-intro-text">
+                <p>
+                    SisterLove South Africa's history includes
+                    programmes focused on HIV prevention, sexual and
+                    reproductive health, human rights, women and girls,
+                    and community empowerment.
+                </p>
+                <p>
+                    These initiatives contribute to the experience,
+                    relationships and knowledge that continue to shape
+                    our work today.
+                </p>
+            </div>
+
         </div>
-
-        <div>
-            <p>
-                SisterLove South Africa's history includes
-                programmes focused on HIV prevention, sexual and
-                reproductive health, human rights, women and girls,
-                and community empowerment.
-            </p>
-            <p>
-                These initiatives contribute to the experience,
-                relationships and knowledge that continue to shape
-                our work today.
-            </p>
-        </div>
-
     </div>
 </section>
 
@@ -87,12 +511,12 @@
 <!-- =============================================
      LEGACY PROGRAMMES
 ============================================== -->
-<section class="focus-section">
-    <div class="container">
+<section class="tr tr-legacy">
+    <div class="tr-wrap">
 
-        <div class="section-heading">
-            <span class="section-label">LEGACY PROGRAMMES</span>
-            <h2>Previous initiatives</h2>
+        <div class="tr-section-head">
+            <span class="tr-label">LEGACY PROGRAMMES</span>
+            <h2 class="tr-heading">Previous initiatives</h2>
             <p>
                 A selection of programmes and projects that shaped
                 SisterLove South Africa's journey and continue to
@@ -100,27 +524,27 @@
             </p>
         </div>
 
-        <div class="focus-grid">
+        <div class="tr-cards">
 
             <!-- DREAMS -->
-            <article class="focus-card focus-purple">
-                <div class="focus-icon">
-                    <i class="fas fa-seedling"></i>
+            <article class="tr-card tr-card-purple">
+                <div class="tr-card-top">
+                    <div class="tr-card-icon"><i class="fas fa-seedling"></i></div>
+                    <span class="tr-year">2016–2019</span>
                 </div>
-                <span class="legacy-year">2016–2019</span>
                 <h3>DREAMS</h3>
                 <p>
                     A programme focused on reducing HIV risk among
                     adolescent girls and young women through
                     prevention, education and community-based support.
                 </p>
-                <span class="legacy-support">Supported through PEPFAR</span>
+                <span class="tr-support">Supported through PEPFAR</span>
             </article>
 
             <!-- Healthy Love Parties -->
-            <article class="focus-card focus-turquoise">
-                <div class="focus-icon">
-                    <i class="fas fa-heart"></i>
+            <article class="tr-card tr-card-turquoise">
+                <div class="tr-card-top">
+                    <div class="tr-card-icon"><i class="fas fa-heart"></i></div>
                 </div>
                 <h3>Healthy Love Parties</h3>
                 <p>
@@ -131,9 +555,9 @@
             </article>
 
             <!-- POWaR -->
-            <article class="focus-card focus-magenta">
-                <div class="focus-icon">
-                    <i class="fas fa-bolt"></i>
+            <article class="tr-card tr-card-magenta">
+                <div class="tr-card-top">
+                    <div class="tr-card-icon"><i class="fas fa-bolt"></i></div>
                 </div>
                 <h3>POWaR</h3>
                 <p>
@@ -144,9 +568,9 @@
             </article>
 
             <!-- SILC -->
-            <article class="focus-card focus-blue">
-                <div class="focus-icon">
-                    <i class="fas fa-users"></i>
+            <article class="tr-card tr-card-blue">
+                <div class="tr-card-top">
+                    <div class="tr-card-icon"><i class="fas fa-users"></i></div>
                 </div>
                 <h3>SILC</h3>
                 <p>
@@ -164,64 +588,66 @@
 <!-- =============================================
      FEATURED PROJECT — SHOW ME YOUR NUMBER
 ============================================== -->
-<section class="identity-section">
-    <div class="container identity-grid">
+<section class="tr tr-featured">
+    <div class="tr-wrap">
+        <div class="tr-feat-grid">
 
-        <!-- Circular image side -->
-        <div class="identity-visual gi-volunteer-visual">
-            <div class="gi-volunteer-image-circle">
-                <div class="gi-volunteer-image"
-                     style="background-image: url('/images/track-record-legacy.jpg');"></div>
-            </div>
-            <div class="floating-card gi-volunteer-badge">
-                <i class="fas fa-scale-balanced"></i>
-                <div>
-                    <strong>Human Rights</strong>
-                    <span>Western Cape • Global Fund</span>
+            <!-- Circular image side -->
+            <div class="tr-feat-visual">
+                <div class="tr-feat-circle">
+                    <div class="tr-feat-image"
+                         style="background-image: url('/images/track-record-legacy.jpg');"></div>
+                </div>
+                <div class="tr-feat-badge">
+                    <i class="fas fa-scale-balanced"></i>
+                    <div>
+                        <strong>Human Rights</strong>
+                        <span>Western Cape • Global Fund</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Content -->
+            <div class="tr-feat-content">
+                <span class="tr-label">FEATURED INITIATIVE</span>
+                <h2 class="tr-heading">
+                    Show Me Your Number —
+                    Human Rights in the Western Cape.
+                </h2>
+                <p>
+                    A human-rights initiative in the Western Cape
+                    supported through the Global Fund. The work focused on
+                    supporting women, girls and key populations to claim
+                    their rights and access essential services.
+                </p>
+
+                <!-- Key highlights -->
+                <div class="tr-highlights">
+                    <div class="tr-highlight">
+                        <i class="fas fa-shield-halved"></i>
+                        <div>
+                            <strong>Rights-Based Approach</strong>
+                            <span>Advancing dignity, equality and justice.</span>
+                        </div>
+                    </div>
+                    <div class="tr-highlight">
+                        <i class="fas fa-people-group"></i>
+                        <div>
+                            <strong>Community-Led</strong>
+                            <span>Work shaped by and for the community.</span>
+                        </div>
+                    </div>
+                    <div class="tr-highlight">
+                        <i class="fas fa-handshake"></i>
+                        <div>
+                            <strong>Partnership Driven</strong>
+                            <span>Delivered alongside trusted partners.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <!-- Content -->
-        <div class="identity-content">
-            <span class="section-label">FEATURED INITIATIVE</span>
-            <h2>
-                Show Me Your Number —
-                Human Rights in the Western Cape.
-            </h2>
-            <p>
-                A human-rights initiative in the Western Cape
-                supported through the Global Fund. The work focused on
-                supporting women, girls and key populations to claim
-                their rights and access essential services.
-            </p>
-
-            <!-- Key highlights -->
-            <div class="work-principles">
-                <div class="work-principle">
-                    <i class="fas fa-shield-halved"></i>
-                    <div>
-                        <strong>Rights-Based Approach</strong>
-                        <span>Advancing dignity, equality and justice.</span>
-                    </div>
-                </div>
-                <div class="work-principle">
-                    <i class="fas fa-people-group"></i>
-                    <div>
-                        <strong>Community-Led</strong>
-                        <span>Work shaped by and for the community.</span>
-                    </div>
-                </div>
-                <div class="work-principle">
-                    <i class="fas fa-handshake"></i>
-                    <div>
-                        <strong>Partnership Driven</strong>
-                        <span>Delivered alongside trusted partners.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>
 
@@ -229,27 +655,22 @@
 <!-- =============================================
      CTA SECTION
 ============================================== -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <span class="section-label">LOOKING AHEAD</span>
-            <h2>
-                Help us build
-                what comes next.
-            </h2>
-            <p>
-                Our previous work provides a foundation for continued
-                community-led action. Support our work or partner with
-                us to help advance health, justice and dignity.
-            </p>
-            <div class="cta-actions">
-                <a asp-controller="Donate" asp-action="Index" class="btn btn-light">
-                    Support Our Work
-                </a>
-                <a asp-controller="Contact" asp-action="Index" class="btn btn-outline-light">
-                    Partner With Us
-                </a>
-            </div>
+<section class="tr tr-cta">
+    <div class="tr-wrap">
+        <span class="tr-label">LOOKING AHEAD</span>
+        <h2>Help us build what comes next.</h2>
+        <p>
+            Our previous work provides a foundation for continued
+            community-led action. Support our work or partner with
+            us to help advance health, justice and dignity.
+        </p>
+        <div class="tr-cta-actions">
+            <a asp-controller="Donate" asp-action="Index" class="tr-btn tr-btn-light">
+                Support Our Work
+            </a>
+            <a asp-controller="Contact" asp-action="Index" class="tr-btn tr-btn-outline">
+                Partner With Us
+            </a>
         </div>
     </div>
 </section>

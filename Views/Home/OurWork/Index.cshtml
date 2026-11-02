@@ -3,6 +3,486 @@
 }
 
 <!-- =============================================
+     SELF-CONTAINED STYLES (scoped to .ow sections)
+============================================== -->
+<style>
+    .ow {
+        --o-purple: #3d1d68;
+        --o-purple-dark: #24143d;
+        --o-turquoise: #2ed5c6;
+        --o-magenta: #c13b8a;
+        --o-blue: #3b6fd4;
+        --o-peach: #e8956b;
+        --o-cream: #faf8f0;
+        --o-text: #4a3a3a;
+        --o-muted: #6f6462;
+
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: var(--o-text);
+        line-height: 1.6;
+    }
+
+    .ow *,
+    .ow *::before,
+    .ow *::after {
+        box-sizing: border-box;
+    }
+
+    .ow h2,
+    .ow h3,
+    .ow h4 {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+    .ow .ow-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .ow .ow-label {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--o-magenta);
+        margin-bottom: 0.75rem;
+    }
+
+    .ow .ow-heading {
+        font-size: clamp(2rem, 3.6vw, 2.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--o-purple);
+        margin: 0 0 1rem;
+    }
+
+    .ow .ow-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .ow .ow-btn-primary {
+        background: linear-gradient(135deg, var(--o-purple) 0%, var(--o-magenta) 100%);
+        color: #fff;
+        box-shadow: 0 10px 25px rgba(193, 59, 138, 0.3);
+    }
+
+    .ow .ow-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(193, 59, 138, 0.4);
+    }
+
+    /* ---------- Intro + stats ---------- */
+    .ow-intro {
+        padding: 6rem 0;
+        background: #fff;
+    }
+
+    .ow-intro .ow-intro-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .ow-intro .ow-body p {
+        font-size: 1.05rem;
+        color: var(--o-muted);
+        line-height: 1.75;
+        margin: 0 0 1rem;
+    }
+
+    .ow-intro .ow-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .ow-intro .ow-stat {
+        background: var(--o-cream);
+        border: 1px solid rgba(61, 29, 104, 0.08);
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .ow-intro .ow-stat strong {
+        display: block;
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--o-purple);
+    }
+
+    .ow-intro .ow-stat span {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--o-muted);
+    }
+
+    .ow-intro .ow-intro-image {
+        position: relative;
+    }
+
+    .ow-intro .ow-intro-image img {
+        display: block;
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        border-radius: 28px;
+        box-shadow: 0 25px 60px rgba(36, 20, 61, 0.2);
+    }
+
+    .ow-intro .ow-badge {
+        position: absolute;
+        left: -1.5rem;
+        bottom: 2rem;
+        background: linear-gradient(135deg, var(--o-purple) 0%, var(--o-magenta) 100%);
+        color: #fff;
+        padding: 1.1rem 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(36, 20, 61, 0.3);
+    }
+
+    .ow-intro .ow-badge strong {
+        display: block;
+        font-size: 1.15rem;
+        font-weight: 800;
+    }
+
+    .ow-intro .ow-badge span {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ---------- Focus areas ---------- */
+    .ow-focus {
+        padding: 6rem 0;
+        background: var(--o-cream);
+    }
+
+    .ow-focus .ow-section-head {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 3.5rem;
+    }
+
+    .ow-focus .ow-section-head p {
+        font-size: 1.1rem;
+        color: var(--o-muted);
+        margin: 0;
+    }
+
+    .ow-focus .ow-areas {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    .ow-focus .ow-area {
+        --accent: var(--o-purple);
+        display: grid;
+        grid-template-columns: 90px 64px 1fr;
+        align-items: center;
+        gap: 1.5rem;
+        background: #fff;
+        border-radius: 20px;
+        padding: 1.75rem 2rem;
+        border: 1px solid rgba(61, 29, 104, 0.06);
+        border-left: 6px solid var(--accent);
+        box-shadow: 0 6px 20px rgba(36, 20, 61, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ow-focus .ow-area:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(36, 20, 61, 0.12);
+    }
+
+    .ow-focus .ow-area-purple { --accent: var(--o-purple); }
+    .ow-focus .ow-area-turquoise { --accent: var(--o-turquoise); }
+    .ow-focus .ow-area-magenta { --accent: var(--o-magenta); }
+    .ow-focus .ow-area-blue { --accent: var(--o-blue); }
+    .ow-focus .ow-area-peach { --accent: var(--o-peach); }
+
+    .ow-focus .ow-area-number {
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--accent);
+        opacity: 0.35;
+    }
+
+    .ow-focus .ow-area-icon {
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 1.5rem;
+    }
+
+    .ow-focus .ow-area h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--o-purple);
+        margin: 0 0 0.4rem;
+    }
+
+    .ow-focus .ow-area p {
+        margin: 0;
+        color: var(--o-muted);
+        line-height: 1.7;
+    }
+
+    /* ---------- How we work ---------- */
+    .ow-how {
+        padding: 6rem 0;
+        background: #fff;
+    }
+
+    .ow-how .ow-how-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .ow-how .ow-how-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .ow-how .ow-how-circle {
+        width: min(100%, 460px);
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        padding: 10px;
+        background: linear-gradient(135deg, var(--o-turquoise) 0%, var(--o-magenta) 100%);
+        box-shadow: 0 25px 60px rgba(36, 20, 61, 0.2);
+    }
+
+    .ow-how .ow-how-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        background-color: #ece6f3;
+    }
+
+    .ow-how .ow-how-badge {
+        position: absolute;
+        right: 0;
+        bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        background: #fff;
+        padding: 1rem 1.4rem;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(36, 20, 61, 0.18);
+    }
+
+    .ow-how .ow-how-badge i {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--o-turquoise) 0%, var(--o-magenta) 100%);
+        color: #fff;
+    }
+
+    .ow-how .ow-how-badge strong {
+        display: block;
+        color: var(--o-purple);
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .ow-how .ow-how-badge span {
+        font-size: 0.8rem;
+        color: var(--o-muted);
+    }
+
+    .ow-how .ow-how-content p {
+        font-size: 1.05rem;
+        color: var(--o-muted);
+        line-height: 1.75;
+        margin: 0 0 1rem;
+    }
+
+    .ow-how .ow-principles {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        margin: 1.75rem 0 2rem;
+    }
+
+    .ow-how .ow-principle {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        background: var(--o-cream);
+        border-radius: 14px;
+        border: 1px solid rgba(61, 29, 104, 0.06);
+    }
+
+    .ow-how .ow-principle i {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: var(--o-purple);
+        color: #fff;
+    }
+
+    .ow-how .ow-principle strong {
+        display: block;
+        color: var(--o-purple);
+        font-weight: 700;
+    }
+
+    .ow-how .ow-principle span {
+        font-size: 0.9rem;
+        color: var(--o-muted);
+    }
+
+    /* ---------- CTA ---------- */
+    .ow-cta {
+        padding: 6rem 0;
+        background: linear-gradient(135deg, var(--o-purple-dark) 0%, var(--o-purple) 55%, var(--o-magenta) 100%);
+        text-align: center;
+        color: #fff;
+    }
+
+    .ow-cta .ow-label {
+        color: var(--o-turquoise);
+    }
+
+    .ow-cta h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: #fff;
+        margin: 0 0 1rem;
+    }
+
+    .ow-cta p {
+        max-width: 620px;
+        margin: 0 auto 2rem;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .ow-cta .ow-cta-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .ow-cta .ow-btn-light {
+        background: #fff;
+        color: var(--o-purple);
+    }
+
+    .ow-cta .ow-btn-light:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .ow-cta .ow-btn-outline {
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        color: #fff;
+    }
+
+    .ow-cta .ow-btn-outline:hover {
+        background: #fff;
+        color: var(--o-purple);
+        transform: translateY(-3px);
+    }
+
+    /* ---------- Responsive ---------- */
+    @@media (max-width: 1000px) {
+        .ow-intro .ow-intro-grid,
+        .ow-how .ow-how-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .ow-intro .ow-badge {
+            left: 1rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .ow-intro,
+        .ow-focus,
+        .ow-how,
+        .ow-cta {
+            padding: 4rem 0;
+        }
+
+        .ow-intro .ow-intro-image img {
+            height: 340px;
+        }
+
+        .ow-focus .ow-area {
+            grid-template-columns: 56px 1fr;
+            padding: 1.5rem;
+            gap: 1rem;
+        }
+
+        .ow-focus .ow-area-number {
+            display: none;
+        }
+
+        .ow-focus .ow-area-icon {
+            width: 56px;
+            height: 56px;
+        }
+
+        .ow-how .ow-how-badge {
+            right: 0.5rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .ow-intro .ow-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<!-- =============================================
      HERO SECTION
 ============================================== -->
 <section class="hero-section our-work-hero">
@@ -55,44 +535,45 @@
 <!-- =============================================
      INTRODUCTION + STATS
 ============================================== -->
-<section class="work-hero-section">
-    <div class="container">
+<section class="ow ow-intro">
+    <div class="ow-wrap">
+        <div class="ow-intro-grid">
 
-        <!-- Orange Badge (Left) -->
-        <div class="orange-badge-container">
-            <div class="orange-badge">
-                <strong>Locally Led</strong>
-                <span>Community • Justice • Action</span>
-            </div>
-        </div>
+            <div class="ow-intro-text">
+                <span class="ow-label">WHAT WE DO</span>
+                <h2 class="ow-heading">Community-led work for lasting change.</h2>
 
-        <!-- Main Content Wrapper -->
-        <div class="work-hero-content-wrapper">
-
-            <!-- LEFT: Text + Stats -->
-            <div class="work-hero-left">
-                <span class="eyebrow">WHAT WE DO</span>
-
-                <div class="heading-with-stats">
-                    <h1>COMMUNITY-LED WORK FOR LASTING CHANGE.</h1>
-
-                    <div class="work-hero-stats">
-                        <span>5 Focus Areas</span>
-                        <span>9+ Provinces Reached</span>
-                        <span>100% Community-Led</span>
-                        <span>∞ Love in Action</span>
-                    </div>
-                </div>
-
-                <div class="body-text">
+                <div class="ow-body">
                     <p>Our work is grounded in sexual and reproductive health and justice, HIV prevention and education, gender justice, youth empowerment and meaningful community engagement.</p>
                     <p>We work through education, prevention, support, research, advocacy, partnerships and community participation.</p>
                 </div>
+
+                <div class="ow-stats">
+                    <div class="ow-stat">
+                        <strong>5</strong>
+                        <span>Focus Areas</span>
+                    </div>
+                    <div class="ow-stat">
+                        <strong>9+</strong>
+                        <span>Provinces Reached</span>
+                    </div>
+                    <div class="ow-stat">
+                        <strong>100%</strong>
+                        <span>Community-Led</span>
+                    </div>
+                    <div class="ow-stat">
+                        <strong>∞</strong>
+                        <span>Love in Action</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- RIGHT: Image -->
-            <div class="work-hero-image">
-                <img src="~/images/our-work-hero.jpg" alt="Our Work Hero" class="our-work-hero-img" />
+            <div class="ow-intro-image">
+                <img src="~/images/our-work-hero.jpg" alt="SisterLove community work" />
+                <div class="ow-badge">
+                    <strong>Locally Led</strong>
+                    <span>Community • Justice • Action</span>
+                </div>
             </div>
 
         </div>
@@ -101,28 +582,26 @@
 
 
 <!-- =============================================
-     FOCUS AREAS — EDITORIAL LIST
+     FOCUS AREAS
 ============================================== -->
-<section class="focus-section" id="our-work">
-    <div class="container">
+<section class="ow ow-focus" id="our-work">
+    <div class="ow-wrap">
 
-        <div class="section-heading">
-            <span class="section-label">OUR FOCUS AREAS</span>
-            <h2>Where we make a difference</h2>
+        <div class="ow-section-head">
+            <span class="ow-label">OUR FOCUS AREAS</span>
+            <h2 class="ow-heading">Where we make a difference</h2>
             <p>
                 Our programmes and initiatives respond to issues
                 affecting communities across South Africa.
             </p>
         </div>
 
-        <div class="focus-areas-list">
+        <div class="ow-areas">
 
-            <article class="focus-area focus-area-purple">
-                <div class="focus-area-number">01</div>
-                <div class="focus-area-content">
-                    <div class="focus-area-icon">
-                        <i class="fas fa-ribbon"></i>
-                    </div>
+            <article class="ow-area ow-area-purple">
+                <div class="ow-area-number">01</div>
+                <div class="ow-area-icon"><i class="fas fa-ribbon"></i></div>
+                <div>
                     <h3>HIV Prevention &amp; Education</h3>
                     <p>
                         Supporting HIV prevention and education through
@@ -133,12 +612,10 @@
                 </div>
             </article>
 
-            <article class="focus-area focus-area-turquoise">
-                <div class="focus-area-number">02</div>
-                <div class="focus-area-content">
-                    <div class="focus-area-icon">
-                        <i class="fas fa-heart-pulse"></i>
-                    </div>
+            <article class="ow-area ow-area-turquoise">
+                <div class="ow-area-number">02</div>
+                <div class="ow-area-icon"><i class="fas fa-heart-pulse"></i></div>
+                <div>
                     <h3>Sexual &amp; Reproductive Health &amp; Justice</h3>
                     <p>
                         Promoting access to information, support and
@@ -149,12 +626,10 @@
                 </div>
             </article>
 
-            <article class="focus-area focus-area-magenta">
-                <div class="focus-area-number">03</div>
-                <div class="focus-area-content">
-                    <div class="focus-area-icon">
-                        <i class="fas fa-hand-fist"></i>
-                    </div>
+            <article class="ow-area ow-area-magenta">
+                <div class="ow-area-number">03</div>
+                <div class="ow-area-icon"><i class="fas fa-hand-fist"></i></div>
+                <div>
                     <h3>Gender-Based Violence &amp; Femicide</h3>
                     <p>
                         Working to prevent gender-based violence and
@@ -164,12 +639,10 @@
                 </div>
             </article>
 
-            <article class="focus-area focus-area-blue">
-                <div class="focus-area-number">04</div>
-                <div class="focus-area-content">
-                    <div class="focus-area-icon">
-                        <i class="fas fa-futbol"></i>
-                    </div>
+            <article class="ow-area ow-area-blue">
+                <div class="ow-area-number">04</div>
+                <div class="ow-area-icon"><i class="fas fa-futbol"></i></div>
+                <div>
                     <h3>Youth Empowerment Through Sport</h3>
                     <p>
                         Using education, sport and community engagement
@@ -179,12 +652,10 @@
                 </div>
             </article>
 
-            <article class="focus-area focus-area-peach">
-                <div class="focus-area-number">05</div>
-                <div class="focus-area-content">
-                    <div class="focus-area-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
+            <article class="ow-area ow-area-peach">
+                <div class="ow-area-number">05</div>
+                <div class="ow-area-icon"><i class="fas fa-handshake"></i></div>
+                <div>
                     <h3>Partnerships &amp; Collaboration</h3>
                     <p>
                         Building relationships with civil society,
@@ -203,98 +674,92 @@
 <!-- =============================================
      HOW WE WORK
 ============================================== -->
-<section class="identity-section our-work-identity">
-    <div class="container identity-grid">
+<section class="ow ow-how">
+    <div class="ow-wrap">
+        <div class="ow-how-grid">
 
-        <div class="identity-visual gi-volunteer-visual">
-            <div class="gi-volunteer-image-circle">
-                <div class="gi-volunteer-image"
-                     style="background-image: url('/images/our-work-community.jpg');"></div>
-            </div>
-            <div class="floating-card gi-volunteer-badge">
-                <i class="fas fa-users"></i>
-                <div>
-                    <strong>Locally Led</strong>
-                    <span>Community • Justice • Action</span>
+            <div class="ow-how-visual">
+                <div class="ow-how-circle">
+                    <div class="ow-how-image"
+                         style="background-image: url('/images/our-work-community.jpg');"></div>
                 </div>
-            </div>
-        </div>
-
-        <div class="identity-content">
-            <span class="section-label">HOW WE WORK</span>
-            <h2>
-                Locally led.
-                Community driven.
-            </h2>
-            <p>
-                SisterLove South Africa is locally led,
-                community-based and grounded in feminist and
-                human-rights principles.
-            </p>
-            <p>
-                Our organisation is volunteer-driven and supported
-                by consultants who work alongside partners,
-                civil society organisations, government and local
-                stakeholders.
-            </p>
-
-            <div class="work-principles">
-                <div class="work-principle">
+                <div class="ow-how-badge">
                     <i class="fas fa-users"></i>
                     <div>
-                        <strong>Community Leadership</strong>
-                        <span>Communities are central to the change we seek.</span>
-                    </div>
-                </div>
-                <div class="work-principle">
-                    <i class="fas fa-scale-balanced"></i>
-                    <div>
-                        <strong>Human Rights</strong>
-                        <span>We work toward dignity, equality and justice.</span>
-                    </div>
-                </div>
-                <div class="work-principle">
-                    <i class="fas fa-heart"></i>
-                    <div>
-                        <strong>Love in Action</strong>
-                        <span>We turn compassion into meaningful action.</span>
+                        <strong>Locally Led</strong>
+                        <span>Community • Justice • Action</span>
                     </div>
                 </div>
             </div>
 
-            <a asp-controller="Contact" asp-action="Index" class="btn btn-primary" style="margin-top:1.5rem;">
-                Work With Us
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
+            <div class="ow-how-content">
+                <span class="ow-label">HOW WE WORK</span>
+                <h2 class="ow-heading">Locally led. Community driven.</h2>
+                <p>
+                    SisterLove South Africa is locally led,
+                    community-based and grounded in feminist and
+                    human-rights principles.
+                </p>
+                <p>
+                    Our organisation is volunteer-driven and supported
+                    by consultants who work alongside partners,
+                    civil society organisations, government and local
+                    stakeholders.
+                </p>
 
+                <div class="ow-principles">
+                    <div class="ow-principle">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <strong>Community Leadership</strong>
+                            <span>Communities are central to the change we seek.</span>
+                        </div>
+                    </div>
+                    <div class="ow-principle">
+                        <i class="fas fa-scale-balanced"></i>
+                        <div>
+                            <strong>Human Rights</strong>
+                            <span>We work toward dignity, equality and justice.</span>
+                        </div>
+                    </div>
+                    <div class="ow-principle">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <strong>Love in Action</strong>
+                            <span>We turn compassion into meaningful action.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a asp-controller="Contact" asp-action="Index" class="ow-btn ow-btn-primary">
+                    Work With Us
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
     </div>
 </section>
 
 
 <!-- =============================================
- //    CTA SECTION
+     CTA SECTION
 ============================================== -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <span class="section-label">GET INVOLVED</span>
-            <h2>
-                Change happens
-                when we act together.
-            </h2>
-            <p>
-                Partner with us, volunteer your time or support
-                our work in advancing health, justice and dignity.
-            </p>
-            <div class="cta-actions">
-                <a asp-controller="Contact" asp-action="Index" class="btn btn-light">
-                    Get Involved
-                </a>
-                <a asp-controller="Donate" asp-action="Index" class="btn btn-outline-light">
-                    Support Our Work
-                </a>
-            </div>
+<section class="ow ow-cta">
+    <div class="ow-wrap">
+        <span class="ow-label">GET INVOLVED</span>
+        <h2>Change happens when we act together.</h2>
+        <p>
+            Partner with us, volunteer your time or support
+            our work in advancing health, justice and dignity.
+        </p>
+        <div class="ow-cta-actions">
+            <a asp-controller="Contact" asp-action="Index" class="ow-btn ow-btn-light">
+                Get Involved
+            </a>
+            <a asp-controller="Donate" asp-action="Index" class="ow-btn ow-btn-outline">
+                Support Our Work
+            </a>
         </div>
     </div>
 </section>
