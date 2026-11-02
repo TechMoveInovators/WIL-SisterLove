@@ -5,69 +5,103 @@
 }
 
 <!-- =============================================
-     BULLETPROOF INLINE STYLES (NO ERRORS)
+     SELF-CONTAINED STYLES FOR THE CONTACT FORM
+     (every rule is scoped to .contact-modern-section)
 ============================================== -->
 <style>
     .contact-modern-section {
+        --c-purple: #3d1d68;
+        --c-purple-dark: #24143d;
+        --c-turquoise: #2ed5c6;
+        --c-magenta: #c13b8a;
+        --c-cream: #faf8f0;
+        --c-text: #4a3a3a;
+        --c-muted: #6f6462;
+        --c-border: #e8e0ee;
+        --c-field: #f8f6fb;
+        --c-error: #c0392b;
+
         padding: 6rem 0;
-        background: #faf8f0;
+        background: var(--c-cream);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: var(--c-text);
+        line-height: 1.6;
     }
 
-    .contact-modern-layout {
+    .contact-modern-section *,
+    .contact-modern-section *::before,
+    .contact-modern-section *::after {
+        box-sizing: border-box;
+    }
+
+    .contact-modern-section h2,
+    .contact-modern-section h3 {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+    .contact-modern-section .contact-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .contact-modern-section .contact-modern-layout {
         display: grid;
         grid-template-columns: 1fr 1.5fr;
         gap: 3rem;
         max-width: 1100px;
         margin: 0 auto;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
-    /* Left Info Card */
-    .contact-info-card {
-        background: linear-gradient(150deg, #24143d 0%, #3d1d68 100%);
+    /* ---------- Left info card ---------- */
+    .contact-modern-section .contact-info-card {
+        background: linear-gradient(150deg, var(--c-purple-dark) 0%, var(--c-purple) 100%);
         border-radius: 24px;
         padding: 3rem 2.5rem;
-        color: #ffffff;
+        color: #fff;
         box-shadow: 0 20px 50px rgba(36, 20, 61, 0.25);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
-    .contact-info-card h2 {
+    .contact-modern-section .contact-info-card h2 {
         font-size: 2rem;
         font-weight: 800;
-        margin-bottom: 0.5rem;
         line-height: 1.2;
+        margin: 0 0 0.5rem;
+        color: #fff;
     }
 
-    .contact-info-card p {
-        color: rgba(255, 255, 255, 0.7);
+    .contact-modern-section .contact-info-card p {
+        color: rgba(255, 255, 255, 0.75);
         font-size: 1rem;
-        margin-bottom: 2.5rem;
         line-height: 1.6;
+        margin: 0 0 2.5rem;
     }
 
-    .contact-info-list {
+    .contact-modern-section .contact-info-list {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
     }
 
-    .contact-info-item {
+    .contact-modern-section .contact-info-item {
         display: flex;
         align-items: flex-start;
         gap: 1.25rem;
         text-decoration: none;
-        color: #ffffff;
+        color: #fff;
         transition: transform 0.2s;
     }
 
-    .contact-info-item:hover {
+    .contact-modern-section .contact-info-item:hover {
         transform: translateX(5px);
     }
 
-    .contact-info-icon {
+    .contact-modern-section .contact-info-icon {
         width: 48px;
         height: 48px;
         flex-shrink: 0;
@@ -76,39 +110,40 @@
         justify-content: center;
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.1);
-        color: #2ed5c6;
+        color: var(--c-turquoise);
         font-size: 1.2rem;
         transition: background 0.2s, color 0.2s;
     }
 
-    .contact-info-item:hover .contact-info-icon {
-        background: #2ed5c6;
-        color: #24143d;
+    .contact-modern-section .contact-info-item:hover .contact-info-icon {
+        background: var(--c-turquoise);
+        color: var(--c-purple-dark);
     }
 
-    .contact-info-text strong {
+    .contact-modern-section .contact-info-text strong {
         display: block;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #2ed5c6;
+        color: var(--c-turquoise);
         margin-bottom: 0.25rem;
     }
 
-    .contact-info-text span {
+    .contact-modern-section .contact-info-text span {
         display: block;
         font-size: 1rem;
         font-weight: 500;
-        color: #ffffff;
+        color: #fff;
+        word-break: break-word;
     }
 
-    .contact-social {
+    .contact-modern-section .contact-social {
         display: flex;
         gap: 1rem;
         margin-top: 3rem;
     }
 
-    .contact-social a {
+    .contact-modern-section .contact-social a {
         width: 44px;
         height: 44px;
         display: flex;
@@ -116,102 +151,110 @@
         justify-content: center;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
+        color: #fff;
         text-decoration: none;
         transition: all 0.2s;
     }
 
-    .contact-social a:hover {
-        background: #c13b8a;
+    .contact-modern-section .contact-social a:hover {
+        background: var(--c-magenta);
         transform: translateY(-3px);
     }
 
-    /* Right Form Card */
-    .contact-form-card {
-        background: #ffffff;
+    /* ---------- Right form card ---------- */
+    .contact-modern-section .contact-form-card {
+        background: #fff;
         border-radius: 24px;
         padding: 3rem;
-        box-shadow: 0 20px 60px rgba(36, 20, 61, 0.08);
+        box-shadow: 0 20px 60px rgba(36, 20, 61, 0.1);
         border: 1px solid rgba(61, 29, 104, 0.06);
     }
 
-    .contact-form-header {
+    .contact-modern-section .contact-form-header {
         margin-bottom: 2rem;
     }
 
-    .contact-form-header h3 {
-        font-size: 1.5rem;
+    .contact-modern-section .contact-form-header h3 {
+        font-size: 1.6rem;
         font-weight: 800;
-        color: #3d1d68;
-        margin-bottom: 0.5rem;
+        color: var(--c-purple);
+        margin: 0 0 0.5rem;
     }
 
-    .contact-form-header p {
-        color: #6f6462;
+    .contact-modern-section .contact-form-header p {
+        color: var(--c-muted);
         font-size: 0.95rem;
+        margin: 0;
     }
 
-    .contact-form-grid {
+    .contact-modern-section .contact-form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
         margin-bottom: 1.5rem;
     }
 
-    .contact-field {
+    .contact-modern-section .contact-field {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        min-width: 0;
     }
 
-    .contact-field-full {
+    .contact-modern-section .contact-field-full {
         grid-column: span 2;
     }
 
-    .contact-field label {
-        font-size: 0.85rem;
+    .contact-modern-section .contact-field label {
+        font-size: 0.8rem;
         font-weight: 700;
-        color: #3d1d68;
+        color: var(--c-purple);
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
 
-    .contact-field label .muted {
+    .contact-modern-section .contact-field label .muted {
         text-transform: none;
         letter-spacing: normal;
         font-weight: 400;
-        color: #6f6462;
+        color: var(--c-muted);
     }
 
-    .contact-field input,
-    .contact-field select,
-    .contact-field textarea {
+    .contact-modern-section .contact-field input,
+    .contact-modern-section .contact-field select,
+    .contact-modern-section .contact-field textarea {
         width: 100%;
         padding: 1rem 1.25rem;
-        font-size: 0.95rem;
         font-family: inherit;
-        color: #4a3a3a;
-        background: #f8f6fb;
-        border: 2px solid #e8e0ee;
+        font-size: 0.95rem;
+        color: var(--c-text);
+        background: var(--c-field);
+        border: 2px solid var(--c-border);
         border-radius: 12px;
         transition: all 0.2s;
     }
 
-    .contact-field input:focus,
-    .contact-field select:focus,
-    .contact-field textarea:focus {
+    .contact-modern-section .contact-field input::placeholder,
+    .contact-modern-section .contact-field textarea::placeholder {
+        color: #a99fb5;
+    }
+
+    .contact-modern-section .contact-field input:focus,
+    .contact-modern-section .contact-field select:focus,
+    .contact-modern-section .contact-field textarea:focus {
         outline: none;
-        border-color: #3d1d68;
-        background: #ffffff;
+        border-color: var(--c-purple);
+        background: #fff;
         box-shadow: 0 0 0 5px rgba(61, 29, 104, 0.1);
     }
 
-    .contact-field textarea {
+    .contact-modern-section .contact-field textarea {
         resize: vertical;
         min-height: 150px;
     }
 
-    .contact-field select {
+    .contact-modern-section .contact-field select {
+        -webkit-appearance: none;
         appearance: none;
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233d1d68' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
         background-repeat: no-repeat;
@@ -221,62 +264,123 @@
         cursor: pointer;
     }
 
-    .contact-checkbox {
+    .contact-modern-section .contact-checkbox {
         display: flex;
         align-items: flex-start;
         gap: 0.75rem;
         margin: 1.5rem 0 2rem;
         padding: 1rem 1.25rem;
-        background: rgba(46, 213, 198, 0.05);
-        border: 2px solid rgba(46, 213, 198, 0.2);
+        background: rgba(46, 213, 198, 0.06);
+        border: 2px solid rgba(46, 213, 198, 0.25);
         border-radius: 12px;
         cursor: pointer;
+        transition: background 0.2s;
     }
 
-    .contact-checkbox input[type="checkbox"] {
+    .contact-modern-section .contact-checkbox:hover {
+        background: rgba(46, 213, 198, 0.12);
+    }
+
+    .contact-modern-section .contact-checkbox input[type="checkbox"] {
         width: 1.2rem;
         height: 1.2rem;
-        margin-top: 0.15rem;
-        accent-color: #2ed5c6;
+        margin-top: 0.2rem;
+        accent-color: var(--c-turquoise);
         cursor: pointer;
         flex-shrink: 0;
     }
 
-    .contact-checkbox span {
+    .contact-modern-section .contact-checkbox span {
         font-size: 0.9rem;
-        color: #3d1d68;
+        color: var(--c-purple);
         font-weight: 500;
         line-height: 1.5;
     }
 
-    .contact-submit {
+    .contact-modern-section .contact-submit {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.75rem;
         padding: 1.25rem 1.5rem;
+        font-family: inherit;
         font-size: 1.1rem;
         font-weight: 700;
-        color: #ffffff;
-        background: linear-gradient(135deg, #3d1d68 0%, #c13b8a 100%);
+        color: #fff;
+        background: linear-gradient(135deg, var(--c-purple) 0%, var(--c-magenta) 100%);
         border: none;
         border-radius: 14px;
         cursor: pointer;
-        transition: all 0.3s;
         box-shadow: 0 12px 30px rgba(193, 59, 138, 0.3);
+        transition: all 0.3s;
     }
 
-    .contact-submit:hover {
+    .contact-modern-section .contact-submit:hover {
         transform: translateY(-3px);
         box-shadow: 0 18px 40px rgba(193, 59, 138, 0.4);
     }
 
-    .field-error, .text-danger {
-        color: #c0392b;
-        font-size: 0.85rem;
-        margin-top: 0.25rem;
+    .contact-modern-section .contact-submit i {
+        transition: transform 0.3s;
+    }
+
+    .contact-modern-section .contact-submit:hover i {
+        transform: translateX(5px);
+    }
+
+    .contact-modern-section .contact-banner-success {
+        max-width: 1100px;
+        margin: 0 auto 2rem;
+        background: #e8f8f5;
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        border: 1px solid var(--c-turquoise);
+        color: #0d9488;
+    }
+
+    .contact-modern-section .contact-thanks {
+        text-align: center;
+        max-width: 600px;
+        margin: 2rem auto 0;
+        color: var(--c-muted);
+        font-size: 0.9rem;
+    }
+
+    .contact-modern-section .field-error,
+    .contact-modern-section .text-danger {
         display: block;
+        color: var(--c-error);
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-top: 0.25rem;
+    }
+
+    /* ---------- Responsive ---------- */
+    @@media (max-width: 1000px) {
+        .contact-modern-section .contact-modern-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .contact-modern-section {
+            padding: 3.5rem 0;
+        }
+
+        .contact-modern-section .contact-info-card,
+        .contact-modern-section .contact-form-card {
+            padding: 2rem 1.5rem;
+        }
+
+        .contact-modern-section .contact-form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-modern-section .contact-field-full {
+            grid-column: span 1;
+        }
     }
 </style>
 
@@ -413,25 +517,25 @@
      CONTACT FORM (MODERN SPLIT LAYOUT)
 ============================================== -->
 <section class="contact-modern-section" id="contact-form">
-    <div class="container">
+    <div class="contact-wrap">
 
         <!-- Success message -->
         @if (TempData["SuccessMessage"] != null)
         {
-            <div class="contact-banner-success" role="status" style="max-width: 1100px; margin: 0 auto 2rem; background: #e8f8f5; padding: 1rem; border-radius: 12px; border: 1px solid #2ed5c6; color: #0d9488;">
+            <div class="contact-banner-success" role="status">
                 <i class="fas fa-circle-check" style="margin-right: 8px;"></i>
                 <strong>Message sent successfully.</strong> @TempData["SuccessMessage"]
             </div>
         }
 
         <div class="contact-modern-layout">
-            
+
             <!-- Left Side: Info Card -->
             <div class="contact-info-card">
                 <div>
                     <h2>Let's connect.</h2>
                     <p>Have a question, want to partner with us, or just want to say hello? We'd love to hear from you.</p>
-                    
+
                     <div class="contact-info-list">
                         <a href="mailto:hello@sisterlove.org.za" class="contact-info-item">
                             <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
@@ -456,7 +560,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="contact-social">
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -532,7 +636,7 @@
 
         </div>
 
-        <p style="text-align: center; max-width: 600px; margin: 2rem auto 0; color: var(--muted); font-size: 0.9rem;">
+        <p class="contact-thanks">
             Thank you for reaching out. Your message helps us connect with people who share our commitment to the community.
         </p>
 
