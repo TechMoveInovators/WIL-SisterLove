@@ -595,8 +595,10 @@
             <!-- Circular image side -->
             <div class="tr-feat-visual">
                 <div class="tr-feat-circle">
+                    <!-- Tries each common extension, so it works whichever one your file uses.
+                         Once you know the exact name, you can keep just that one url(). -->
                     <div class="tr-feat-image"
-                         style="background-image: url('/images/track-record-legacy.jpg');"></div>
+                         style="background-image: url('@Url.Content("~/images/showme.jpg")'), url('@Url.Content("~/images/showme.jpeg")'), url('@Url.Content("~/images/showme.png")'), url('@Url.Content("~/images/showme.webp")'), url('@Url.Content("~/images/showme.JPG")');"></div>
                 </div>
                 <div class="tr-feat-badge">
                     <i class="fas fa-scale-balanced"></i>
