@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
 using SisterLoveSA.Models;
 
 namespace SisterLoveSA.Services
@@ -17,74 +16,72 @@ namespace SisterLoveSA.Services
             _logger = logger;
         }
 
-        public async Task<DonationResult> ProcessDonation(DonationViewModel model)
+        public async Task<DonationResult> ProcessDonation(
+            DonationViewModel model)
         {
             try
             {
                 var payload = new
                 {
-                    name = model.DonorName, // Fixed: Changed from donorName to name to match Node controller
+                    name = model.DonorName,
                     email = model.Email,
                     amount = model.Amount ?? 0,
                     message = model.Message
                 };
 
-                // Calls http://localhost:4000/api/donations
-                var response = await _httpClient.PostAsJsonAsync("/api/donations", payload);
+                var response = await _httpClient.PostAsJsonAsync(
+                    "/api/donations",
+                    payload);
 
-                if (response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
                 {
-                    var responseString = await response.Content.ReadAsStringAsync();
+                    _logger.LogWarning(
+                        "Donation submission failed. Status Code: {StatusCode}",
+                        response.StatusCode);
 
-                    var result = new DonationResult
+                    return new DonationResult
                     {
-                        Success = true,
-                        TransactionId = $"SL-{DateTime.Now.Year}-API",
-                        DonorName = model.DonorName,
-                        Amount = model.Amount ?? 0
+                        Success = false,
+                        ErrorMessage =
+                            "Unable to submit your donation details. Please try again."
                     };
-
-                    await SendConfirmationEmail(result);
-                    return result;
                 }
 
-                _logger.LogWarning("Failed to send donation to Node API. Status Code: {StatusCode}", response.StatusCode);
+                _logger.LogInformation(
+                    "Donation record saved for {Email}. " +
+                    "No payment was processed by this service.",
+                    model.Email);
 
                 return new DonationResult
                 {
-                    Success = false,
-                    ErrorMessage = "Unable to process donation via Node API. Please try again."
+                    Success = true,
+                    TransactionId = string.Empty,
+                    DonorName = model.DonorName,
+                    Amount = model.Amount ?? 0
                 };
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing donation via Node API");
+                _logger.LogError(
+                    ex,
+                    "Error submitting donation to Node API");
 
                 return new DonationResult
                 {
                     Success = false,
-                    ErrorMessage = "Unable to process donation. Please try again."
+                    ErrorMessage =
+                        "Unable to submit your donation details. Please try again."
                 };
             }
         }
 
-        public async Task<bool> SendConfirmationEmail(DonationResult result)
+        public Task<bool> SendConfirmationEmail(DonationResult result)
         {
-            try
-            {
-                await Task.Delay(500);
+            _logger.LogWarning(
+                "Confirmation email was not sent because email delivery " +
+                "has not been configured.");
 
-                _logger.LogInformation(
-                    $"Confirmation email sent to donor {result.DonorName} " +
-                    $"for transaction #{result.TransactionId}");
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error sending confirmation email");
-                return false;
-            }
+            return Task.FromResult(false);
         }
     }
 }

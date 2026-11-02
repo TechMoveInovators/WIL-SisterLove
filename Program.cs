@@ -89,12 +89,13 @@ builder.Services.AddAuthentication(
 
 //API INTEGRATION
 
+// API INTEGRATION
 builder.Services.AddHttpClient("NodeApi", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "http://localhost:4000/api");
+    client.BaseAddress = new Uri(
+        builder.Configuration["ApiSettings:BaseUrl"]
+        ?? "http://localhost:4000");
 });
-
-builder.Services.AddScoped<IVolunteerService, VolunteerService>();
 
 // ============================================================
 // BUILD APPLICATION
