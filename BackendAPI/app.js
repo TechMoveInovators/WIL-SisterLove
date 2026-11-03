@@ -15,6 +15,7 @@ app.use(express.json());
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const roleRoutes = require('./routes/roleRoutes');
 const volunteerRoutes = require('./routes/volunteerRoutes');
 const donationRoutes = require('./routes/donationRoutes');
 const eventRoutes = require('./routes/eventRoutes');
@@ -23,6 +24,7 @@ const contactRoutes = require('./routes/contactRoutes');
 // Mount API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/roles', roleRoutes);
 app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/donations', donationRoutes);
 app.use('/api/events', eventRoutes);
