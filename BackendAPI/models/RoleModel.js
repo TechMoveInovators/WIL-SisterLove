@@ -1,43 +1,76 @@
-let roles = [
-    {
-        id: 1,
-        name: "User",
-        description: "Registered website user"
-    },
-    {
-        id: 2,
-        name: "Administrator",
-        description: "Administrator who manages website content"
-    }
-];
+
+const { sql, getPool } = require("../config/db");
 
 const RoleModel = {
-    getAll: () => {
-        return roles;
+    getAll: async () => {
+        const pool = await getPool();
+
+        const result = await pool.request().query(`
+            SELECT
+                Id AS id,
+                RoleName AS name,
+                Description AS description
+            FROM dbo.Roles
+            ORDER BY Id
+        `);
+
+        return result.recordset;
     },
 
-    getById: (id) => {
-        return roles.find(
-            role => role.id === Number(id)
-        );
+    getById: async (id) => {
+        const pool = await getPool();
+
+        const result = await pool.request()
+            .input("id", sql.Int, Number(id))
+            .query(`
+                SELECT
+                    Id AS id,
+                    RoleName AS name,
+                    Description AS description
+                FROM dbo.Roles
+                WHERE Id = @id
+            `);
+
+        return result.recordset[0] || null;
     },
 
-    getByName: (name) => {
-        return roles.find(
-            role => role.name.toLowerCase() === name.toLowerCase()
-        );
+    getByName: async (name) => {
+        const pool = await getPool();
+
+        const result = await pool.request()
+            .input("name", sql.NVarChar(50), name.trim())
+            .query(`
+                SELECT
+                    Id AS id,
+                    RoleName AS name,
+                    Description AS description
+                FROM dbo.Roles
+                WHERE RoleName = @name
+            `);
+
+        return result.recordset[0] || null;
     },
 
-    create: (roleData) => {
-        const newRole = {
-            id: roles.length + 1,
-            name: roleData.name,
-            description: roleData.description
-        };
+    create: async (roleData) => {
+        const pool = await getPool();
 
-        roles.push(newRole);
+        const result = await pool.request()
+            .input("name", sql.NVarChar(50), roleData.name.trim())
+            .input(
+                "description",
+                sql.NVarChar(250),
+                roleData.description || null
+            )
+            .query(`
+                INSERT INTO dbo.Roles (RoleName, Description)
+                OUTPUT
+                    INSERTED.Id AS id,
+                    INSERTED.RoleName AS name,
+                    INSERTED.Description AS description
+                VALUES (@name, @description)
+            `);
 
-        return newRole;
+        return result.recordset[0];
     }
 };
 
