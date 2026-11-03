@@ -1,18 +1,18 @@
-const authorizeAdmin = (req, res, next) => {
 
+const requireAdmin = (req, res, next) => {
     if (!req.user) {
         return res.status(401).json({
-            message: "Access denied. Please log in first."
+            message: "Authentication is required."
         });
     }
 
-    if (req.user.roleId !== 2) {
+    if (Number(req.user.roleId) !== 2) {
         return res.status(403).json({
-            message: "Access denied. Administrator permissions required."
+            message: "Administrator access is required."
         });
     }
 
-    next();
+    return next();
 };
 
-module.exports = authorizeAdmin;
+module.exports = requireAdmin;
