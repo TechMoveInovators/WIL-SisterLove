@@ -1,4 +1,6 @@
+
 const express = require("express");
+const router = express.Router();
 
 const {
     getRoles,
@@ -6,10 +8,14 @@ const {
     createRole
 } = require("../controllers/RoleController");
 
-const router = express.Router();
+const authenticateToken = require("../middleware/authMiddleware");
+const requireAdmin = require("../middleware/adminMiddleware");
 
+// Role information can be read publicly.
 router.get("/", getRoles);
 router.get("/:id", getRoleById);
-router.post("/", createRole);
+
+// Only administrators can create roles.
+router.post("/", authenticateToken, requireAdmin, createRole);
 
 module.exports = router;
