@@ -1,14 +1,20 @@
+
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 
-const JWT_SECRET = "sisterlove-secret-key";
+const getJwtSecret = () => {
+    const secret = process.env.JWT_SECRET;
+
+    if (!secret) {
+        throw new Error("JWT_SECRET is not configured.");
+    }
+
+    return secret;
+};
 
 const login = async (req, res) => {
     try {
-        const {
-            email,
-            password
-        } = req.body;
+        const { email, password } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({
@@ -16,7 +22,7 @@ const login = async (req, res) => {
             });
         }
 
-        const user = UserModel.getByEmail(email);
+        const user = await UserModel.getByEmail(email);
 
         if (!user) {
             return res.status(401).json({
@@ -41,15 +47,13 @@ const login = async (req, res) => {
                 email: user.email,
                 roleId: user.roleId
             },
-            JWT_SECRET,
-            {
-                expiresIn: "2h"
-            }
+            getJwtSecret(),
+            { expiresIn: "2h" }
         );
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "Login successful",
-            token: token,
+            token,
             user: {
                 id: user.id,
                 name: user.name,
@@ -59,16 +63,13 @@ const login = async (req, res) => {
                 status: user.status
             }
         });
-
     } catch (error) {
-        res.status(500).json({
-            message: "Login failed",
-            error: error.message
+        console.error("Login failed:", error.message);
+
+        return res.status(500).json({
+            message: "Login failed"
         });
     }
 };
 
-module.exports = {
-    login,
-    JWT_SECRET
-};
+module.exports = { login, getJwtSecret };
